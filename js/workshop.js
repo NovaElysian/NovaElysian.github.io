@@ -1,4 +1,4 @@
-/* ===== 指令工坊 workshop.js v1.3.0 =====
+/* ===== 指令工坊 workshop.js v1.3.1 =====
    指令工坊：/give 生成器 / execute 语法双向转换 / 历史记录 / 推荐网站
    视觉沿用现有主题变量；网站图标用各站自带 favicon，失败回退首字母。
 */
@@ -272,11 +272,7 @@
     { sec: "音乐与转换", secIco: "", items: [
       { name: "MidiShow", desc: "MIDI 音乐资源", url: "https://www.midishow.com/" },
       { name: "指令音乐压缩工具", desc: "压缩音乐命令体积", url: "https://backend.appmiaoda.com/projects/supabase298428991113572352/functions/v1/serve_website?name=compress" },
-      { name: "MIDI转mcpack", desc: "MIDI 生成行为包", url: "https://dislink.github.io/midi2mcfunction/" },
-      { name: "MIDI转mcstructure", desc: "MIDI 生成结构文件", url: "https://dislink.github.io/midiconvertor/" },
-      { name: "mcfunction转换器", desc: "mcfunction 转换工具", url: "https://dislink.github.io/mcfunctionconvertor/" },
-      { name: "图片转mcfunction", desc: "图片生成方块指令", url: "https://dislink.github.io/img2mcfunction/" }
-    ] },
+      { name: "Dislink 工具合集", desc: "MIDI转mcpack/mcstructure、mcfunction转换、图片转mcfunction等", url: "https://dislink.github.io" }] },
     { sec: "存档与NBT", secIco: "", items: [
       { name: "Amulet", desc: "存档编辑与转换", url: "https://www.amuletmc.com/" },
       { name: "NBT Studio", desc: "NBT 数据编辑器", url: "https://github.com/tryashtar/nbt-studio/releases" }
