@@ -324,16 +324,11 @@
   // （嵌套模板已通过 site-url 文本展示，这里改模板直接带 data-url）
 
   window.openExternalBrowser = function (url) {
-    try {
-      if (/^https?:\/\//i.test(url) && /Android/i.test(navigator.userAgent)) {
-        var u = new URL(url, window.location.href);
-        var scheme = u.protocol.replace(":", "");
-        window.location.href = "intent://" + u.host + u.pathname + u.search + u.hash + "#Intent;scheme=" + scheme + ";action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;end";
-      } else {
-        window.open(url, "_blank", "noopener,noreferrer");
-      }
-    } catch (e) {
-      try { window.open(url, "_blank", "noopener,noreferrer"); } catch (err) { toast("无法打开网站"); }
+    if (!url) return;
+    var ok = false;
+    try { ok = !!(window.open(url, "_blank", "noopener,noreferrer")); } catch (e) { ok = false; }
+    if (!ok) {
+      window.location.href = url;
     }
   };
   window.copySiteUrl = function (url) { copyText(url); };
