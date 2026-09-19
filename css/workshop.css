@@ -59,3 +59,12 @@ pre{font-family:'Courier New',Consolas,monospace;font-size:13px;color:var(--text
 .ws-toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);color:#fff;padding:8px 20px;border-radius:20px;font-size:13px;z-index:999;opacity:0;transition:opacity .25s;pointer-events:none}
 .ws-toast.show{opacity:1}
 @media (max-width:420px){.site-grid{grid-template-columns:1fr}}
+
+/* ===== 全屏加载遮罩 (splash) ===== */
+.splash{position:fixed;inset:0;z-index:99999;background:var(--bg-color);display:flex;align-items:center;justify-content:center;transition:opacity .35s ease}
+.splash.done{opacity:0;pointer-events:none}
+.splash-inner{display:flex;flex-direction:column;align-items:center;gap:18px}
+.splash-spinner{width:46px;height:46px;border:4px solid var(--border-color);border-top-color:var(--accent-color);border-radius:50%;animation:splash-spin .8s linear infinite}
+.splash-text{color:var(--text-sub);font-size:14px;letter-spacing:1px}
+@keyframes splash-spin{to{transform:rotate(360deg)}}
+.splash.done .splash-spinner{animation:none}
