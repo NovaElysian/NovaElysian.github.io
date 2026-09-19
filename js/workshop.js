@@ -1,4 +1,4 @@
-/* ===== 指令工坊 workshop.js v1.3.1 =====
+/* ===== 指令工坊 workshop.js v1.3.3 =====
    指令工坊：/give 生成器 / execute 语法双向转换 / 历史记录 / 推荐网站
    视觉沿用现有主题变量；网站图标用各站自带 favicon，失败回退首字母。
 */
@@ -278,7 +278,7 @@
       { name: "NBT Studio", desc: "NBT 数据编辑器", url: "https://github.com/tryashtar/nbt-studio/releases" }
     ] },
     { sec: "综合工具", secIco: "", items: [
-      { name: "小舟工具箱", desc: "常用指令工具箱", url: "https://tool.lonzov.top" }
+      { name: "小舟工具箱", desc: "常用指令工具箱", url: "https://tool.lonzov.top" },{ name: "MC Toolbox", desc: "give/指令生成器，支持基岩版组件", url: "https://mctoolbox.net/zh-cn" },{ name: "CraftCMD", desc: "give/loot/execute 等命令构建器", url: "https://www.craftcmd.com/give" },{ name: "MineBuildr", desc: "指令/数据包/像素画工具集", url: "https://minebuildr.com/tools/command-generator" },{ name: "MCWorldTools", desc: "多版本命令生成器", url: "https://mcworldtools.com/tools/command-generator" }
     ] },
     { sec: "结构与格式", secIco: "", items: [
       { name: "4D皮肤模型", desc: "4D 皮肤模型生成", url: "https://fangkuaichaoge.github.io/" },
