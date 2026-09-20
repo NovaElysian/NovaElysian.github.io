@@ -48,7 +48,12 @@
         sec.classList.add('active');
       }
     }
-    function openEditor() { var b = document.getElementById('btn-create'); if (b) b.click(); }
+    function openEditor() {
+      /* 直接进编辑器工作区（与抽屉「T显编辑器」一致），不再先弹「创建项目」面板 */
+      if (window.App && window.App.enterEditor) { window.App.enterEditor(); return; }
+      var b = document.getElementById('btn-create');
+      if (b) b.click();
+    }
     function openPreset(query) {
       var t = document.querySelector('[data-open-url="presets_viewer.html"]');
       if (t) t.click();

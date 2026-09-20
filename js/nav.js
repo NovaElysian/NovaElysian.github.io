@@ -108,6 +108,9 @@
       }
       window.App.openProjectById(p.id);
     }
+    /* 暴露给 launcher.js 等入口：进入编辑器直接打开工作区 */
+    window.App = window.App || {};
+    window.App.enterEditor = enterEditor;
 
     /* ---------- 动作分派 ---------- */
     var VIEW_MAP = {
@@ -118,16 +121,27 @@
       project: 'view-project'
     };
 
+    function directSwitch(target) {
+      var el = document.querySelector('.app-tabbar .tab-item[data-target="' + target + '"]');
+      if (el) { el.click(); return; }
+      var sec = document.getElementById(target);
+      if (sec) {
+        document.querySelectorAll('.app-tabbar .tab-item').forEach(function (i) {
+          i.classList.toggle('active', i.getAttribute('data-target') === target);
+        });
+        document.querySelectorAll('.view-section').forEach(function (n) { n.classList.remove('active'); });
+        sec.classList.add('active');
+      }
+    }
+
     function runAction(nav) {
-      var el;
       if (nav === 'editor') { enterEditor(); return; }
       if (nav === 'sites') { location.href = 'sites.html'; return; }
       if (nav === 'more') { location.href = 'more.html'; return; }
       if (nav === 'fuhao') { location.href = 'fuhao.html'; return; }
       if (nav === 'changelog') { location.href = 'changelog.html'; return; }
       if (nav === 'about') {
-        el = document.querySelector('.app-tabbar .tab-item[data-target="view-home"]');
-        if (el) el.click();
+        directSwitch('view-home');
         setTimeout(function () {
           var a = document.getElementById('about-card');
           if (a && a.scrollIntoView) a.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -135,10 +149,7 @@
         return;
       }
       var target = VIEW_MAP[nav];
-      if (target) {
-        el = document.querySelector('.app-tabbar .tab-item[data-target="' + target + '"]');
-        if (el) el.click();
-      }
+      if (target) directSwitch(target);
     }
 
     /* ---------- 点击委托：整条抽屉（含 .fn-card 与 .nav-item）---------- */
