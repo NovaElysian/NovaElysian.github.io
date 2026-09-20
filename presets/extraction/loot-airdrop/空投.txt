@@ -1,0 +1,32 @@
+空投 红色羊毛 烟花fireworks_rocket
+
+#1.前置 输入框输入
+scoreboard objectives add 空投 dummy
+
+创建 空投tag的盔甲架 保存到结构
+创建 空投箱的结构
+
+
+#召唤
+
+execute as @e[type=fireworks_rocket,tag=!空投火箭] at @s run structure load 空投 ~ ~300 ~ 0_degrees none true
+
+execute as @e[type=fireworks_rocket,tag=!空投火箭] at @s run title @a title §a某处召唤了空投
+
+execute as @e[type=fireworks_rocket] at @s run tag @s add 空投火箭
+
+execute as @e[tag=空投] at @s run particle minecraft:campfire_tall_smoke_particle ~ ~-250 ~ 
+
+execute as @e[tag=空投,tag=!空投已完成] at @s unless block ~~-250~ air run setblock ~~-1~ barrier
+
+execute as @e[tag=空投,tag=!空投已完成] at @s unless block ~~-250~ air run structure load 空投箱 ~ ~-249 ~ 0_degrees none true
+
+execute as @e[tag=空投] at @s unless block ~~-250~ air run tag @s add 空投已完成
+
+scoreboard players add @e[tag=空投已完成] 空投 1
+
+execute as @e[scores={空投=200..}] at @s run setblock ~~-249~ air destroy
+
+execute as @e[scores={空投=200..}] at @s run setblock ~~-1~ air replace
+
+execute as @e[scores={空投=200..}] at @s run kill @s

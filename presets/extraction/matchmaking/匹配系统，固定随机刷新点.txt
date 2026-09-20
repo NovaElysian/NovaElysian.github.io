@@ -1,0 +1,48 @@
+#备注 主要改传送模块 如果要加人数也可以自己改
+
+#初始化
+scoreboard objectives add 匹配 dummy
+scoreboard objectives add 匹配中 dummy
+
+#前台
+tag @e[c=4,r=4,tag=!匹配中] add 匹配中
+
+
+#1.匹配
+scoreboard players set 匹配中 匹配中 0
+
+execute as @e[tag=匹配中] at @s run scoreboard players add 匹配中 匹配中 1
+
+execute as @e[tag=匹配中] at @s if score 匹配中 匹配中 matches 1..4 run titleraw @s actionbar {"rawtext":[{"text":"§6匹配中§f: [§c4/"},{"score":{"name":"匹配中","objective":"匹配中"}},{"text":"§f]"}]}
+
+execute if score 匹配中 匹配中 matches 4.. run title @a[tag=匹配中] title §a匹配成功
+
+execute if score 匹配中 匹配中 matches 4.. run tag @e[tag=匹配中] add 匹配 
+
+execute if score 匹配中 匹配中 matches 4.. run tag @e remove 匹配中
+
+execute if score 匹配中 匹配中 matches 4.. run scoreboard players set 匹配中 匹配中 0
+
+#2.后台
+execute as @e[c=1,tag=匹配] at @s run scoreboard players add 匹配 匹配 1
+
+execute as @e[c=1,tag=匹配] at @s run scoreboard players operation @s 匹配 = 匹配 匹配
+
+
+#传送模块 需自己改
+execute as @e[tag=匹配,scores={匹配=1}] at @s run tp @s 传送点1
+
+execute as @e[tag=匹配,scores={匹配=2}] at @s run tp @s 传送点2
+
+execute as @e[tag=匹配,scores={匹配=3}] at @s run tp @s 传送点3
+
+execute as @e[tag=匹配,scores={匹配=4}] at @s run tp @s 传送点4
+
+
+
+tag @e[scores={匹配=1..}] remove 匹配
+
+execute as @e[tag=!匹配,scores={匹配=1..}] at @s run scoreboard players set @s 匹配 0
+
+execute if score 匹配 匹配 matches 4.. run scoreboard players set 匹配 匹配 0
+

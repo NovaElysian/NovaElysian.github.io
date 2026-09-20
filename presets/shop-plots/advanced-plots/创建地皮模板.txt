@@ -1,0 +1,55 @@
+#聊天框输入
+
+/tp 1000 100 1000
+
+#到地方站着别动输入
+
+/tickingarea add ~~~ ~63~~63 地皮模板
+
+/fill ~~-1~ ~63~-1~63 stonebrick
+
+/fill ~~-2~ ~63~-8~63 bedrock
+
+/fill ~~-9~ ~63~-9~63 deny
+
+/fill ~6~-9~6 ~57~-9~57 allow
+
+/fill ~5 ~-1 ~5 ~58 ~-8 ~58 andesite 
+
+/fill ~5 ~ ~5 ~58 ~ ~58 stone_block_slab3 5
+
+/fill ~6 ~ ~6 ~57 ~ ~57 air
+
+/fill ~6~-1~6 ~57~-8~57 grass
+
+/structure save 地皮 ~~~ ~63~-9~63 disk
+
+/fill ~~~ ~63~4~ quartz_block 5
+
+/tickingarea remove 地皮模板
+
+§f[§a购买地皮§f]
+§e金币价格:
+§f10000¥
+
+§f[§a返回地皮§f]
+
+
+
+
+
+/tp 6000 91 6000
+
+/structure load 地皮 ~~~
+
+#命令柱
+
+execute positioned ~ ~ ~ as @a[x=~,y=~,z=~,dx=50,dy=100,dz=50] at @s run summon armor_stand 防护检测 ~ ~ ~
+
+execute as @e[name=防护检测] at @s positioned ~ 91 ~ run scoreboard players operation @s uid = @p[x=~,y=~,z=~,dx=50,dy=100,dz=50] uid
+
+execute positioned ~ ~ ~ run tp @e[name=防护检测] ~ 89 ~
+
+execute as @e[name=防护检测] at @s run structure load 数据箱 ~~-1~
+
+execute as @e[name=防护检测,r=20] run fill ~~~ ~~-4~ air

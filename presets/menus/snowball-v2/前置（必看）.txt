@@ -1,0 +1,37 @@
+#注意1到7页全都是连锁在一起的没有断开部分，除了转账和互传两个文件要单独做其他一到七页都是连锁的t显。
+
+
+#循环+连锁
+scoreboard objectives add 菜单 dummy
+scoreboard objectives add PAY dummy
+scoreboard objectives add PAYUID dummy
+scoreboard objectives add TPA dummy
+scoreboard objectives add TPAN dummy
+scoreboard objectives add TPA计时 dummy
+scoreboard objectives add 在线时间 dummy
+scoreboard objectives add UID dummy
+scoreboard objectives add 金币 dummy
+scoreboard objectives add 转账金额 dummy
+
+scoreboard players add @a 菜单 0
+scoreboard players add @a UID 0
+scoreboard players add @a 金币 0
+scoreboard players add @a 转账金额 0
+scoreboard players add @a 在线时间 0
+
+execute as @r[scores={UID=0}] at @s run scoreboard players add UID UID 1
+
+execute as @r[scores={UID=0}] at @s run scoreboard players operation @s UID = UID UID
+
+
+#单独循环连锁 延迟2或3
+
+#彩色字
+scoreboard players add @a 彩色字 1
+
+#彩色字
+execute as @a[scores={彩色字=5..}] at @s run scoreboard players set @s 彩色字 1
+
+
+#所有的一到七页做完后 在最后命令方块加上
+kill @e[type=snowball]

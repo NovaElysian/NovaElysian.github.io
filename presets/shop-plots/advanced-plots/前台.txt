@@ -1,0 +1,22 @@
+#创建地皮
+#脉冲
+execute as @p[tag=!已经创建] at @s unless score @s 金币 matches 10000.. run title @p title §c创建失败
+
+#连锁
+execute as @p at @s if score @s 金币 matches 10000.. run tag @s[tag=!已经创建] add 创建地皮
+
+#连锁
+tellraw @p[tag=已经创建] {"rawtext":[{"text":"§c┃ §e您已经创建过地皮 请在旁边返回 "}]}
+
+#连锁
+tag @p[tag=创建地皮] add 已经创建
+
+
+
+#回到地皮
+
+#脉冲
+tag @p[tag=已经创建] add 回到地皮
+
+#连锁
+tellraw @p[tag=!已经创建] {"rawtext":[{"text":"§c┃ §e您还未创建地皮 请在旁边创建 "}]}

@@ -1,0 +1,180 @@
+
+
+#初始化
+scoreboard objectives add 后台地皮 dummy
+
+scoreboard objectives add 玩家x dummy
+scoreboard objectives add 玩家z dummy
+
+scoreboard objectives add 传送x dummy
+scoreboard objectives add 传送z dummy
+
+scoreboard players add x 后台地皮 0
+scoreboard players add z 后台地皮 0
+scoreboard players add b 后台地皮 0
+
+scoreboard players add @a 玩家x 0
+scoreboard players add @a 玩家z 0
+
+scoreboard players add @a 传送x 0
+scoreboard players add @a 传送z 0
+
+
+#核心指令 断链
+
+execute if entity @a[tag=创建地皮] run tag @a[tag=创建地皮] add 传送地皮
+
+execute if entity @a[tag=创建地皮] run setblock ~1~~ chain_command_block 5
+
+这里空一格
+
+setblock ~-1~~ air
+
+scoreboard players operation b 后台地皮 = x 后台地皮
+
+scoreboard players operation b 后台地皮 -= z 后台地皮
+
+execute if score b 后台地皮 matches ..0 run scoreboard players add x 后台地皮 1
+
+execute if score b 后台地皮 matches 0 run scoreboard players set z 后台地皮 0
+
+execute if score b 后台地皮 matches !0 run scoreboard players operation x 后台地皮 >< z 后台地皮
+
+execute as @a[tag=创建地皮] at @s run scoreboard players operation @s 玩家x = x 后台地皮
+
+execute as @a[tag=创建地皮] at @s run scoreboard players operation @s 玩家z = z 后台地皮
+
+execute as @a[tag=创建地皮] at @s run scoreboard players operation @s 传送x = x 后台地皮
+
+execute as @a[tag=创建地皮] at @s run scoreboard players operation @s 传送z = z 后台地皮
+
+execute as @a[tag=创建地皮] at @s run titleraw @s title {"rawtext":[{"text":"§a§l创建成功"}]}
+
+execute as @a[tag=创建地皮] at @s run titleraw @s subtitle {"rawtext":[{"text":"§a地皮编号§f：( §e"},{"score":{"objective":"玩家x","name":"@s"}},{"text":" §f, §e"},{"score":{"objective":"玩家z","name":"@s"}},{"text":"§f )\n\n"}]}
+
+effect @a[tag=创建地皮] slow_falling 10 3
+
+tag @a remove 创建地皮
+
+
+
+
+#传送回地皮 断链
+execute if entity @a[tag=回到地皮] run setblock ~1~~ chain_command_block 5
+
+这里空一格
+
+setblock ~-1~~ air
+
+execute as @a[tag=回到地皮] at @s run scoreboard players operation @s 玩家x = @s 传送x
+
+execute as @a[tag=回到地皮] at @s run scoreboard players operation @s 玩家z = @s 传送z
+
+execute as @a[tag=回到地皮] at @s run title @s title §a回到家咯
+
+tag @a remove 回到地皮
+
+
+
+
+#二分法传送
+#循环
+execute as @a[scores={玩家x=2048..}] at @s run tp @s ~131072~~
+#有条件
+execute as @a[scores={玩家x=2048..}] at @s run scoreboard players remove @s 玩家x 2048
+
+execute as @a[scores={玩家x=1024..}] at @s run tp @s ~65536~~
+#有条件
+execute as @a[scores={玩家x=1024..}] at @s run scoreboard players remove @s 玩家x 1024
+
+execute as @a[scores={玩家x=512..}] at @s run tp @s ~32768~~
+#有条件
+execute as @a[scores={玩家x=512..}] at @s run scoreboard players remove @s 玩家x 512
+
+execute as @a[scores={玩家x=256..}] at @s run tp @s ~16384~~
+#有条件
+execute as @a[scores={玩家x=256..}] at @s run scoreboard players remove @s 玩家x 256
+
+execute as @a[scores={玩家x=128..}] at @s run tp @s ~8192~~
+#有条件
+execute as @a[scores={玩家x=128..}] at @s run scoreboard players remove @s 玩家x 128
+
+execute as @a[scores={玩家x=64..}] at @s run tp @s ~4096~~
+#有条件
+execute as @a[scores={玩家x=64..}] at @s run scoreboard players remove @s 玩家x 64
+
+execute as @a[scores={玩家x=32..}] at @s run tp @s ~2048~~
+#有条件
+execute as @a[scores={玩家x=32..}] at @s run scoreboard players remove @s 玩家x 32
+
+execute as @a[scores={玩家x=16..}] at @s run tp @s ~1024~~
+#有条件
+execute as @a[scores={玩家x=16..}] at @s run scoreboard players remove @s 玩家x 16
+
+execute as @a[scores={玩家x=8..}] at @s run tp @s ~512~~
+#有条件
+execute as @a[scores={玩家x=8..}] at @s run scoreboard players remove @s 玩家x 8
+
+execute as @a[scores={玩家x=4..}] at @s run tp @s ~256~~
+#有条件
+execute as @a[scores={玩家x=4..}] at @s run scoreboard players remove @s 玩家x 4
+
+execute as @a[scores={玩家x=2..}] at @s run tp @s ~128~~
+#有条件
+execute as @a[scores={玩家x=2..}] at @s run scoreboard players remove @s 玩家x 2
+
+execute as @a[scores={玩家x=1..}] at @s run tp @s ~64~~
+#有条件
+execute as @a[scores={玩家x=1..}] at @s run scoreboard players remove @s 玩家x 1
+
+execute as @a[scores={玩家z=2048..}] at @s run tp @s ~~~131072
+#有条件
+execute as @a[scores={玩家z=2048..}] at @s run scoreboard players remove @s 玩家z 2048
+
+execute as @a[scores={玩家z=1024..}] at @s run tp @s ~~~65536
+#有条件
+execute as @a[scores={玩家z=1024..}] at @s run scoreboard players remove @s 玩家z 1024
+
+execute as @a[scores={玩家z=512..}] at @s run tp @s ~~~32768
+#有条件
+execute as @a[scores={玩家z=512..}] at @s run scoreboard players remove @s 玩家z 512
+
+execute as @a[scores={玩家z=256..}] at @s run tp @s ~~~16384
+#有条件
+execute as @a[scores={玩家z=256..}] at @s run scoreboard players remove @s 玩家z 256
+
+execute as @a[scores={玩家z=128..}] at @s run tp @s ~~~8192
+#有条件
+execute as @a[scores={玩家z=128..}] at @s run scoreboard players remove @s 玩家z 128
+
+execute as @a[scores={玩家z=64..}] at @s run tp @s ~~~4096
+#有条件
+execute as @a[scores={玩家z=64..}] at @s run scoreboard players remove @s 玩家z 64
+
+execute as @a[scores={玩家z=32..}] at @s run tp @s ~~~2048
+#有条件
+execute as @a[scores={玩家z=32..}] at @s run scoreboard players remove @s 玩家z 32
+
+execute as @a[scores={玩家z=16..}] at @s run tp @s ~~~1024
+#有条件
+execute as @a[scores={玩家z=16..}] at @s run scoreboard players remove @s 玩家z 16
+
+execute as @a[scores={玩家z=8..}] at @s run tp @s ~~~512
+#有条件
+execute as @a[scores={玩家z=8..}] at @s run scoreboard players remove @s 玩家z 8
+
+execute as @a[scores={玩家z=4..}] at @s run tp @s ~~~256
+#有条件
+execute as @a[scores={玩家z=4..}] at @s run scoreboard players remove @s 玩家z 4
+
+execute as @a[scores={玩家z=2..}] at @s run tp @s ~~~128
+#有条件
+execute as @a[scores={玩家z=2..}] at @s run scoreboard players remove @s 玩家z 2
+
+execute as @a[scores={玩家z=1..}] at @s run tp @s ~~~64
+#有条件
+execute as @a[scores={玩家z=1..}] at @s run scoreboard players remove @s 玩家z 1
+
+execute as @a[tag=传送地皮] at @s run structure load 地皮 ~ -64 ~ 0_degrees none layer_by_layer 5
+
+execute as @a[tag=传送地皮] at @s run tag @a remove 传送地皮

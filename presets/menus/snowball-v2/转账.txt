@@ -1,0 +1,89 @@
+#金币转账
+
+
+scoreboard players set @a[scores={菜单=!88..117}] 转账金额 0
+
+scoreboard players set 十 转账金额 10
+
+execute as @a[scores={菜单=89..97},rx=-85,rxm=-90] at @s run scoreboard players operation @s 转账金额 *= 十 转账金额
+
+execute as @a[scores={菜单=89..97},rx=-85,rxm=-90] at @s run scoreboard players operation @s 转账金额 += @s 菜单
+
+execute as @a[scores={菜单=89..97},rx=-85,rxm=-90] at @s run scoreboard players remove @s 转账金额 88
+
+execute as @a[scores={菜单=98},rx=-85,rxm=-90] at @s run scoreboard players operation @s 转账金额 *= 十 转账金额
+
+execute as @a[scores={菜单=99},rx=-85,rxm=-90] at @s run scoreboard players operation @s 转账金额 /= 十 转账金额
+
+execute as @a[scores={菜单=100},rx=-85,rxm=-90] at @s if score @s 金币 < @s 转账金额 run title @s title §c金币不足
+
+execute as @a[scores={菜单=100},rx=-85,rxm=-90] at @s if score @s 金币 >= @s 转账金额 run scoreboard players set @s 菜单 110
+
+execute as @a[scores={菜单=100},rx=-85,rxm=-90] at @s if score @s 金币 < @s 转账金额 run scoreboard players set @s 转账金额 0
+
+execute as @a[scores={菜单=89..100},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~
+
+#此文件由星月牙月制作3122191515
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s run scoreboard players operation @s PAY = @s 菜单
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s run scoreboard players remove @s PAY 110
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s if score @s PAY = @s PAYUID run title @s title §c请勿给自己转账
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s if score @s PAY = @s PAYUID run tp @s ~~~ facing ~~~
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s PAY = @p PAYUID run tag @s add 检测有人
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90,tag=!检测有人] at @s run title @s title §c此处没有人可以刷新试试
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90,tag=!检测有人] at @s run tp @s ~~~ facing ~~~
+
+tag @a remove 检测有人
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s PAY = @p PAYUID run title @s title §a转账成功
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s PAY = @p PAYUID run scoreboard players operation @p 金币 += @s 转账金额
+
+#此文件由b站乱写指令的雷狮制作
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s PAY = @p PAYUID run scoreboard players operation @s 金币 -= @s 转账金额
+
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s PAY = @p PAYUID run tellraw @p {"rawtext":[{"text":"§7— — — — — — — — — — "},{"text":"\n§a〉钱包到账"},{"text":"\n§7— — — — — — — — — — "},{"text":"\n§7发件人: §f"},{"selector":"@a[scores={菜单=111..115},rx=-85,rxm=-90]"},{"text":"\n§7转账金额: §f"},{"score":{"name":"@a[scores={菜单=111..115},rx=-85,rxm=-90]","objective":"转账金额"}},{"text":"\n§7余额: §f"},{"score":{"name":"@p","objective":"金币"}},{"text":"\n§7— — — — — — — — — — "}]}
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s PAY = @p PAYUID run tellraw @s {"rawtext":[{"text":"§7— — — — — — — — — — "},{"text":"\n§a〉转账成功"},{"text":"\n§7— — — — — — — — — — "},{"text":"\n§7收件人: §f"},{"selector":"@p"},{"text":"\n§7转账金额: §f"},{"score":{"name":"@s","objective":"转账金额"}},{"text":"\n§7余额: §f"},{"score":{"name":"@s","objective":"金币"}},{"text":"\n§7— — — — — — — — — — "}]}
+
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s run scoreboard players reset @s PAY
+
+execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s run scoreboard players set @s 菜单 29
+
+#有条件
+execute as @a[rx=-85,rxm=-90,scores={菜单=29}] at @s run tp @s ~~~ facing ~~~
+
+
+#单独放
+#刷新玩家 断链
+#循环
+execute as @a[scores={菜单=116},rx=-85,rxm=-90] run setblock ~1~~ chain_command_block 5
+
+空
+
+#连锁
+setblock ~-1~~ air
+#连锁
+scoreboard players set @a PAYUID -1
+#连锁
+scoreboard players operation @a PAYUID -= @a PAYUID
+#连锁
+scoreboard players add @a PAYUID 1
+#连锁
+execute as @a[scores={菜单=116},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~
+
+#刷新UID
+
+#循环
+execute as @a[scores={菜单=117},rx=-85,rxm=-90] run scoreboard players operation @a[scores={PAYUID=1}] PAYUID >< @a[scores={PAYUID=1..}] PAYUID
+#连锁
+execute as @a[scores={菜单=117},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~

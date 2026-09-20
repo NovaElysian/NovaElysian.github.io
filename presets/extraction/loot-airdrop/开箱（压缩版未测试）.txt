@@ -1,0 +1,84 @@
+普通开箱 白色 黄绿色 淡蓝色 橙色 羊毛
+物品品质 普通 优秀 传说 绝密
+#提示 只需要改#5 #6就行 初始化必须看视频学，不然深奥难懂
+
+#1.前置 输入框输入
+scoreboard objectives add 普通开箱 dummy
+
+scoreboard objectives add 品质 dummy
+
+
+#2.去看视频 设置 此部分比较繁琐
+
+弄两个背对背的盔甲架 两个都命名为 随机
+
+execute positioned ~2~~2 rotated as @e[name=随机,type=armor_stand] positioned ^^^0.5 rotated as @r[name=随机,type=armor_stand] positioned ^^^1 rotated as @e[name=随机,type=armor_stand] positioned ^0.5^^ rotated as @e[name=随机,type=armor_stand] positioned ^1^^ run setblock ~~~ barrel
+
+execute positioned ~2~~2 rotated as @r[name=随机,type=armor_stand] positioned ^^^0.5 rotated as @r[name=随机,type=armor_stand] positioned ^^^1 rotated as @r[name=随机,type=armor_stand] positioned ^0.5^^ rotated as @r[name=随机,type=armor_stand] positioned ^1^^ run clone ~~~ ~~~ 品质位置
+
+structure save 普通优秀传说绝密 ~ ~-1 ~ ~ ~-1 ~ true disk
+
+
+#这里是羊毛 分别是 白色 黄绿 淡蓝 橙色
+structure save 普通箱优秀箱传说箱绝密箱 ~ ~-1 ~ ~ ~-1 ~ true disk
+
+
+
+
+#后台循环连锁一直铺就行
+
+#3.检测脚底下不是羊毛显示t显
+execute as @a[scores={普通开箱=1..}] at @s unless block ~ ~-1 ~ white_wool unless block ~ ~-1 ~ lime_wool unless block ~ ~-1 ~ light_blue_wool unless block ~ ~-1 ~ orange_wool run titleraw @s actionbar {"rawtext":[{"text":"┏                                ┓\n"},{"text":"    §c请勿离开箱子进度已重置"},{"text":"\n§f┗                                ┛"}]}
+
+#4.羊毛加分
+execute as @a at @s unless block ~ ~-1 ~ white_wool unless block ~ ~-1 ~ lime_wool unless block ~ ~-1 ~ light_blue_wool unless block ~ ~-1 ~ orange_wool run scoreboard players set @s 普通开箱 0
+
+scoreboard players add @s 普通开箱 1
+
+
+#5.刷新 这个5是五秒刷新，自己调
+execute as @a[scores={普通开箱=100..}] at @s if block ~ ~-1 ~ white_wool run structure load 普通箱 ~ ~-1 ~ 0_degrees none layer_by_layer 5
+
+execute as @a[scores={普通开箱=100..}] at @s if block ~ ~-1 ~ lime_wool run structure load 优秀箱 ~ ~-1 ~ 0_degrees none layer_by_layer 5
+
+execute as @a[scores={普通开箱=100..}] at @s if block ~ ~-1 ~ light_blue_wool run structure load 传说箱 ~ ~-1 ~ 0_degrees none layer_by_layer 5
+
+execute as @a[scores={普通开箱=100..}] at @s if block ~ ~-1 ~ orange_wool run structure load 绝密箱 ~ ~-1 ~ 0_degrees none layer_by_layer 5
+
+#6.品质 最后的两个数字是 1到4级品质随机 可以自己调 也可以不调
+execute as @a[scores={普通开箱=100..}] at @s if block ~ ~-1 ~ white_wool run scoreboard players random @s 品质 1 2
+
+execute as @a[scores={普通开箱=100..}] at @s if block ~ ~-1 ~ lime_wool run scoreboard players random @s 品质 1 3
+
+execute as @a[scores={普通开箱=100..}] at @s if block ~ ~-1 ~ light_blue_wool run scoreboard players random @s 品质 2 3
+
+execute as @a[scores={普通开箱=100..}] at @s if block ~ ~-1 ~ orange_wool run scoreboard players random @s 品质 3 4
+
+#给物品
+
+execute as @a[scores={品质=1}] run structure load 普通 ~4 ~1 ~ 0_degrees none
+
+execute as @a[scores={品质=2}] run structure load 优秀 ~3 ~1 ~ 0_degrees none
+
+execute as @a[scores={品质=3}] run structure load 传说 ~2 ~1 ~ 0_degrees none
+
+execute as @a[scores={品质=4}] run structure load 绝密 ~1 ~1 ~ 0_degrees none
+
+setblock ~2 ~1 ~ air destroy
+
+kill @e[r=5,name=木桶]
+
+tp @e[r=4,type=item] @a[scores={品质=1..4}]
+
+#标题
+
+execute as @a[scores={品质=1..}] at @s run title @s title §a恭喜获得
+
+execute as @a[scores={品质=1..}] at @s run titleraw @s subtitle {"rawtext":[{"selector":"@e[r=2,type=item]"}]}
+
+#标靶
+
+execute as @a[scores={普通开箱=100..}] at @s run setblock ~ ~-1 ~ target replace 
+
+#t显 连锁 无条件 保持
+execute as @a[scores={普通开箱=1..}] at @s run titleraw @s actionbar {"rawtext":[{"text":"┏                                ┓\n"},{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={普通开箱=..19}]"},{"selector":"@s[scores={普通开箱=..29}]"},{"selector":"@s[scores={普通开箱=..39}]"},{"selector":"@s[scores={普通开箱=..49}]"},{"selector":"@s[scores={普通开箱=..59}]"},{"selector":"@s[scores={普通开箱=..69}]"},{"selector":"@s[scores={普通开箱=..79}]"},{"selector":"@s[scores={普通开箱=..89}]"},{"text":" §a开箱中: §f\n §aࡇࡇ§fࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ"},{"text":" §a开箱中: §f\n §aࡇࡇࡇࡇ§fࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ"},{"text":" §a开箱中: §f\n §aࡇࡇࡇࡇࡇࡇ§fࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ"},{"text":" §a开箱中: §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇ§fࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ"},{"text":" §a开箱中: §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ§fࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ"},{"text":" §a开箱中: §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ§fࡇࡇࡇࡇࡇࡇࡇࡇ"},{"text":" §a开箱中: §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ§fࡇࡇࡇࡇࡇࡇ"},{"text":" §a开箱中: §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ§fࡇࡇࡇࡇ"},{"translate":"%%3","with":{"rawtext":[{"selector":"@s[scores={普通开箱=..99}]"},{"selector":"@s[scores={普通开箱=..100}]"},{"text":" §a开箱中: §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ§fࡇࡇ"},{"text":" §a开箱成功 §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ"}]}}]}},{"text":"\n\n§f┗                                ┛"}]}

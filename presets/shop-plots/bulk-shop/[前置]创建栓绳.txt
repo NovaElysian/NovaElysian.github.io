@@ -1,0 +1,20 @@
+#前置 聊天框输入
+/scoreboard objectives add 栓绳计数 dummy
+
+#创建二分法栓绳指令 必须把命令方块铺在x+位置，只要x轴变大了就对了
+
+#1.先创建64 然后改成 32 16 8 4 2 1每次改一下就行 脉冲 红石激活
+scoreboard players set 栓绳计数 栓绳计数 64
+
+#2.循环 保持开启 无条件
+execute if score 栓绳计数 栓绳计数 matches 1.. run summon leash_knot ~2~1~
+
+#3.连锁 有条件 保持
+execute if score 栓绳计数 栓绳计数 matches 1.. run scoreboard players remove 栓绳计数 栓绳计数 1
+
+#4.连锁无保持 每次改的时候把栓绳数量，这个名字的数量二字，改成#1对应的数字 64改成一组 32改成三二 16改成十六 8改成八 4改成四 2改成二 1改成一
+execute if score 栓绳计数 栓绳计数 matches 0 run structure save 栓绳数量 ~ ~1 ~ ~ ~1 ~ true disk
+
+#5.连锁 无条件 保持开启
+execute if score 栓绳计数 栓绳计数 matches 0 run scoreboard players reset 栓绳计数 栓绳计数
+

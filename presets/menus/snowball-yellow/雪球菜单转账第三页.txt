@@ -1,0 +1,131 @@
+
+execute as @a[rx=-85,rxm=-90,scores={菜单=44..57}] at @s run scoreboard players set @s 菜单 240
+
+execute as @a[scores={菜单=240},rx=-85,rxm=-90] at @s run tp @s ~~~ ~~120
+
+execute as @a[scores={菜单=240..260}] at @s run playsound random.click @s ~ ~ ~ 1 5.5 1
+
+
+execute as @a[scores={菜单=240..250}] at @s run titleraw @s actionbar {"rawtext":[{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..240}]"},{"selector":"@s[scores={菜单=..241}]"},{"selector":"@s[scores={菜单=..142}]"},{"selector":"@s[scores={菜单=..243}]"},{"selector":"@s[scores={菜单=..244}]"},{"selector":"@s[scores={菜单=..245}]"},{"selector":"@s[scores={菜单=..246}]"},{"selector":"@s[scores={菜单=..247}]"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7        <〈 多维☫传送 〉>§r\n§7     §o§6▎§e▎▎ §r§f<〈 金币☫转账 〉> §o§e▎▎§6▎§r\n§7        <〈 玩家☫互传 〉>\n§7        <〈 锚点☫传送 〉>\n§7        <〈 其他☫功能 〉>\n\n§f ◇----------------------------◇ \n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n        <〈 多维☫传送 〉>§r\n     §o§6▎§e▎▎ §r§f<〈 金币☫转账 〉> §o§e▎▎§6▎§r\n§7        <〈 玩家☫互传 〉>\n§7        <〈 锚点☫传送 〉>\n§7        <〈 其他☫功能 〉>\n\n§f ◇----------------------------◇ \n\n\n\n\n"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7        <〈 多维☫传送 〉>\n     §o§6▎§e▎▎ §r§f<〈 金币☫转账 〉> §o§e▎▎§6▎§r\n§7        <〈 玩家☫互传 〉>\n§7        <〈 锚点☫传送 〉>\n§7        <〈 其他☫功能 〉>\n\n\n\n"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7        <〈 多维☫传送 〉>\n§7     §o§6▎§e▎▎ §r§f<〈 金币☫转账 〉> §o§e▎▎§6▎§r\n§7        <〈 玩家☫互传 〉>\n§7        <〈 锚点☫传送 〉>\n\n\n"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7        <〈 多维☫传送 〉>\n     §o§6▎§e▎▎ §r§f<〈 金币☫转账 〉> §o§e▎▎§6▎§r\n§7        <〈 玩家☫互传 〉>\n\n"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7        <〈 多维☫传送 〉>\n     §o§6▎§e▎▎ §r§f<〈 金币☫转账 〉> §o§e▎▎§6▎§r\n"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7        <〈 多维☫传送 〉>"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n"},{"translate":"%%4","with":{"rawtext":[{"selector":"@s[scores={菜单=..248}]"},{"selector":"@s[scores={菜单=..249}]"},{"selector":"@s[scores={菜单=..250}]"},{"text":"         §e✿§f雪球 菜单§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"         §e✿§f雪球 菜单§e✿           "},{"text":"                             "}]}}]}}]}
+
+
+
+execute as @a[scores={菜单=251..263}] at @s run titleraw @s actionbar {"rawtext":[{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..251}]"},{"selector":"@s[scores={菜单=..252}]"},{"selector":"@s[scores={菜单=..253}]"},{"selector":"@s[scores={菜单=..254}]"},{"selector":"@s[scores={菜单=..255}]"},{"selector":"@s[scores={菜单=..256}]"},{"selector":"@s[scores={菜单=..257}]"},{"selector":"@s[scores={菜单=..258}]"},{"text":"         §e✿§f金币 转账§e✿           "},{"text":"         §e✿§f金币 转账§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"         §e✿§f金币 转账§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n"},{"text":"         §e✿§f金币 转账§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n  §6转账金额§f: §f"},{"text":"         §e✿§f金币 转账§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n  §6转账金额§f: §f\n  §6玩家余额§f: §f\n"},{"text":"         §e✿§f金币 转账§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n  §6转账金额§f: \n  §6玩家余额§f: \n\n          §e输入转账金额"},{"text":"         §e✿§f金币 转账§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n  §6转账金额§f: \n  §6玩家余额§f: \n\n          §e输入转账金额\n§f        1       2       3"},{"text":"         §e✿§f金币 转账§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n  §6转账金额§f: \n  §6玩家余额§f: \n\n          §e输入转账金额\n§f        1       2       3\n        4       5       6"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={菜单=..259}]"},{"selector":"@s[scores={菜单=..260}]"},{"selector":"@s[scores={菜单=..261}]"},{"selector":"@s[scores={菜单=..263}]"},{"text":"         §e✿§f金币 转账§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n  §6转账金额§f: \n  §6玩家余额§f: \n\n          §e输入转账金额\n§f        1       2       3\n        4       5       6\n        7       8       9"},{"text":"         §e✿§f金币 转账§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n  §6转账金额§f: \n  §6玩家余额§f: \n\n          §e输入转账金额\n§f        1       2       3\n        4       5       6\n        7       8       9\n                0\n       退位          确认\n"},{"text":"         §e✿§f金币 转账§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n  §6转账金额§f: \n  §6玩家余额§f: \n\n          §e输入转账金额\n§f        1       2       3\n        4       5       6\n        7       8       9\n                0\n       退位          确认\n\n§f ◇----------------------------◇ "},{"text":"         §e✿§f金币 转账§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n  §6转账金额§f: \n  §6玩家余额§f: \n\n          §e输入转账金额\n§f        1       2       3\n        4       5       6\n        7       8       9\n                0\n       退位          确认\n\n§f ◇----------------------------◇ \n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n\n\n\n\n"}]}}]}}]}
+
+execute as @a[scores={菜单=264}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f金币 转账§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n  §6转账金额§f: "},{"text":"\n  §6玩家余额§f: "},{"score":{"name":"@s","objective":"金币"}},{"text":"\n\n          §e输入转账金额\n§f        1       2       3\n        4       5       6\n        7       8       9\n                0\n       退位          确认\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=265..276}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f金币 转账§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n  §6转账金额§f: "},{"score":{"name":"@s","objective":"转账金额"}},{"text":"\n  §6玩家余额§f: "},{"score":{"name":"@s","objective":"金币"}},{"text":"\n\n          §e输入转账金额"},{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..265}]"},{"selector":"@s[scores={菜单=..266}]"},{"selector":"@s[scores={菜单=..267}]"},{"selector":"@s[scores={菜单=..268}]"},{"selector":"@s[scores={菜单=..269}]"},{"selector":"@s[scores={菜单=..270}]"},{"selector":"@s[scores={菜单=..271}]"},{"selector":"@s[scores={菜单=..272}]"},{"text":"\n§f        §e1       §f2       3\n        4       5       6\n        7       8       9\n                0\n       退位          确认\n\n"},{"text":"\n§f        1       §e2       §f3\n        4       5       6\n        7       8       9\n                0\n       退位          确认\n\n"},{"text":"\n§f        1       2       §e3\n§f        4       5       6\n        7       8       9\n                0\n       退位          确认\n\n"},{"text":"\n§f        1       2       3\n        §e4§f       5       6\n        7       8       9\n                0\n       退位          确认\n\n"},{"text":"\n§f        1       2       3\n        4       §e5§f       6\n        7       8       9\n                0\n       退位          确认\n\n"},{"text":"\n§f        1       2       3\n        4       5       §e6\n        §f7       8       9\n                0\n       退位          确认\n\n"},{"text":"\n§f        1       2       3\n        4       5       6\n        §e7§f       8       9\n                0\n       退位          确认\n\n"},{"text":"\n§f        1       2       3\n        4       5       6\n        7       §e8§f       9\n                0\n       退位          确认\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={菜单=..273}]"},{"selector":"@s[scores={菜单=..274}]"},{"selector":"@s[scores={菜单=..275}]"},{"selector":"@s[scores={菜单=..276}]"},{"text":"\n§f        1       2       3\n        4       5       6\n        7       8§e       9§f\n                0\n       退位          确认\n\n"},{"text":"\n§f        1       2       3\n        4       5       6\n        7       8       9\n                §e0§f\n       退位          确认\n\n"},{"text":"\n§f        1       2       3\n        4       5       6\n        7       8       9\n                0\n       §c退位§f          确认\n\n"},{"text":"\n§f        1       2       3\n        4       5       6\n        7       8       9\n                0\n       退位          §a确认\n\n§r"}]}}]}},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=280}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f金币 转账§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=1}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=2}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=3}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=4}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=5}]"},{"text":"\n\n  §f刷新玩家           刷新列表"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=281}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f金币 转账§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§6  ▶▶➤ §f"},{"selector":"@a[scores={PAYUID=1}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=2}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=3}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=4}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=5}]"},{"text":"\n\n  §f刷新玩家           刷新列表"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=282}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f金币 转账§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=1}]"},{"text":"\n§6  ▶▶➤ §f"},{"selector":"@a[scores={PAYUID=2}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=3}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=4}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=5}]"},{"text":"\n\n  §f刷新玩家           刷新列表"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=283}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f金币 转账§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=1}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=2}]"},{"text":"\n§6  ▶▶➤ §f"},{"selector":"@a[scores={PAYUID=3}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=4}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=5}]"},{"text":"\n\n  §f刷新玩家           刷新列表"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=284}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f金币 转账§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=1}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=2}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=3}]"},{"text":"\n§6  ▶▶➤ §f"},{"selector":"@a[scores={PAYUID=4}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=5}]"},{"text":"\n\n  §f刷新玩家           刷新列表"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=285}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f金币 转账§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=1}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=2}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=3}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=4}]"},{"text":"\n§6  ▶▶➤ §f"},{"selector":"@a[scores={PAYUID=5}]"},{"text":"\n\n  §f刷新玩家           刷新列表"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=286..287}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f金币 转账§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=1}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=2}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=3}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=4}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={PAYUID=5}]"},{"translate":"%%3","with":{"rawtext":[{"selector":"@s[scores={菜单=..286}]"},{"selector":"@s[scores={菜单=..287}]"},{"text":"\n\n  §e刷新玩家           §f刷新列表"},{"text":"\n\n  §f刷新玩家           §e刷新列表"}]}},{"text":"§r\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=280..287},rx=90,rxm=85] at @s run scoreboard players set @s 菜单 264
+
+execute as @a[scores={菜单=264},rx=90,rxm=85] at @s run tp @s ~~~ ~ ~-120
+
+execute as @a[scores={菜单=288}] at @s run scoreboard players set @s 菜单 281
+
+execute as @a[scores={菜单=277..279}] at @s run scoreboard players set @s 菜单 265
+
+execute as @a[scores={菜单=264..276},rx=90,rxm=85] at @s run scoreboard players set @s 菜单 263
+
+execute as @a[scores={菜单=263},rx=90,rxm=85] at @s run tp @s ~~~ ~ ~-120
+
+execute as @a[scores={菜单=239}] at @s run scoreboard players set @s 菜单 57
+
+
+
+
+
+
+#转账部分 这段单独弄 循环连锁
+
+
+scoreboard players set @a[scores={菜单=!265..287}] 转账金额 0
+
+scoreboard players set 十 转账金额 10
+
+execute as @a[scores={菜单=265..273},rx=-85,rxm=-90] at @s run scoreboard players operation @s 转账金额 *= 十 转账金额
+
+execute as @a[scores={菜单=265..273},rx=-85,rxm=-90] at @s run scoreboard players operation @s 转账金额 += @s 菜单
+
+execute as @a[scores={菜单=265..273},rx=-85,rxm=-90] at @s run scoreboard players remove @s 转账金额 264
+
+execute as @a[scores={菜单=274},rx=-85,rxm=-90] at @s run scoreboard players operation @s 转账金额 *= 十 转账金额
+
+execute as @a[scores={菜单=275},rx=-85,rxm=-90] at @s run scoreboard players operation @s 转账金额 /= 十 转账金额
+
+execute as @a[scores={菜单=276},rx=-85,rxm=-90] at @s if score @s 金币 < @s 转账金额 run title @s title §c金币不足
+
+execute as @a[scores={菜单=276},rx=-85,rxm=-90] at @s if score @s 金币 >= @s 转账金额 run scoreboard players set @s 菜单 280
+
+execute as @a[scores={菜单=276},rx=-85,rxm=-90] at @s if score @s 金币 < @s 转账金额 run scoreboard players set @s 转账金额 0
+
+execute as @a[scores={菜单=265..280},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~
+
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90] at @s run scoreboard players operation @s PAY = @s 菜单
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90] at @s run scoreboard players remove @s PAY 280
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90] at @s if score @s PAY = @s PAYUID run title @s title §c请勿给自己转账
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90] at @s if score @s PAY = @s PAYUID run tp @s ~~~ facing ~~~
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s PAY = @p PAYUID run tag @s add 检测有人
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90,tag=!检测有人] at @s run title @s title §c此处没有人可以刷新试试
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90,tag=!检测有人] at @s run tp @s ~~~ facing ~~~
+
+tag @a remove 检测有人
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s PAY = @p PAYUID run title @s title §a转账成功
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s PAY = @p PAYUID run scoreboard players operation @p 金币 += @s 转账金额
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s PAY = @p PAYUID run tellraw @p {"rawtext":[{"text":"§f"},{"selector":"@a[scores={菜单=281..285},rx=-85,rxm=-90]"},{"text":"§6 给您转账"},{"score":{"name":"@a[scores={菜单=281..285},rx=-85,rxm=-90]","objective":"转账金额"}}]}
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s PAY = @p PAYUID run scoreboard players operation @s 金币 -= @s 转账金额
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90] at @s run scoreboard players reset @s PAY
+
+execute as @a[scores={菜单=281..285},rx=-85,rxm=-90] at @s run scoreboard players set @s 菜单 120
+
+
+
+#刷新玩家 断链 单独弄 摆到 x+的地方一条线
+
+execute as @a[scores={菜单=286},rx=-85,rxm=-90] run setblock ~1~~ chain_command_block 5
+
+空
+
+setblock ~-1~~ air
+
+scoreboard players set @a PAYUID 0
+
+scoreboard players set @a PAYUID -1
+
+scoreboard players operation @a PAYUID -= @a PAYUID
+
+scoreboard players add @a PAYUID 1
+
+execute as @a[scores={菜单=286},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~
+
+
+#刷新UID 单独弄
+
+execute as @a[scores={菜单=287},rx=-85,rxm=-90] run scoreboard players operation @a[scores={PAYUID=1}] PAYUID >< @a[scores={PAYUID=1..}] PAYUID
+
+execute as @a[scores={菜单=287},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~

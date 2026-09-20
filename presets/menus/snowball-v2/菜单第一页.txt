@@ -1,0 +1,54 @@
+#循环 连锁做完
+#关闭声音
+execute as @a[hasitem={item=snowball,location=slot.weapon.mainhand}] at @s run stopsound @s random.bow
+
+#给音效
+execute as @e[type=snowball] at @s run playsound random.toast @p[r=2] ~~~ 1 3 1
+
+execute as @e[type=snowball] at @s run scoreboard players add @p[r=2,scores={菜单=0}] 菜单 1
+
+
+execute as @a[scores={菜单=1..25}] run scoreboard players add @s 菜单 1
+
+#音效
+execute as @a[scores={菜单=1..25}] at @s run playsound random.click @s ~ ~ ~ 1 5.5 1
+
+execute as @a[scores={菜单=1..17}] at @s run titleraw @s actionbar {"rawtext":[{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..1}]"},{"selector":"@s[scores={菜单=..2}]"},{"selector":"@s[scores={菜单=..3}]"},{"selector":"@s[scores={菜单=..4}]"},{"selector":"@s[scores={菜单=..5}]"},{"selector":"@s[scores={菜单=..6}]"},{"selector":"@s[scores={菜单=..7}]"},{"selector":"@s[scores={菜单=..8}]"},{"text":"§7『§f▏"},{"text":"§7『§d牙§f▏"},{"text":"§7『§d牙月§f▏"},{"text":"§7『§d牙月菜§f▏"},{"text":"§7『§d牙月菜单§f▏"},{"text":"§7『§d牙月菜单§7』§f▏"},{"text":"§7『§d牙月菜单§7』 §f▏"},{"text":"§7『§d牙月菜单§7』 Ｌ§f▏"},{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..9}]"},{"selector":"@s[scores={菜单=..10}]"},{"selector":"@s[scores={菜单=..11}]"},{"selector":"@s[scores={菜单=..12}]"},{"selector":"@s[scores={菜单=..13}]"},{"selector":"@s[scores={菜单=..14}]"},{"selector":"@s[scores={菜单=..15}]"},{"selector":"@s[scores={菜单=..16}]"},{"text":"§7『§d牙月菜单§7』 Ｌｏ§f▏"},{"text":"§7『§d牙月菜单§7』 Ｌｏａ§f▏"},{"text":"§7『§d牙月菜单§7』 Ｌｏａｄ§f▏"},{"text":"§7『§d牙月菜单§7』 Ｌｏａｄｉ§f▏"},{"text":"§7『§d牙月菜单§7』 Ｌｏａｄｉｎ§f▏"},{"text":"§7『§d牙月菜单§7』 Ｌｏａｄｉｎｇ"},{"text":"§7『§d牙月菜单§7』 Ｌｏａｄｉｎｇ 。§f▏"},{"text":"§7『§d牙月菜单§7』 Ｌｏａｄｉｎｇ 。。§f▏"},{"translate":"%%2","with":{"rawtext":[{"selector":"@s[scores={菜单=..17}]"},{"text":"§7『§d牙月菜单§7』 Ｌｏａｄｉｎｇ 。。。"}]}}]}}]}}]}
+#此文件由星月牙月制作3122191515
+execute as @a[scores={菜单=18..25}] at @s run titleraw @s actionbar {"rawtext":[{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..18}]"},{"selector":"@s[scores={菜单=..19}]"},{"selector":"@s[scores={菜单=..20}]"},{"selector":"@s[scores={菜单=..21}]"},{"selector":"@s[scores={菜单=..22}]"},{"selector":"@s[scores={菜单=..23}]"},{"selector":"@s[scores={菜单=..24}]"},{"selector":"@s[scores={菜单=..25}]"},{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n"},{"text":"\n\n\n\n"},{"text":"\n\n"}]}},{"text":"         §b✿§f牙月 出品§b✿"},{"text":"\n    §b◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§b ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §b◇---§s----§3----§9--§b--§9--§3----§s----§b---◇ "},{"text":" §s◇---§3----§9----§b--§s--§b--§9----§3----§s---◇ "},{"text":" §3◇---§9----§b----§s--§3--§s--§b----§9----§3---◇ "},{"text":" §9◇---§b----§s----§3--§9--§3--§s----§b----§9---◇ "}]}},{"text":"\n\n"},{"text":"  §7┃ 多维传送 §r\n §7 ┃ §7玩家互传 \n §7 ┃ §7数控转账 \n §7 ┃ §7音乐选项\n §7 ┃ §7原地飞升\n §7 ┃ §7个人信息"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §b◇---§s----§3----§9--§b--§9--§3----§s----§b---◇ "},{"text":" §s◇---§3----§9----§b--§s--§b--§9----§3----§s---◇ "},{"text":" §3◇---§9----§b----§s--§3--§s--§b----§9----§3---◇ "},{"text":" §9◇---§b----§s----§3--§9--§3--§s----§b----§9---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头关机\n\n\n\n\n\n"}]}
+
+定点传送 主城 商店 
+ 互传
+ 转账
+ 音乐
+ 紫砂
+ 个人信息 
+
+execute as @e[type=snowball] at @s run scoreboard players add @p[r=2,rx=60,rxm=0,scores={菜单=26..32}] 菜单 1
+
+execute as @e[type=snowball] at @s run scoreboard players remove @p[r=2,rx=0,rxm=-60,scores={菜单=27..32}] 菜单 1
+
+execute as @e[type=snowball] at @s run scoreboard players set @p[r=2,rx=0,rxm=-60,scores={菜单=26}] 菜单 32
+
+execute as @a[scores={菜单=33..39}] at @s run scoreboard players set @s 菜单 27
+#此文件由b站乱写指令的雷狮制作
+execute as @a[scores={菜单=26..32}] at @s unless entity @s[scores={菜单=32},rx=-85,rxm=-90] run titleraw @s actionbar {"rawtext":[{"text":"         §b✿§f牙月 菜单§b✿"},{"text":"\n    §b◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§b ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §b◇---§s----§3----§9--§b--§9--§3----§s----§b---◇ "},{"text":" §s◇---§3----§9----§b--§s--§b--§9----§3----§s---◇ "},{"text":" §3◇---§9----§b----§s--§3--§s--§b----§9----§3---◇ "},{"text":" §9◇---§b----§s----§3--§9--§3--§s----§b----§9---◇ "}]}},{"text":"\n\n"},{"translate":"%%8","with":{"rawtext":[{"selector":"@s[scores={菜单=..26}]"},{"selector":"@s[scores={菜单=..27}]"},{"selector":"@s[scores={菜单=..28}]"},{"selector":"@s[scores={菜单=..29}]"},{"selector":"@s[scores={菜单=..30}]"},{"selector":"@s[scores={菜单=..31}]"},{"selector":"@s[scores={菜单=..32}]"},{"text":"  §7┃ 多维传送 §r\n §7 ┃ §7玩家互传 \n §7 ┃ §7数控转账 \n §7 ┃ §7音乐选项\n §7 ┃ §7原地飞升\n §7 ┃ §7个人信息"},{"text":"  §9┃ §f多维传送 〉>  §f一〈§bｗｏｒｌｄ§f〉一§r \n §7 ┃ §7玩家互传 \n §7 ┃ §7数控转账 \n §7 ┃ §7音乐选项\n §7 ┃ §7原地飞升\n §7 ┃ §7个人信息"},{"text":"  §7┃ 多维传送 §r\n§7  §9┃ §f玩家互传 〉>  §f一〈§bｅｏｔｐ§f〉一§r \n §7 ┃ §7数控转账 \n §7 ┃ §7音乐选项\n §7 ┃ §7原地飞升\n §7 ┃ §7个人信息"},{"text":"  §7┃ 多维传送 §r\n §7 ┃ §7玩家互传 \n  §9┃ §f数控转账 〉>  §f一〈§bｐａｙ§f〉一§r \n §7 ┃ §7音乐选项\n §7 ┃ §7原地飞升\n §7 ┃ §7个人信息"},{"text":"  §7┃ 多维传送 §r\n §7 ┃ §7玩家互传 \n §7 ┃ §7数控转账 \n  §9┃ §f音乐选项 §f 〉>  §f一〈§bｍｕｓｉｃ§f〉一§r \n §7 ┃ §7原地飞升\n §7 ┃ §7个人信息"},{"text":"  §7┃ 多维传送 §r\n §7 ┃ §7玩家互传 \n §7 ┃ §7数控转账 \n §7 ┃ §7音乐选项\n  §9┃ §f原地飞升 〉>  §f一〈§bｓｕｉｃｉｄｅ§f〉一§r \n §7 ┃ §7个人信息"},{"text":"  §7┃ 多维传送 §r\n §7 ┃ §7玩家互传 \n §7 ┃ §7数控转账 \n §7 ┃ §7音乐选项 \n §7 ┃ §7原地飞升 \n  §9┃ §f个人信息 〉>  §f一〈§bｄａｔａ§f〉一§r"}]}},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §b◇---§s----§3----§9--§b--§9--§3----§s----§b---◇ "},{"text":" §s◇---§3----§9----§b--§s--§b--§9----§3----§s---◇ "},{"text":" §3◇---§9----§b----§s--§3--§s--§b----§9----§3---◇ "},{"text":" §9◇---§b----§s----§3--§9--§3--§s----§b----§9---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头关机\n\n\n\n\n\n"}]}
+
+
+execute as @a[rx=90,rxm=85,scores={菜单=26..32}] at @s run scoreboard players set @s 菜单 200
+
+execute as @a[hasitem={quantity=0,location=slot.weapon.mainhand,item=snowball},scores={菜单=1..,菜单=!200..217}] at @s run scoreboard players set @s 菜单 200
+
+execute as @a[scores={菜单=200..217}] run scoreboard players add @s 菜单 1
+
+execute as @a[scores={菜单=218..}] run scoreboard players set @s 菜单 0
+#此文件由星月牙月制作3122191515
+
+execute as @a[scores={菜单=200..217}] at @s run titleraw @s actionbar {"rawtext":[{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..200}]"},{"selector":"@s[scores={菜单=..201}]"},{"selector":"@s[scores={菜单=..202}]"},{"selector":"@s[scores={菜单=..203}]"},{"selector":"@s[scores={菜单=..204}]"},{"selector":"@s[scores={菜单=..205}]"},{"selector":"@s[scores={菜单=..206}]"},{"selector":"@s[scores={菜单=..207}]"},{"text":"§7『§f▏"},{"text":"§7『§c牙§f▏"},{"text":"§7『§c牙月§f▏"},{"text":"§7『§c牙月菜§f▏"},{"text":"§7『§c牙月菜单§f▏"},{"text":"§7『§c牙月菜单§7』§f▏"},{"text":"§7『§c牙月菜单§7』 §f▏"},{"text":"§7『§c牙月菜单§7』 Ｓ§f▏"},{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..208}]"},{"selector":"@s[scores={菜单=..209}]"},{"selector":"@s[scores={菜单=..210}]"},{"selector":"@s[scores={菜单=..211}]"},{"selector":"@s[scores={菜单=..212}]"},{"selector":"@s[scores={菜单=..213}]"},{"selector":"@s[scores={菜单=..214}]"},{"selector":"@s[scores={菜单=..215}]"},{"text":"§7『§c牙月菜单§7』 Ｓｈ§f▏"},{"text":"§7『§c牙月菜单§7』 Ｓｈｕ§f▏"},{"text":"§7『§c牙月菜单§7』 Ｓｈｕｔ§f▏"},{"text":"§7『§c牙月菜单§7』 Ｓｈｕｔｄ§f▏"},{"text":"§7『§c牙月菜单§7』 Ｓｈｕｔｄｏ§f▏"},{"text":"§7『§c牙月菜单§7』 Ｓｈｕｔｄｏｗ"},{"text":"§7『§c牙月菜单§7』 Ｓｈｕｔｄｏｗｎ 。§f▏"},{"text":"§7『§c牙月菜单§7』 Ｓｈｕｔｄｏｗｎ 。。§f▏"},{"translate":"%%3","with":{"rawtext":[{"selector":"@s[scores={菜单=..216}]"},{"selector":"@s[scores={菜单=..217}]"},{"text":"§7『§c牙月菜单§7』 Ｓｈｕｔｄｏｗｎ 。。。"},{"text":"§c已关闭"}]}}]}}]}}]}
+
+execute as @a[scores={菜单=200..216}] at @s run playsound random.click @s ~ ~ ~ 1 5.5 1
+
+execute as @a[scores={菜单=217}] at @s run playsound beacon.activate @s ~~~ 1 3 1
+
+execute as @a[scores={菜单=217}] at @s run scoreboard players set @s 菜单 0
+

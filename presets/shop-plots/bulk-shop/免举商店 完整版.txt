@@ -1,0 +1,274 @@
+#注 什么都没解释的直接连锁无条件保持开启 也不需要你改动
+
+#先去把前置栓绳弄完再看这篇 不然后果自负
+群号 1055339030
+
+——————————————————————————————
+
+#要改的只有 #9 #10一个是折扣 一个是价格 #9要设置成8折就调成80
+
+
+#前置
+#1.循环 保持 无条件
+scoreboard objectives add 金币 dummy
+#2.
+scoreboard objectives add 价格 dummy
+#3.
+scoreboard objectives add 总金额 dummy
+#4.
+scoreboard objectives add 总价格 dummy
+#5.
+scoreboard objectives add 折扣 dummy
+#6.
+scoreboard objectives add 数量 dummy
+#7.
+scoreboard objectives add 商店菜单 dummy
+#8.
+scoreboard players set 十 数量 10
+
+#9.要设置折扣改这里8折就是80
+execute as @a at @s run scoreboard players set @s 折扣 100
+
+#9.5这里别动
+scoreboard players set 一百 折扣 100
+
+
+
+
+
+#前台 
+#10.循环 保持 无条件 价格自己调
+execute as @p[c=1,r=2] at @s if block ~~-1~ lodestone run scoreboard players set @s 价格 价格自己设置
+
+#然后放一个木桶在命令方块下面，里面物品自己设定
+
+#音效可加可不加
+
+#后台
+
+#11.循环 无条件 保持
+execute as @a[scores={价格=1..}] at @s run replaceitem entity @s slot.hotbar 8 experience_bottle 1 0 {"minecraft:item_lock":{"mode":"lock_in_slot"}}
+
+#12.
+execute as @a[hasitem={item=experience_bottle,location=slot.hotbar,slot=8,quantity=1..}] at @s unless block ~~-1~ lodestone run replaceitem entity @s slot.hotbar 8 air 1 0
+
+#13.
+execute as @e[type=xp_bottle] at @s run scoreboard players add @p[r=2,hasitem={item=experience_bottle},c=1] 商店菜单 1
+
+#音效
+execute as @e[type=xp_bottle] at @s run playsound random.orb @p[r=2,hasitem={item=experience_bottle},c=1]
+
+#音效
+execute as @a[rx=-85,rxm=-90] at @s run playsound random.screenshot @p[r=2,hasitem={item=experience_bottle},c=1]
+
+#14.
+kill @e[type=xp_bottle]
+
+#15.
+execute as @a[scores={商店菜单=1..}] at @s run scoreboard players operation @s 总价格 = @s 价格
+
+#16.
+execute as @a[scores={商店菜单=1..}] at @s run scoreboard players operation @s 总价格 *= @s 数量
+
+#17.
+execute as @a[scores={商店菜单=1..}] at @s run scoreboard players operation @s 总价格 *= @s 折扣
+
+#17.5
+execute as @a[scores={商店菜单=1..}] at @s run scoreboard players operation @s 总价格 /= 一百 折扣
+
+#18.
+execute as @a[scores={商店菜单=..0}] at @s run scoreboard players reset @s 总价格
+
+#19.
+execute as @a[scores={商店菜单=1..}] at @s run titleraw @s actionbar {"rawtext":[{"text":"    §d―｛§fＳｈｏｐ　 Ｍｅｎｕ§d｝―"},{"text":"\n§f――――――――――――――――――――――――"},{"text":"\n          §f("},{"score":{"name":"@s","objective":"数量"}},{"text":"§f)\n"},{"text":"\n  §5丢出附魔之瓶选择数量\n"},{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={商店菜单=..1}]"},{"selector":"@s[scores={商店菜单=..2}]"},{"selector":"@s[scores={商店菜单=..3}]"},{"selector":"@s[scores={商店菜单=..4}]"},{"selector":"@s[scores={商店菜单=..5}]"},{"selector":"@s[scores={商店菜单=..6}]"},{"selector":"@s[scores={商店菜单=..7}]"},{"selector":"@s[scores={商店菜单=..8}]"},{"text":"§e    1§f       2       3\n§f    4       5       6\n§f    7       8       9\n§f  归零      0      购买"},{"text":"§f    1       §e2§f       3\n§f    4       5       6\n§f    7       8       9\n§f  归零      0      购买"},{"text":"§f    1       2       §e3\n§f    §f4       5       6\n§f    7       8       9\n§f  归零      0      购买"},{"text":"§f    1       2       3\n§f    §e4       §f5       6\n§f    7       8       9\n§f  归零      0      购买"},{"text":"§f    1       2       3\n§f    4       §e5       §f6\n§f    7       8       9\n§f  归零      0      购买"},{"text":"§f    1       2       3\n§f    4       5       §e6\n§f    7       8       9\n§f  归零      0      购买"},{"text":"§f    1       2       3\n§f    4       5       6\n§f    §e7       §f8       9\n§f  归零      0      购买"},{"text":"§f    1       2       3\n§f    4       5       6\n§f    7       §e8       §f9\n§f  归零      0      购买"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={商店菜单=..9}]"},{"selector":"@s[scores={商店菜单=..10}]"},{"selector":"@s[scores={商店菜单=..11}]"},{"selector":"@s[scores={商店菜单=..12}]"},{"text":"§f    1       2       3\n§f    4       5       6\n§f    7       8       §e9\n§f  归零      0      购买"},{"text":"§f    1       2       3\n§f    4       5       6\n§f    7       8       9\n§f  §e归零      §f0      购买"},{"text":"§f    1       2       3\n§f    4       5       6\n§f    7       8       9\n§f  归零      §e0      §f购买"},{"text":"§f    1       2       3\n§f    4       5       6\n§f    7       8       9\n§f  归零      0      §e购买"}]}}]}},{"text":"\n§f――――――――――――――――――――――――"},{"text":"\n§6购买价格§f :§e"},{"score":{"name":"@s","objective":"总价格"}},{"text":"\n§a抬头确认       §c低头关闭\n\n\n\n"}]}
+
+#20.
+execute as @a[scores={数量=999..}] at @s run title @s title §c数量超过999自动归零
+
+#21.
+execute as @a[scores={数量=999..}] at @s run scoreboard players set @s 数量 0
+
+#22.
+execute as @a[scores={商店菜单=1..11},rx=-85,rxm=-90] at @s run scoreboard players operation @s 数量 *= 十 数量
+
+#23.
+execute as @a[scores={商店菜单=1},rx=-85,rxm=-90] at @s run scoreboard players add @s 数量 1
+
+#24.
+execute as @a[scores={商店菜单=2},rx=-85,rxm=-90] at @s run scoreboard players add @s 数量 2
+
+#25.
+execute as @a[scores={商店菜单=3},rx=-85,rxm=-90] at @s run scoreboard players add @s 数量 3
+
+#26.
+execute as @a[scores={商店菜单=4},rx=-85,rxm=-90] at @s run scoreboard players add @s 数量 4
+
+#27.
+execute as @a[scores={商店菜单=5},rx=-85,rxm=-90] at @s run scoreboard players add @s 数量 5
+
+#28.
+execute as @a[scores={商店菜单=6},rx=-85,rxm=-90] at @s run scoreboard players add @s 数量 6
+
+#29.
+execute as @a[scores={商店菜单=7},rx=-85,rxm=-90] at @s run scoreboard players add @s 数量 7
+
+#30.
+execute as @a[scores={商店菜单=8},rx=-85,rxm=-90] at @s run scoreboard players add @s 数量 8
+
+#31.
+execute as @a[scores={商店菜单=9},rx=-85,rxm=-90] at @s run scoreboard players add @s 数量 9
+
+#32.
+execute as @a[scores={商店菜单=10},rx=-85,rxm=-90] at @s run scoreboard players set @s 数量 0
+
+#33.
+execute as @a[scores={商店菜单=1..11},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~
+
+#34.
+execute as @a[scores={商店菜单=13..}] at @s run scoreboard players set @s 商店菜单 1
+
+#35.
+execute as @a[scores={数量=..0,商店菜单=12},rx=-85,rxm=-90] at @s run title @s title §c啥都不买你确定啥
+
+#36.
+execute as @a[scores={数量=..0,商店菜单=12},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~
+
+#37.
+execute as @a[scores={数量=1..,商店菜单=12},rx=-85,rxm=-90] at @s run scoreboard players operation @s 总金额 = @s 价格
+
+#38.
+execute as @a[scores={数量=1..,商店菜单=12},rx=-85,rxm=-90] at @s run scoreboard players operation @s 总金额 *= @s 数量
+
+#39.
+execute as @a[scores={数量=1..,商店菜单=12},rx=-85,rxm=-90] at @s run scoreboard players operation @s 总金额 *= @s 折扣
+
+execute as @a[scores={数量=1..,商店菜单=12},rx=-85,rxm=-90] at @s run scoreboard players operation @s 总金额 /= 一百 折扣
+
+#40.
+execute as @a[scores={数量=1..,商店菜单=12},rx=-85,rxm=-90] if score @s 金币 < @s 总金额 at @s run title @s title §c购买失败
+
+#41.
+execute as @a[scores={数量=1..,商店菜单=12},rx=-85,rxm=-90] if score @s 金币 < @s 总金额 at @s run title @s subtitle §c金额不足
+
+#42.
+execute as @a[scores={数量=1..,商店菜单=12},rx=-85,rxm=-90] if score @s 金币 < @s 总金额 at @s run tp @s ~~~ facing ~~~
+
+#43.连锁 有条件
+execute as @a[scores={数量=1..,商店菜单=12}] if score @s 金币 < @s 总金额 at @s run scoreboard players set @s 数量 0
+
+#44.
+execute as @a[scores={数量=1..,价格=1..,商店菜单=12},rx=-85,rxm=-90] if score @s 金币 >= @s 总金额 at @s run tag @s add 购买中
+
+#45.
+execute as @a[scores={数量=1..,价格=1..,商店菜单=12},rx=-85,rxm=-90] if score @s 金币 >= @s 总金额 at @s run title @s title §a购买成功
+
+#46.
+execute as @a[scores={数量=1..,价格=1..,商店菜单=12},rx=-85,rxm=-90] if score @s 金币 >= @s 总金额 at @s run scoreboard players operation @s 金币 -= @s 总金额
+
+#47.
+#连锁有条件
+execute as @a[scores={数量=1..,价格=1..,商店菜单=12},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~
+
+#48.
+execute as @a[tag=购买中] at @s run clone ~~-3~ ~~-3~ ~~-4~
+
+#49.
+execute as @a[tag=购买中] at @s run setblock ~~-4~ air destroy
+
+#50.
+execute as @a[tag=购买中] at @s run kill @e[name=木桶,y=~-4,r=2,c=1]
+
+#51.
+execute as @a[tag=购买中] at @s run structure save 临时商品 ~ ~-4 ~ ~ ~-4 ~ true memory
+
+#52.有条件
+execute as @a[tag=购买中] at @s run tellraw @s {"rawtext":[{"text":"§8— — — — — — — — — — "},{"text":"\n§a〉购买成功"},{"text":"\n§8— — — — — — — — — — "},{"text":"\n§7商品: §f"},{"selector":"@e[type=item,y=~-4,r=2,c=1]"},{"text":"\n§7数量: §f"},{"score":{"name":"@s","objective":"数量"}},{"text":"\n§7价格: §f"},{"score":{"name":"@s","objective":"总金额"}},{"text":"\n§7余额: §f"},{"score":{"name":"@s","objective":"金币"}},{"text":"\n§8— — — — — — — — — — "}]}
+
+#53.
+execute as @a[tag=购买中] at @s run kill @e[type=item,y=~-4,r=2,c=1]
+
+#54.
+execute as @a[tag=购买中] at @s run tag @s add 购买成功
+
+#55.
+execute as @a[tag=购买中] at @s run tag @s remove 购买中
+
+#二分法部分 群号 1055339030
+
+#56.
+execute as @a[tag=购买成功,scores={数量=64..}] at @s run structure load 栓绳一组 ~ ~2 ~ 0_degrees none true
+
+#57.
+execute as @a[tag=购买成功,scores={数量=64..}] at @s run scoreboard players remove @s 数量 64
+
+#58.
+execute as @a[tag=购买成功,scores={数量=32..}] at @s run structure load 栓绳三二 ~ ~2 ~ 0_degrees none true
+
+#59.
+execute as @a[tag=购买成功,scores={数量=32..}] at @s run scoreboard players remove @s 数量 32
+
+#60.
+execute as @a[tag=购买成功,scores={数量=16..}] at @s run structure load 栓绳十六 ~ ~2 ~ 0_degrees none true
+
+#61.
+execute as @a[tag=购买成功,scores={数量=16..}] at @s run scoreboard players remove @s 数量 16
+
+#62.
+execute as @a[tag=购买成功,scores={数量=8..}] at @s run structure load 栓绳八 ~ ~2 ~ 0_degrees none true
+
+#63.
+execute as @a[tag=购买成功,scores={数量=8..}] at @s run scoreboard players remove @s 数量 8
+
+#64.
+execute as @a[tag=购买成功,scores={数量=4..}] at @s run structure load 栓绳四 ~ ~2 ~ 0_degrees none true
+
+#65.
+execute as @a[tag=购买成功,scores={数量=4..}] at @s run scoreboard players remove @s 数量 4
+
+#66.
+execute as @a[tag=购买成功,scores={数量=2..}] at @s run structure load 栓绳二 ~ ~2 ~ 0_degrees none true
+
+#67.
+execute as @a[tag=购买成功,scores={数量=2..}] at @s run scoreboard players remove @s 数量 2
+
+#68.
+execute as @a[tag=购买成功,scores={数量=1..}] at @s run structure load 栓绳一 ~ ~2 ~ 0_degrees none true
+
+#69.
+execute as @a[tag=购买成功,scores={数量=1..}] at @s run scoreboard players remove @s 数量 1
+
+#70.
+execute as @e[type=leash_knot] at @s run structure load 临时商品 ~ ~ ~ 0_degrees none true
+
+#71.
+execute as @e[type=leash_knot] at @s run kill @s
+
+#72.
+execute as @a[tag=购买成功,scores={数量=..0}] at @s run tag @s add 重置所有
+
+#73.连锁 有条件
+execute as @a[tag=购买成功] at @s run tag @s remove 购买成功
+
+#74.
+execute as @a at @s unless block ~~-1~ lodestone run tag @s add 重置所有
+
+#74.5
+execute as @a[hasitem={item=experience_bottle,location=slot.weapon.mainhand},rx=90,rxm=85] at @s run tag @s add 重置所有
+
+#75.
+execute as @a[tag=重置所有] at @s run scoreboard players reset @s 价格
+
+#76.
+execute as @a[tag=重置所有] at @s run scoreboard players reset @s 总价格
+
+#77.
+execute as @a[tag=重置所有] at @s run scoreboard players reset @s 总金额
+
+#78.
+execute as @a[tag=重置所有] at @s run scoreboard players set @s 商店菜单 0
+
+#79.
+execute as @a[tag=重置所有] at @s run scoreboard players reset @s 数量
+
+#80.
+execute as @a at @s if block ~~-1~ lodestone run tag @s remove 重置所有

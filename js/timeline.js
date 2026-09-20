@@ -1,1 +1,648 @@
-!function(){window.App=window.App||{};const e=window.App.state;let t=!1;function n(){const t=document.querySelector(".track-area");if(!t)return 0;const n=100*(e.timelineScale||1);return Math.max(0,Math.round(t.scrollLeft/n*20))}function r(r){if(t)return;const o=document.getElementById("reorder-handles-container");if(!o)return;if(o.innerHTML="",!e.menuLines||0===e.menuLines.length)return;void 0===r&&(r=n());const a=e.menuLines.map((e,t)=>({clip:e,index:t})).filter(e=>{const t=e.clip.startTick||0,n=t+(e.clip.durationTicks||20);return r>=t&&r<n});a.sort((e,t)=>e.clip.trackIndex-t.clip.trackIndex),a.forEach(n=>{const r=document.createElement("div");r.className="reorder-handle",r.dataset.index=n.index,r.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>',r.style.top=34*n.clip.trackIndex+"px",e.selectedLines.has(n.index)&&r.classList.add("active");let a=0,s=0,c=0,d=[],l=null;const p=i=>{if(!t)return;i.preventDefault(),i.stopPropagation();const o=i.clientY-a;l&&(l.style.transform=`translateY(${o}px)`),r.style.transform=`translateY(${o}px)`;const p=Math.round(o/34);let u=s+p,m=-1;if(e.menuLines.forEach((e,t)=>{t!==n.index&&e.trackIndex>m&&(m=e.trackIndex)}),u=Math.max(0,Math.min(m+1,u)),u!==c){window.App.saveHistory&&window.App.saveHistory();const t=n.clip.startTick||0,i=t+(n.clip.durationTicks||20),o=e.menuLines.filter((e,r)=>{if(r===n.index)return!1;if(e.trackIndex===u){const n=e.startTick||0,r=n+(e.durationTicks||20);return Math.max(t,n)<Math.min(i,r)}return!1});n.clip.trackIndex=u,o.forEach(e=>{e.trackIndex=c}),c=u,e.menuLines.forEach((e,t)=>{if(t===n.index)return;const r=document.querySelector(`.track-clip[data-index="${t}"]`);if(r){const n=e.trackIndex-d[t];r.style.transform=`translateY(${34*n}px)`}}),document.querySelectorAll(".reorder-handle").forEach(t=>{if(t===r)return;const n=parseInt(t.dataset.index);if(!isNaN(n)){const r=e.menuLines[n].trackIndex-d[n];t.style.transform=`translateY(${34*r}px)`}}),window.App.render&&window.App.render.render()}},u=o=>{o.stopPropagation();try{o.currentTarget.releasePointerCapture(o.pointerId)}catch(e){}t=!1,r.removeEventListener("pointermove",p),r.removeEventListener("pointerup",u),document.querySelectorAll(".track-clip, .reorder-handle").forEach(e=>{e.style.transition="",e.style.transform="",e.style.zIndex=""}),e.selectedLines.clear(),e.selectedLines.add(n.index),i(),window.App.ui&&window.App.ui.openPropSheet&&window.App.ui.openPropSheet(n.index),window.App.saveCurrentProject&&window.App.saveCurrentProject()};r.addEventListener("pointerdown",i=>{i.preventDefault(),i.stopPropagation(),e.selectedLines.clear(),e.selectedLines.add(n.index),window.App.ui&&window.App.ui.closePropSheet&&window.App.ui.closePropSheet(),window.App.render&&window.App.render.render();try{i.currentTarget.setPointerCapture(i.pointerId)}catch(e){}t=!0,a=i.clientY,s=n.clip.trackIndex,c=s,d=e.menuLines.map(e=>e.trackIndex),l=document.querySelector(`.track-clip[data-index="${n.index}"]`),document.querySelectorAll(".track-clip").forEach(e=>{e===l?(e.style.transition="none",e.style.zIndex="100"):(e.style.transition="transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)",e.style.zIndex="10")}),document.querySelectorAll(".reorder-handle").forEach(e=>{e===r?(e.style.transition="none",e.style.zIndex="100"):(e.style.transition="transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)",e.style.zIndex="10")}),r.addEventListener("pointermove",p),r.addEventListener("pointerup",u)}),o.appendChild(r)})}function i(t=!1){const n=document.querySelector(".layer-headers"),o=document.querySelector(".tracks"),a=document.querySelector(".time-ruler");if(document.querySelector(".track-area"),!n||!o||!a)return;const s=100*(e.timelineScale||1),c=s/20;let d=20;for(let t of e.menuLines){const e=(t.startTick||0)+(t.durationTicks||20);e>d&&(d=e)}e.markers&&e.markers.forEach(e=>{e>d&&(d=e)});const l=d,p=l/20*s;a.style.width=`${p}px`,o.style.width=`${p}px`;const u=document.querySelector(".track-scroll-content");u&&(u.style.width=`calc(100vw - 80px + ${p}px)`),function(e,t,n,r){e.innerHTML="",e.style.backgroundImage="none";const i=document.createDocumentFragment();for(let e=0;e<=t;e++){const t=e*n;if(e%20==0){const n=document.createElement("div");n.className="time-tick-mark long",n.style.left=`${t}px`,i.appendChild(n);const o=e/20;if(r>=40||o%5==0||0===o){const e=document.createElement("span");e.className="time-tick-label",e.style.left=`${t}px`;const n=String(Math.floor(o/60)).padStart(2,"0"),r=String(o%60).padStart(2,"0");e.textContent=`${n}:${r}`,i.appendChild(e)}}else if(e%5==0){if(r/4>=4){const e=document.createElement("div");e.className="time-tick-mark medium",e.style.left=`${t}px`,i.appendChild(e)}}else if(n>=4){const e=document.createElement("div");e.className="time-tick-mark short",e.style.left=`${t}px`,i.appendChild(e)}}e.appendChild(i)}(a,l,c,s),function(t,n,r){t.innerHTML="",n.innerHTML="";let o=-1;e.menuLines.forEach(e=>{e.trackIndex>o&&(o=e.trackIndex)});const a=Math.max(0,o);for(let o=0;o<=a;o++){let a=!1,s=!1;e.menuLines.forEach((t,n)=>{t.trackIndex===o&&(s=!0,e.selectedLines.has(n)&&(a=!0))});const c=document.createElement("div");c.className=a?"layer-header selected":"layer-header",a&&(c.style.background="var(--accent-color)");const d=a?"#fff":s?"var(--text-main)":"var(--border-color)",l=s?"#555":"transparent",p=s?"none":"1px dashed var(--border-color)";c.innerHTML=`\n                <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${d}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>\n                <div class="layer-thumb" style="background: ${l}; border: ${p};"><span class="x-layer-thumb-text">${s?"T":""}</span></div>\n            `,t.appendChild(c);const u=document.createElement("div");u.className=a?"track-row selected":"track-row",e.menuLines.forEach((t,n)=>{if(t.trackIndex!==o)return;const a=e.selectedLines.has(n),s=document.createElement("div");s.className="track-clip",s.dataset.index=n;const c=t.startTick||0,d=t.durationTicks||20,l=c/20*r,p=d/20*r;if(s.style.left=`${l}px`,s.style.width=`${p}px`,"text"===t.type){s.style.background=a?"#ffb74d":"#ffcc80";let e=t.text.replace(/§[0-9a-fk-or]/gi,"");e=e.replace(/\{\{selector:(.*?)\}\}/g,"[实体选择器]"),e=e.replace(/\{\{score:(.*?),(.*?)\}\}/g,"[计分板分数]"),e=e.replace(/\{\{marquee:(.*?)\}\}/g,"[循环积木]"),e=e.replace(/\{\{state:(.*?)\}\}/g,"[状态机]"),s.innerHTML=`<div class="clip-text-content">${e||"空文本"}</div>`}else"gap"===t.type&&(s.style.background=a?"#4dd0e1":"#80deea",s.innerHTML=`<div class="clip-text-content">空行 x${t.lines}</div>`);let m=0,w=0,h=0,y=0,f=1/0,k=!1;const x=()=>{const n=e.menuLines.filter(e=>e.trackIndex===t.trackIndex);n.sort((e,t)=>(e.startTick||0)-(t.startTick||0));const r=n.indexOf(t);y=r>0?(n[r-1].startTick||0)+(n[r-1].durationTicks||20):0,f=r<n.length-1?n[r+1].startTick||0:1/0};let g=null,v=null;const L=document.getElementById("main-toolbar"),T=document.getElementById("drag-info-bar"),E=document.getElementById("drag-start-time"),A=document.getElementById("drag-duration-time"),I=e=>`${String(Math.floor(e/1200)).padStart(2,"0")}:${String(Math.floor(e%1200/20)).padStart(2,"0")}:${String(e%20).padStart(2,"0")}`,S=(e,t,n=0)=>{if(L&&(L.style.display="none"),T&&(T.style.display="flex"),E&&(E.textContent=I(e)),A){const e=n>=0?"+":"-";A.textContent=e+I(Math.abs(n))}const i=document.querySelector(".time-ruler");g||(g=document.createElement("div"),g.className="drag-marker",i&&i.appendChild(g)),v||(v=document.createElement("div"),v.className="drag-marker",i&&i.appendChild(v)),g.style.left=e/20*r+"px",v.style.left=(e+t)/20*r+"px"},C=()=>{L&&(L.style.display="flex"),T&&(T.style.display="none"),g&&(g.remove(),g=null),v&&(v.remove(),v=null)};if(a){const e=document.createElement("div");e.className="clip-handle left-handle",e.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>';const n=document.createElement("div");n.className="clip-handle right-handle",n.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>',e.addEventListener("pointerdown",e=>{window.App.saveHistory&&window.App.saveHistory(),e.stopPropagation();try{e.currentTarget.setPointerCapture(e.pointerId)}catch(e){}m=e.clientX,w=t.startTick||0,h=t.durationTicks||20,x(),S(w,h,0)}),e.addEventListener("pointermove",e=>{if(!e.currentTarget.hasPointerCapture(e.pointerId))return;e.preventDefault(),e.stopPropagation();const n=e.clientX-m,i=Math.round(n/r*20);let o=w+i,a=h-i;o<y&&(o=y,a=w+h-o),a<1&&(a=1,o=w+h-1),t.startTick=o,t.durationTicks=a,s.style.left=t.startTick/20*r+"px",s.style.width=t.durationTicks/20*r+"px",S(o,a,o-w),window.App.render&&window.App.render.render()}),n.addEventListener("pointerdown",e=>{window.App.saveHistory&&window.App.saveHistory(),e.stopPropagation();try{e.currentTarget.setPointerCapture(e.pointerId)}catch(e){}m=e.clientX,w=t.startTick||0,h=t.durationTicks||20,x(),S(w,h,0)}),n.addEventListener("pointermove",e=>{if(!e.currentTarget.hasPointerCapture(e.pointerId))return;e.preventDefault(),e.stopPropagation();const n=e.clientX-m,i=Math.round(n/r*20);let o=h+i,a=w+o;a>f&&(a=f,o=a-w),o<1&&(o=1),t.durationTicks=o,s.style.width=t.durationTicks/20*r+"px",S(w,o,o-h),window.App.render&&window.App.render.render()});const o=e=>{e.stopPropagation();try{e.currentTarget.releasePointerCapture(e.pointerId)}catch(e){}C(),i()};e.addEventListener("pointerup",o),n.addEventListener("pointerup",o);const a=()=>{window.App.saveCurrentProject&&window.App.saveCurrentProject()};e.addEventListener("pointerup",a),n.addEventListener("pointerup",a),s.appendChild(e),s.appendChild(n)}s.addEventListener("pointerdown",e=>{if(!e.target.closest(".clip-handle")&&!e.target.closest(".y-drag-handle")){try{e.currentTarget.setPointerCapture(e.pointerId)}catch(e){}k=!1,m=e.clientX,w=t.startTick||0,x()}}),s.addEventListener("pointermove",i=>{if(!i.currentTarget.hasPointerCapture(i.pointerId))return;if(i.target.closest(".clip-handle")||i.target.closest(".y-drag-handle"))return;const o=i.clientX-m;if(!k&&Math.abs(o)>5&&(window.App.saveHistory&&window.App.saveHistory(),k=!0,e.selectedLines.has(n)||(e.selectedLines.clear(),e.selectedLines.add(n),s.style.background="text"===t.type?"#ffb74d":"#4dd0e1"),S(t.startTick||0,t.durationTicks||20,0)),k){i.preventDefault(),i.stopPropagation();const e=Math.round(o/r*20);let n=w+e;const a=t.durationTicks||20;n<y&&(n=y),n+a>f&&(n=f-a),t.startTick=n,s.style.left=t.startTick/20*r+"px",S(n,a,n-w),window.App.render&&window.App.render.render()}}),s.addEventListener("pointerup",t=>{try{t.currentTarget.releasePointerCapture(t.pointerId)}catch(e){}k?(C(),i(),window.App.saveCurrentProject&&window.App.saveCurrentProject()):(e.selectedLines.clear(),e.selectedLines.add(n),i(),window.App.render&&window.App.render.render(),window.App.ui&&window.App.ui.openPropSheet(n))}),u.appendChild(s)}),n.appendChild(u)}const s=document.querySelector(".timeline-container");if(s){const e=s.clientHeight,r=Math.max(0,e-48-34);t.style.paddingBottom=`${r}px`,n.style.paddingBottom=`${r}px`;const i=document.getElementById("reorder-handles-container");i&&(i.style.paddingBottom=`${r}px`)}const c=document.querySelector(".track-area");c&&c.dispatchEvent(new Event("scroll"))}(n,o,s),function(t,n){(e.markers||new Set).forEach(e=>{const r=e/20*n,i=document.createElement("div");i.className="time-marker",i.style.left=`${r}px`,t.appendChild(i)})}(o,s),r(),t||window.App.ui&&window.App.ui.updateQuickBarState&&window.App.ui.updateQuickBarState()}window.App.timeline={init:function(){i(),function(){let t=0,n=0,r=!1;const o=e=>{e.target.closest(".layer-header")||e.target.closest(".track-clip")||e.target.closest(".tool-btn")||e.target.closest(".playhead-fixed")||e.target.closest(".drag-info-bar")||e.target.closest(".reorder-handle")?r=!1:(r=!0,t=e.clientX,n=e.clientY)},a=o=>{if(!r)return;r=!1;const a=o.clientX-t,s=o.clientY-n;Math.abs(a)<5&&Math.abs(s)<5&&(e.selectedLines.clear(),i(),window.App.render&&window.App.render.render(),window.App.ui&&window.App.ui.closePropSheet())};[document.querySelector(".layer-headers"),document.querySelector(".tracks"),document.querySelector(".toolbar"),document.querySelector(".time-ruler"),document.querySelector(".track-area")].forEach(e=>{e&&(e.addEventListener("pointerdown",o),e.addEventListener("pointerup",a))})}()},renderTimeline:i,getCurrentTick:n,updateReorderHandles:r,get isDraggingHandle(){return t}}}();
+(function() {
+    window.App = window.App || {};
+    const e = window.App.state;
+    let t = false;
+
+    function n() {
+        const t = document.querySelector(".track-area");
+        if (!t) {
+            return 0;
+        }
+        const n = (e.timelineScale || 1) * 100;
+        return Math.max(0, Math.round(t.scrollLeft / n * 20));
+    }
+
+    function r(r) {
+        if (t) {
+            return;
+        }
+        const o = document.getElementById("reorder-handles-container");
+        if (!o) {
+            return;
+        }
+        o.innerHTML = "";
+        if (!e.menuLines || e.menuLines.length === 0) {
+            return;
+        }
+        if (r === undefined) {
+            r = n();
+        }
+        const a = e.menuLines.map((e, t) => ({
+            clip: e,
+            index: t
+        })).filter(e => {
+            const t = e.clip.startTick || 0;
+            const n = t + (e.clip.durationTicks || 20);
+            return r >= t && r < n;
+        });
+        a.sort((e, t) => e.clip.trackIndex - t.clip.trackIndex);
+        a.forEach(n => {
+            const r = document.createElement("div");
+            r.className = "reorder-handle";
+            r.dataset.index = n.index;
+            r.innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"4\" y1=\"6\" x2=\"20\" y2=\"6\"></line><line x1=\"4\" y1=\"12\" x2=\"20\" y2=\"12\"></line><line x1=\"4\" y1=\"18\" x2=\"20\" y2=\"18\"></line></svg>";
+            r.style.top = n.clip.trackIndex * 34 + "px";
+            if (e.selectedLines.has(n.index)) {
+                r.classList.add("active");
+            }
+            let a = 0;
+            let s = 0;
+            let c = 0;
+            let d = [];
+            let l = null;
+            const p = i => {
+                if (!t) {
+                    return;
+                }
+                i.preventDefault();
+                i.stopPropagation();
+                const o = i.clientY - a;
+                if (l) {
+                    l.style.transform = `translateY(${o}px)`;
+                }
+                r.style.transform = `translateY(${o}px)`;
+                const p = Math.round(o / 34);
+                let u = s + p;
+                let m = -1;
+                e.menuLines.forEach((e, t) => {
+                    if (t !== n.index && e.trackIndex > m) {
+                        m = e.trackIndex;
+                    }
+                });
+                u = Math.max(0, Math.min(m + 1, u));
+                if (u !== c) {
+                    if (window.App.saveHistory) {
+                        window.App.saveHistory();
+                    }
+                    const t = n.clip.startTick || 0;
+                    const i = t + (n.clip.durationTicks || 20);
+                    const o = e.menuLines.filter((e, r) => {
+                        if (r === n.index) {
+                            return false;
+                        }
+                        if (e.trackIndex === u) {
+                            const n = e.startTick || 0;
+                            const r = n + (e.durationTicks || 20);
+                            return Math.max(t, n) < Math.min(i, r);
+                        }
+                        return false;
+                    });
+                    n.clip.trackIndex = u;
+                    o.forEach(e => {
+                        e.trackIndex = c;
+                    });
+                    c = u;
+                    e.menuLines.forEach((e, t) => {
+                        if (t === n.index) {
+                            return;
+                        }
+                        const r = document.querySelector(`.track-clip[data-index="${t}"]`);
+                        if (r) {
+                            const n = e.trackIndex - d[t];
+                            r.style.transform = `translateY(${n * 34}px)`;
+                        }
+                    });
+                    document.querySelectorAll(".reorder-handle").forEach(t => {
+                        if (t === r) {
+                            return;
+                        }
+                        const n = parseInt(t.dataset.index);
+                        if (!isNaN(n)) {
+                            const r = e.menuLines[n].trackIndex - d[n];
+                            t.style.transform = `translateY(${r * 34}px)`;
+                        }
+                    });
+                    if (window.App.render) {
+                        window.App.render.render();
+                    }
+                }
+            };
+            const u = o => {
+                o.stopPropagation();
+                try {
+                    o.currentTarget.releasePointerCapture(o.pointerId);
+                } catch (e) {}
+                t = false;
+                r.removeEventListener("pointermove", p);
+                r.removeEventListener("pointerup", u);
+                document.querySelectorAll(".track-clip, .reorder-handle").forEach(e => {
+                    e.style.transition = "";
+                    e.style.transform = "";
+                    e.style.zIndex = "";
+                });
+                e.selectedLines.clear();
+                e.selectedLines.add(n.index);
+                i();
+                if (window.App.ui && window.App.ui.openPropSheet) {
+                    window.App.ui.openPropSheet(n.index);
+                }
+                if (window.App.saveCurrentProject) {
+                    window.App.saveCurrentProject();
+                }
+            };
+            r.addEventListener("pointerdown", i => {
+                i.preventDefault();
+                i.stopPropagation();
+                e.selectedLines.clear();
+                e.selectedLines.add(n.index);
+                if (window.App.ui && window.App.ui.closePropSheet) {
+                    window.App.ui.closePropSheet();
+                }
+                if (window.App.render) {
+                    window.App.render.render();
+                }
+                try {
+                    i.currentTarget.setPointerCapture(i.pointerId);
+                } catch (e) {}
+                t = true;
+                a = i.clientY;
+                s = n.clip.trackIndex;
+                c = s;
+                d = e.menuLines.map(e => e.trackIndex);
+                l = document.querySelector(`.track-clip[data-index="${n.index}"]`);
+                document.querySelectorAll(".track-clip").forEach(e => {
+                    if (e === l) {
+                        e.style.transition = "none";
+                        e.style.zIndex = "100";
+                    } else {
+                        e.style.transition = "transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)";
+                        e.style.zIndex = "10";
+                    }
+                });
+                document.querySelectorAll(".reorder-handle").forEach(e => {
+                    if (e === r) {
+                        e.style.transition = "none";
+                        e.style.zIndex = "100";
+                    } else {
+                        e.style.transition = "transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)";
+                        e.style.zIndex = "10";
+                    }
+                });
+                r.addEventListener("pointermove", p);
+                r.addEventListener("pointerup", u);
+            });
+            o.appendChild(r);
+        });
+    }
+
+    function i(t = false) {
+        const n = document.querySelector(".layer-headers");
+        const o = document.querySelector(".tracks");
+        const a = document.querySelector(".time-ruler");
+        document.querySelector(".track-area");
+        if (!n || !o || !a) {
+            return;
+        }
+        const s = (e.timelineScale || 1) * 100;
+        const c = s / 20;
+        let d = 20;
+        for (let t of e.menuLines) {
+            const e = (t.startTick || 0) + (t.durationTicks || 20);
+            if (e > d) {
+                d = e;
+            }
+        }
+        if (e.markers) {
+            e.markers.forEach(e => {
+                if (e > d) {
+                    d = e;
+                }
+            });
+        }
+        const l = d;
+        const p = l / 20 * s;
+        a.style.width = `${p}px`;
+        o.style.width = `${p}px`;
+        const u = document.querySelector(".track-scroll-content");
+        if (u) {
+            u.style.width = `calc(100vw - 80px + ${p}px)`;
+        }
+        (function(e, t, n, r) {
+            e.innerHTML = "";
+            e.style.backgroundImage = "none";
+            const i = document.createDocumentFragment();
+            for (let e = 0; e <= t; e++) {
+                const t = e * n;
+                if (e % 20 == 0) {
+                    const n = document.createElement("div");
+                    n.className = "time-tick-mark long";
+                    n.style.left = `${t}px`;
+                    i.appendChild(n);
+                    const o = e / 20;
+                    if (r >= 40 || o % 5 == 0 || o === 0) {
+                        const e = document.createElement("span");
+                        e.className = "time-tick-label";
+                        e.style.left = `${t}px`;
+                        const n = String(Math.floor(o / 60)).padStart(2, "0");
+                        const r = String(o % 60).padStart(2, "0");
+                        e.textContent = `${n}:${r}`;
+                        i.appendChild(e);
+                    }
+                } else if (e % 5 == 0) {
+                    if (r / 4 >= 4) {
+                        const e = document.createElement("div");
+                        e.className = "time-tick-mark medium";
+                        e.style.left = `${t}px`;
+                        i.appendChild(e);
+                    }
+                } else if (n >= 4) {
+                    const e = document.createElement("div");
+                    e.className = "time-tick-mark short";
+                    e.style.left = `${t}px`;
+                    i.appendChild(e);
+                }
+            }
+            e.appendChild(i);
+        })(a, l, c, s);
+        (function(t, n, r) {
+            t.innerHTML = "";
+            n.innerHTML = "";
+            let o = -1;
+            e.menuLines.forEach(e => {
+                if (e.trackIndex > o) {
+                    o = e.trackIndex;
+                }
+            });
+            const a = Math.max(0, o);
+            for (let o = 0; o <= a; o++) {
+                let a = false;
+                let s = false;
+                e.menuLines.forEach((t, n) => {
+                    if (t.trackIndex === o) {
+                        s = true;
+                        if (e.selectedLines.has(n)) {
+                            a = true;
+                        }
+                    }
+                });
+                const c = document.createElement("div");
+                c.className = a ? "layer-header selected" : "layer-header";
+                if (a) {
+                    c.style.background = "var(--accent-color)";
+                }
+                const d = a ? "#fff" : s ? "var(--text-main)" : "var(--border-color)";
+                const l = s ? "#555" : "transparent";
+                const p = s ? "none" : "1px dashed var(--border-color)";
+                c.innerHTML = `\n                <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${d}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>\n                <div class="layer-thumb" style="background: ${l}; border: ${p};"><span class="x-layer-thumb-text">${s ? "T" : ""}</span></div>\n            `;
+                t.appendChild(c);
+                const u = document.createElement("div");
+                u.className = a ? "track-row selected" : "track-row";
+                e.menuLines.forEach((t, n) => {
+                    if (t.trackIndex !== o) {
+                        return;
+                    }
+                    const a = e.selectedLines.has(n);
+                    const s = document.createElement("div");
+                    s.className = "track-clip";
+                    s.dataset.index = n;
+                    const c = t.startTick || 0;
+                    const d = t.durationTicks || 20;
+                    const l = c / 20 * r;
+                    const p = d / 20 * r;
+                    s.style.left = `${l}px`;
+                    s.style.width = `${p}px`;
+                    if (t.type === "text") {
+                        s.style.background = a ? "#ffb74d" : "#ffcc80";
+                        let e = t.text.replace(/§[0-9a-fk-or]/gi, "");
+                        e = e.replace(/\{\{selector:(.*?)\}\}/g, "[实体选择器]");
+                        e = e.replace(/\{\{score:(.*?),(.*?)\}\}/g, "[计分板分数]");
+                        e = e.replace(/\{\{marquee:(.*?)\}\}/g, "[循环积木]");
+                        e = e.replace(/\{\{state:(.*?)\}\}/g, "[状态机]");
+                        s.innerHTML = `<div class="clip-text-content">${e || "空文本"}</div>`;
+                    } else if (t.type === "gap") {
+                        s.style.background = a ? "#4dd0e1" : "#80deea";
+                        s.innerHTML = `<div class="clip-text-content">空行 x${t.lines}</div>`;
+                    }
+                    let m = 0;
+                    let w = 0;
+                    let h = 0;
+                    let y = 0;
+                    let f = Infinity;
+                    let k = false;
+                    const x = () => {
+                        const n = e.menuLines.filter(e => e.trackIndex === t.trackIndex);
+                        n.sort((e, t) => (e.startTick || 0) - (t.startTick || 0));
+                        const r = n.indexOf(t);
+                        y = r > 0 ? (n[r - 1].startTick || 0) + (n[r - 1].durationTicks || 20) : 0;
+                        f = r < n.length - 1 ? n[r + 1].startTick || 0 : Infinity;
+                    };
+                    let g = null;
+                    let v = null;
+                    const L = document.getElementById("main-toolbar");
+                    const T = document.getElementById("drag-info-bar");
+                    const E = document.getElementById("drag-start-time");
+                    const A = document.getElementById("drag-duration-time");
+                    const I = e => `${String(Math.floor(e / 1200)).padStart(2, "0")}:${String(Math.floor(e % 1200 / 20)).padStart(2, "0")}:${String(e % 20).padStart(2, "0")}`;
+                    const S = (e, t, n = 0) => {
+                        if (L) {
+                            L.style.display = "none";
+                        }
+                        if (T) {
+                            T.style.display = "flex";
+                        }
+                        if (E) {
+                            E.textContent = I(e);
+                        }
+                        if (A) {
+                            const e = n >= 0 ? "+" : "-";
+                            A.textContent = e + I(Math.abs(n));
+                        }
+                        const i = document.querySelector(".time-ruler");
+                        if (!g) {
+                            g = document.createElement("div");
+                            g.className = "drag-marker";
+                            if (i) {
+                                i.appendChild(g);
+                            }
+                        }
+                        if (!v) {
+                            v = document.createElement("div");
+                            v.className = "drag-marker";
+                            if (i) {
+                                i.appendChild(v);
+                            }
+                        }
+                        g.style.left = e / 20 * r + "px";
+                        v.style.left = (e + t) / 20 * r + "px";
+                    };
+                    const C = () => {
+                        if (L) {
+                            L.style.display = "flex";
+                        }
+                        if (T) {
+                            T.style.display = "none";
+                        }
+                        if (g) {
+                            g.remove();
+                            g = null;
+                        }
+                        if (v) {
+                            v.remove();
+                            v = null;
+                        }
+                    };
+                    if (a) {
+                        const e = document.createElement("div");
+                        e.className = "clip-handle left-handle";
+                        e.innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"15 18 9 12 15 6\"></polyline></svg>";
+                        const n = document.createElement("div");
+                        n.className = "clip-handle right-handle";
+                        n.innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg>";
+                        e.addEventListener("pointerdown", e => {
+                            if (window.App.saveHistory) {
+                                window.App.saveHistory();
+                            }
+                            e.stopPropagation();
+                            try {
+                                e.currentTarget.setPointerCapture(e.pointerId);
+                            } catch (e) {}
+                            m = e.clientX;
+                            w = t.startTick || 0;
+                            h = t.durationTicks || 20;
+                            x();
+                            S(w, h, 0);
+                        });
+                        e.addEventListener("pointermove", e => {
+                            if (!e.currentTarget.hasPointerCapture(e.pointerId)) {
+                                return;
+                            }
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const n = e.clientX - m;
+                            const i = Math.round(n / r * 20);
+                            let o = w + i;
+                            let a = h - i;
+                            if (o < y) {
+                                o = y;
+                                a = w + h - o;
+                            }
+                            if (a < 1) {
+                                a = 1;
+                                o = w + h - 1;
+                            }
+                            t.startTick = o;
+                            t.durationTicks = a;
+                            s.style.left = t.startTick / 20 * r + "px";
+                            s.style.width = t.durationTicks / 20 * r + "px";
+                            S(o, a, o - w);
+                            if (window.App.render) {
+                                window.App.render.render();
+                            }
+                        });
+                        n.addEventListener("pointerdown", e => {
+                            if (window.App.saveHistory) {
+                                window.App.saveHistory();
+                            }
+                            e.stopPropagation();
+                            try {
+                                e.currentTarget.setPointerCapture(e.pointerId);
+                            } catch (e) {}
+                            m = e.clientX;
+                            w = t.startTick || 0;
+                            h = t.durationTicks || 20;
+                            x();
+                            S(w, h, 0);
+                        });
+                        n.addEventListener("pointermove", e => {
+                            if (!e.currentTarget.hasPointerCapture(e.pointerId)) {
+                                return;
+                            }
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const n = e.clientX - m;
+                            const i = Math.round(n / r * 20);
+                            let o = h + i;
+                            let a = w + o;
+                            if (a > f) {
+                                a = f;
+                                o = a - w;
+                            }
+                            if (o < 1) {
+                                o = 1;
+                            }
+                            t.durationTicks = o;
+                            s.style.width = t.durationTicks / 20 * r + "px";
+                            S(w, o, o - h);
+                            if (window.App.render) {
+                                window.App.render.render();
+                            }
+                        });
+                        const o = e => {
+                            e.stopPropagation();
+                            try {
+                                e.currentTarget.releasePointerCapture(e.pointerId);
+                            } catch (e) {}
+                            C();
+                            i();
+                        };
+                        e.addEventListener("pointerup", o);
+                        n.addEventListener("pointerup", o);
+                        const a = () => {
+                            if (window.App.saveCurrentProject) {
+                                window.App.saveCurrentProject();
+                            }
+                        };
+                        e.addEventListener("pointerup", a);
+                        n.addEventListener("pointerup", a);
+                        s.appendChild(e);
+                        s.appendChild(n);
+                    }
+                    s.addEventListener("pointerdown", e => {
+                        if (!e.target.closest(".clip-handle") && !e.target.closest(".y-drag-handle")) {
+                            try {
+                                e.currentTarget.setPointerCapture(e.pointerId);
+                            } catch (e) {}
+                            k = false;
+                            m = e.clientX;
+                            w = t.startTick || 0;
+                            x();
+                        }
+                    });
+                    s.addEventListener("pointermove", i => {
+                        if (!i.currentTarget.hasPointerCapture(i.pointerId)) {
+                            return;
+                        }
+                        if (i.target.closest(".clip-handle") || i.target.closest(".y-drag-handle")) {
+                            return;
+                        }
+                        const o = i.clientX - m;
+                        if (!k && Math.abs(o) > 5) {
+                            if (window.App.saveHistory) {
+                                window.App.saveHistory();
+                            }
+                            k = true;
+                            if (!e.selectedLines.has(n)) {
+                                e.selectedLines.clear();
+                                e.selectedLines.add(n);
+                                s.style.background = t.type === "text" ? "#ffb74d" : "#4dd0e1";
+                            }
+                            S(t.startTick || 0, t.durationTicks || 20, 0);
+                        }
+                        if (k) {
+                            i.preventDefault();
+                            i.stopPropagation();
+                            const e = Math.round(o / r * 20);
+                            let n = w + e;
+                            const a = t.durationTicks || 20;
+                            if (n < y) {
+                                n = y;
+                            }
+                            if (n + a > f) {
+                                n = f - a;
+                            }
+                            t.startTick = n;
+                            s.style.left = t.startTick / 20 * r + "px";
+                            S(n, a, n - w);
+                            if (window.App.render) {
+                                window.App.render.render();
+                            }
+                        }
+                    });
+                    s.addEventListener("pointerup", t => {
+                        try {
+                            t.currentTarget.releasePointerCapture(t.pointerId);
+                        } catch (e) {}
+                        if (k) {
+                            C();
+                            i();
+                            if (window.App.saveCurrentProject) {
+                                window.App.saveCurrentProject();
+                            }
+                        } else {
+                            e.selectedLines.clear();
+                            e.selectedLines.add(n);
+                            i();
+                            if (window.App.render) {
+                                window.App.render.render();
+                            }
+                            if (window.App.ui) {
+                                window.App.ui.openPropSheet(n);
+                            }
+                        }
+                    });
+                    u.appendChild(s);
+                });
+                n.appendChild(u);
+            }
+            const s = document.querySelector(".timeline-container");
+            if (s) {
+                const e = s.clientHeight;
+                const r = Math.max(0, e - 48 - 34);
+                t.style.paddingBottom = `${r}px`;
+                n.style.paddingBottom = `${r}px`;
+                const i = document.getElementById("reorder-handles-container");
+                if (i) {
+                    i.style.paddingBottom = `${r}px`;
+                }
+            }
+            const c = document.querySelector(".track-area");
+            if (c) {
+                c.dispatchEvent(new Event("scroll"));
+            }
+        })(n, o, s);
+        (function(t, n) {
+            (e.markers || new Set()).forEach(e => {
+                const r = e / 20 * n;
+                const i = document.createElement("div");
+                i.className = "time-marker";
+                i.style.left = `${r}px`;
+                t.appendChild(i);
+            });
+        })(o, s);
+        r();
+        if (!t) {
+            if (window.App.ui && window.App.ui.updateQuickBarState) {
+                window.App.ui.updateQuickBarState();
+            }
+        }
+    }
+    window.App.timeline = {
+        init: function() {
+            i();
+            (function() {
+                let t = 0;
+                let n = 0;
+                let r = false;
+                const o = e => {
+                    if (e.target.closest(".layer-header") || e.target.closest(".track-clip") || e.target.closest(".tool-btn") || e.target.closest(".playhead-fixed") || e.target.closest(".drag-info-bar") || e.target.closest(".reorder-handle")) {
+                        r = false;
+                    } else {
+                        r = true;
+                        t = e.clientX;
+                        n = e.clientY;
+                    }
+                };
+                const a = o => {
+                    if (!r) {
+                        return;
+                    }
+                    r = false;
+                    const a = o.clientX - t;
+                    const s = o.clientY - n;
+                    if (Math.abs(a) < 5 && Math.abs(s) < 5) {
+                        e.selectedLines.clear();
+                        i();
+                        if (window.App.render) {
+                            window.App.render.render();
+                        }
+                        if (window.App.ui) {
+                            window.App.ui.closePropSheet();
+                        }
+                    }
+                };
+                [document.querySelector(".layer-headers"), document.querySelector(".tracks"), document.querySelector(".toolbar"), document.querySelector(".time-ruler"), document.querySelector(".track-area")].forEach(e => {
+                    if (e) {
+                        e.addEventListener("pointerdown", o);
+                        e.addEventListener("pointerup", a);
+                    }
+                });
+            })();
+        },
+        renderTimeline: i,
+        getCurrentTick: n,
+        updateReorderHandles: r,
+        get isDraggingHandle() {
+            return t;
+        }
+    };
+})();

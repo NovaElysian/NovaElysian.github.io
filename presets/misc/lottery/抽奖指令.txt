@@ -1,0 +1,147 @@
+#本文件需配合视频教程观看
+【我的世界抽奖大转盘 可自定义物品 随机抽取-哔哩哔哩】 https://b23.tv/K1C9gAd
+
+#需要自己改的坐标 箱子位置 处理点
+#可批量处理 汇总点 转盘位置 中奖物品 抽奖按钮位置
+
+
+#前台
+execute as @p at @s unless score @s 金币 matches 500.. run title @s title §c金币不足
+
+execute as @p at @s if score @s 金币 matches 500.. run tag @p add 抽奖中
+
+
+#初始化 循环
+scoreboard objectives add 抽奖 dummy
+scoreboard objectives add 抽奖bot dummy
+
+
+#音效 循环 延迟3
+execute as @a[scores={抽奖=60..}] at @s run playsound note.pling @s ~ ~ ~ 1 2 1
+
+#盔甲架旋转 循环 转速
+execute as @a[scores={抽奖=60..}] as @e[name=圆] at @s run tp ~~~~22.5~
+
+
+
+#后台第一个循环 后面全连锁
+#去分
+execute as @a[scores={抽奖=1..}] at @s run scoreboard players remove @s 抽奖 1
+
+#给抽奖按钮位置 放一个铜灯
+execute as @a[tag=抽奖中] run structure load 抽奖中 抽奖按钮位置 0_degrees none true true
+
+#给抽奖位置一个特效
+execute as @a[tag=抽奖中] run particle minecraft:totem_particle 转盘位置
+
+#给音效
+execute as @a[tag=抽奖中] at @s run playsound mob.warden.emerge
+
+#扣款 这里自己改
+execute as @a[tag=抽奖中] at @s run scoreboard players remove @s 金币 500
+
+#复制蓝色品质箱子 到蓝色品质处理点
+execute as @a[tag=抽奖中] run clone 箱子位置 箱子位置 处理点
+
+#复制紫色品质箱子 到紫色品质处理点
+execute as @a[tag=抽奖中] run clone 箱子位置 箱子位置 处理点
+
+#复制金色品质箱子 到金色品质处理点
+execute as @a[tag=抽奖中] run clone 箱子位置 箱子位置 处理点
+
+#给蓝色处理点打掉箱子
+execute as @a[tag=抽奖中] run setblock 处理点 air destroy
+
+#给紫色处理点打掉箱子
+execute as @a[tag=抽奖中] run setblock 处理点 air destroy
+
+#给金色处理点打掉箱子
+execute as @a[tag=抽奖中] run setblock 处理点 air destroy
+
+#把蓝色处理点五个物品 tp到汇总地方
+execute as @a[tag=抽奖中] positioned 处理点 run tp @e[r=1,c=5,name=!木桶] 汇总点
+
+#把紫色处理点两个物品 tp到汇总地方
+execute as @a[tag=抽奖中] positioned 处理点 run tp @e[r=1,c=2,name=!木桶] 汇总点
+
+#把金色处理点五个物品 tp到汇总地方
+execute as @a[tag=抽奖中] positioned 处理点 run tp @e[r=1,c=1,name=!木桶] 汇总点
+
+#给汇总点的物品分配uid
+execute as @a[tag=抽奖中] positioned 汇总点 run scoreboard players set @e[type=item,r=0.5] 抽奖bot -1
+
+execute as @a[tag=抽奖中] positioned 汇总点 run scoreboard players operation @e[r=0.5,type=item] 抽奖bot -= @e[r=0.5,type=item] 抽奖bot
+
+execute as @a[tag=抽奖中] positioned 汇总点 run scoreboard players add @e[r=0.5,type=item] 抽奖bot 1
+
+
+
+#抽奖随机时间 最重要最关键的 随机数越大他随机概率越大 不过最大不要超过200 最小不要小过100
+execute as @a[tag=抽奖中] at @s run scoreboard players random @s 抽奖 130 150
+
+
+#旋转tp
+execute as @a[scores={抽奖=0..}] at @e[type=armor_stand,name=圆] positioned 转盘位置 rotated ~0 ~ positioned ^^^2 rotated 0 45 positioned ^^^1024 facing 转盘位置 positioned ^^^2048 rotated 0 45 positioned ^^^1024 run tp @e[scores={抽奖bot=1}] ~~~
+
+#旋转tp
+execute as @a[scores={抽奖=0..}] at @e[type=armor_stand,name=圆] positioned 转盘位置 rotated ~45 ~ positioned ^^^2 rotated 0 45 positioned ^^^1024 facing 转盘位置 positioned ^^^2048 rotated 0 45 positioned ^^^1024 run tp @e[scores={抽奖bot=2}] ~~~
+
+#旋转tp
+execute as @a[scores={抽奖=0..}] at @e[type=armor_stand,name=圆] positioned 转盘位置 rotated ~90 ~ positioned ^^^2 rotated 0 45 positioned ^^^1024 facing 转盘位置 positioned ^^^2048 rotated 0 45 positioned ^^^1024 run tp @e[scores={抽奖bot=3}] ~~~
+
+#旋转tp
+execute as @a[scores={抽奖=0..}] at @e[type=armor_stand,name=圆] positioned 转盘位置 rotated ~135 ~ positioned ^^^2 rotated 0 45 positioned ^^^1024 facing 转盘位置 positioned ^^^2048 rotated 0 45 positioned ^^^1024 run tp @e[scores={抽奖bot=4}] ~~~
+
+#旋转tp
+execute as @a[scores={抽奖=0..}] at @e[type=armor_stand,name=圆] positioned 转盘位置 rotated ~180 ~ positioned ^^^2 rotated 0 45 positioned ^^^1024 facing 转盘位置 positioned ^^^2048 rotated 0 45 positioned ^^^1024 run tp @e[scores={抽奖bot=5}] ~~~
+
+#旋转tp
+execute as @a[scores={抽奖=0..}] at @e[type=armor_stand,name=圆] positioned 转盘位置 rotated ~225 ~ positioned ^^^2 rotated 0 45 positioned ^^^1024 facing 转盘位置 positioned ^^^2048 rotated 0 45 positioned ^^^1024 run tp @e[scores={抽奖bot=6}] ~~~
+
+#旋转tp
+execute as @a[scores={抽奖=0..}] at @e[type=armor_stand,name=圆] positioned 转盘位置 rotated ~270 ~ positioned ^^^2 rotated 0 45 positioned ^^^1024 facing 转盘位置 positioned ^^^2048 rotated 0 45 positioned ^^^1024 run tp @e[scores={抽奖bot=7}] ~~~
+
+#旋转tp
+execute as @a[scores={抽奖=0..}] at @e[type=armor_stand,name=圆] positioned 转盘位置 rotated ~315 ~ positioned ^^^2 rotated 0 45 positioned ^^^1024 facing 转盘位置 positioned ^^^2048 rotated 0 45 positioned ^^^1024 run tp @e[scores={抽奖bot=8}] ~~~
+
+#转盘音效
+execute as @a[scores={抽奖=0..60,抽奖=!41..59,抽奖=!21..39,抽奖=!0..19}] at @s run playsound note.pling @s ~ ~ ~ 1 2 1
+
+#转盘转动
+execute as @a[scores={抽奖=0..60,抽奖=!41..59,抽奖=!21..39,抽奖=!1..19}] as @e[name=圆] at @s run tp ~~~~45~
+
+#获奖音效
+execute as @a[scores={抽奖=0}] at @s run playsound random.levelup @s
+
+#转盘获奖粒子
+execute as @a[scores={抽奖=0}] run particle minecraft:breeze_wind_explosion_emitter 转盘位置
+
+#给转盘最上面的一个物品去分
+execute as @a[scores={抽奖=0}] positioned 中奖物品 run scoreboard players reset @e[r=1,c=1] 抽奖bot
+
+#发送中奖物品信息
+execute as @a[scores={抽奖=0}] at @s positioned 中奖物品 run titleraw @s title {"rawtext":[{"text":"§e恭喜中奖\n§r"},{"selector":"@e[r=1,c=1]"}]}
+
+#获得中奖物品
+execute as @a[scores={抽奖=0}] at @s positioned 中奖物品 run tp @e[r=2,c=1] @s
+
+#去除所有没得奖物品
+execute as @a[scores={抽奖=0}] run kill @e[scores={抽奖bot=0..}]
+
+#给抽奖开关重置
+execute as @a[scores={抽奖=..0}] run structure load 抽奖开关 抽奖按钮位置 0_degrees none true true
+
+#去除汇总点附近物品
+execute as @e[tag=抽奖中] positioned 汇总点 run kill @e[r=10,type=item]
+
+#去除tag
+tag @a remove 抽奖中
+
+#给圆重置位置
+execute as @a[scores={抽奖=..0}] as @e[name=圆] at @s run tp @s ~~~ facing ~~~
+
+#给圆重置到适合的位置
+execute as @a[scores={抽奖=..0}] as @e[name=圆] at @s run tp @s ~~~ ~33.75~
+
+#重置分数
+execute as @a[scores={抽奖=..0}] at @s run scoreboard players reset @s 抽奖

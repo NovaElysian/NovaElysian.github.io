@@ -1,0 +1,184 @@
+69-73是选人 74-75是刷新玩家与列表
+
+
+#将tpan分和菜单同步
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s run scoreboard players operation @s TPAN = @s 菜单
+
+#减去68变为1-5
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s run  scoreboard players remove @s TPAN 68
+#此文件由星月牙月制作3122191515
+#检测是否是自己传自己
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s if score @s TPAN = @s TPAUID run title @s title §c请勿自娱自乐
+
+#是就更正视角
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s if score @s TPAN = @s TPAUID run tp @s
+
+
+
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run tag @s add 此处有人
+
+#检测是否有人
+execute as @a[scores={菜单=69..73},tag=!此处有人,rx=-85,rxm=-90] at @s run title @s title §c此处没有人可以刷新试试
+
+execute as @a[scores={菜单=69..73},tag=!此处有人,rx=-85,rxm=-90] at @s run tp @s
+
+tag @a remove 此处有人
+
+
+#检测是否有人传送中
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPA run title @s title §c有人正在传送此人
+
+#更正视角
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPA run tp @s
+
+#此文件由星月牙月制作3122191515
+#若前面的都没有更正视角，那么就确认传送
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run tellraw @p {"rawtext":[{"text":"§b〉>> §f"},{"selector":"@a[scores={菜单=69..73},rx=-85,rxm=-90,tag=!有人正在传送]"},{"text":" §b正在对您申请传送 §730S后自动结束"},{"text":"\n§f抬头确认§a✔     §f低头取消§c✘"}]}
+
+#把自己TPA分数变成TPAN分数
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run scoreboard players operation @s TPA = @s TPAN
+
+#给自己一个倒计时
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run scoreboard players set @s TPA计时 600
+
+#给对面一个倒计时
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run scoreboard players set @p TPA计时 600
+
+#改成传送中显示
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run scoreboard players set @s 菜单 77
+
+#重置自己TPAN分数
+execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run scoreboard players reset @s TPAN
+
+#检测自己低头后取消传送
+execute as @a[scores={菜单=77},rx=90,rxm=85] at @s run scoreboard players set @s 菜单 78
+
+execute at @e[type=snowball] as @p[r=3,scores={菜单=77},rx=90,rxm=85] at @s run scoreboard players set @s 菜单 78
+
+#给对面提示取消
+execute as @a[scores={菜单=78}] at @s at @a[rm=0.1] if score @s TPA = @p TPAUID run tellraw @p {"rawtext":[{"text":"§b〉>> §c对方已取消传送"}]}
+
+execute as @a[scores={菜单=78}] at @s at @a[rm=0.1] if score @s TPA = @p TPAUID run scoreboard players reset @s TPA计时
+
+execute as @a[scores={菜单=78}] at @s at @a[rm=0.1] if score @s TPA = @p TPAUID run scoreboard players reset @p TPA计时
+
+#给自己清除
+execute as @a[scores={菜单=78}] at @s run scoreboard players reset @s TPA
+
+execute as @a[scores={菜单=78}] at @s run scoreboard players reset @s TPAN
+
+#给自己显示取消
+execute as @a[scores={菜单=78}] at @s run title @s title §c已取消传送
+
+#取消后改成关机
+execute as @a[scores={菜单=78}] at @s run scoreboard players set @s 菜单 200
+#此文件由b站乱写指令的雷狮制作
+#检测对方低头后给自己显示拒绝
+execute as @a[rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run tellraw @p {"rawtext":[{"text":"§b〉>> §c对方已拒绝传送"}]}
+
+execute as @a[rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run title @s title §c已取消传送
+
+#给自己菜单回到原始
+execute as @a[rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run scoreboard players set @p 菜单 68
+
+#拒绝后重置
+execute as @a[rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run scoreboard players reset @p TPA计时
+
+execute as @a[rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run scoreboard players reset @s TPA计时
+
+#拒绝后重置对面tpa分数
+execute as @a[rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run scoreboard players reset @p TPA
+
+#抬头后传送成功
+execute as @a[rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run title @p title §a传送成功
+
+#让自己tp到对方
+execute as @a[rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run tag @s add 传送
+
+execute as @a[rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run tag @p add 被传送
+
+#重置两人的所有
+
+execute as @a[tag=传送] at @s run tp @a[tag=被传送] @s
+
+execute as @a at @s unless entity @s[tag=!传送,tag=!被传送] run scoreboard players reset @s TPA计时
+
+execute as @a at @s unless entity @s[tag=!传送,tag=!被传送] run scoreboard players reset @s TPAN
+
+execute as @a at @s unless entity @s[tag=!传送,tag=!被传送] run scoreboard players reset @s TPA
+
+execute as @a at @s unless entity @s[tag=!传送,tag=!被传送] run scoreboard players set @s 菜单 200
+#此文件由星月牙月制作3122191515
+tag @a remove 传送
+
+tag @a remove 被传送
+
+#减时间
+scoreboard players remove @a[scores={TPA计时=1..}] TPA计时 1
+
+#时间到了重置
+execute as @a[scores={TPA计时=0}] at @s run tellraw @s {"rawtext":[{"text":"§b〉>> §c时间已到期"}]}
+
+execute as @a[scores={TPA计时=0}] at @s run scoreboard players reset @s TPA
+
+execute as @a[scores={TPA计时=0}] at @s run scoreboard players set @s 菜单 200
+
+execute as @a[scores={TPA计时=0}] at @s run scoreboard players reset @s TPA计时
+
+
+
+
+
+
+#单独放循环连锁
+#设置TPA分数
+scoreboard players set TPA TPA 0
+
+execute as @a[scores={TPA=1..}] run scoreboard players set TPA TPA 1
+
+
+
+#单独放
+#刷新玩家 断链
+
+#循环
+execute as @a[scores={菜单=74},rx=-85,rxm=-90] at @s if score TPA TPA matches 1 run title @s title §c请勿刷新有人占用通道
+
+#连锁
+execute as @a[scores={菜单=74},rx=-85,rxm=-90] if score TPA TPA matches 0 run setblock ~1~~ chain_command_block 5
+
+#空一个方块
+空
+
+#连锁
+setblock ~-1~~ air
+#连锁
+scoreboard players set @a TPAUID -1
+#连锁
+scoreboard players operation @a TPAUID -= @a TPAUID
+#连锁
+scoreboard players add @a TPAUID 1
+#连锁
+execute as @a[scores={菜单=74},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~
+
+#此文件由b站乱写指令的雷狮制作
+
+#刷新UID 单独放
+
+#循环
+execute as @a[scores={菜单=75},rx=-85,rxm=-90] at @s if score TPA TPA matches 1 run title @s title §c请勿刷新有人占用通道
+
+#连锁
+execute as @a[scores={菜单=75},rx=-85,rxm=-90] if score TPA TPA matches 0 run setblock ~1~~ chain_command_block 5
+
+#空一格方块
+空
+
+#连锁
+setblock ~-1~~ air
+#连锁
+execute as @a[scores={菜单=75},rx=-85,rxm=-90] run scoreboard players operation @a[scores={TPAUID=1}] TPAUID >< @a[scores={TPAUID=1..}] TPAUID
+#连锁
+execute as @a[scores={菜单=75},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~
+
+

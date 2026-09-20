@@ -1,0 +1,50 @@
+
+
+
+#预加载
+
+scoreboard objectives add 菜单 dummy
+
+scoreboard objectives add 转账金额 dummy
+
+scoreboard objectives add PAY dummy
+
+scoreboard objectives add PAYUID dummy
+
+scoreboard objectives add 金币 dummy
+
+scoreboard objectives add TPA dummy
+
+scoreboard objectives add TPAUID dummy
+
+scoreboard objectives add TPAN dummy
+
+scoreboard objectives add DTPA dummy
+
+scoreboard objectives add TPA计时 dummy
+
+scoreboard objectives add 彩色字 dummy
+
+
+
+scoreboard players add @a 菜单 0
+
+scoreboard players add @a 转账金额 0
+
+scoreboard players add @a PAY 0
+
+scoreboard players add @a PAYUID 0
+
+scoreboard players add @a 金币 0
+
+scoreboard players add @a TPA 0
+
+scoreboard players add @a TPAUID 0
+
+scoreboard players add @a TPAN 0
+
+scoreboard players add @a DTPA 0
+
+scoreboard players add @a TPA计时 0
+
+scoreboard players add @a 彩色字 0

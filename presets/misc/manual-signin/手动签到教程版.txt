@@ -1,0 +1,84 @@
+#提醒 需要手动改的分别是#11与#20
+
+#前台
+#1脉冲 无条件 红石 无延迟
+tag @p add 签到
+
+
+
+
+#后台预加载 初始化 第一个循环 其他全部连锁
+#2循环 无条件 保持开启 无延迟
+scoreboard objectives add 签到 dummy
+
+#3连锁 无条件 保持开启
+scoreboard objectives add 时间 dummy
+
+#4连锁 无条件 保持开启
+scoreboard objectives add 签到天数 dummy
+
+#5连锁 无条件 保持开启
+scoreboard objectives add 金币 dummy
+
+#6连锁 无条件 保持开启
+scoreboard players add @a 签到 0
+
+
+
+
+#后台 第一个循环 其他全部连锁
+#7循环 无条件 保持开启 无延迟
+scoreboard players add @p[scores={签到=0},tag=签到] 签到 1
+
+#8连锁 无条件 保持开启
+titleraw @p[scores={签到=2..},tag=签到] title {"rawtext":[{"text":"§c您已签到请勿再次签到"}]}
+
+#9连锁 无条件 保持开启
+titleraw @p[scores={签到=2..},tag=签到] subtitle {"rawtext":[{"text":"§4还有 §f"},{"score":{"name":"签到计时","objective":"时间"}},{"text":" §4分钟可继续领取"}]}
+
+#10连锁 无条件 保持开启
+playsound random.break @p[scores={签到=2..},tag=签到] 
+
+#11连锁 无条件 保持开启
+#这里是给予金币 如果要固定就用 set 如果要随机其他金额就改一下数字就行
+execute as @a[scores={签到=1}] at @s run scoreboard players random 签到金币 金币 50 100
+
+#12连锁 无条件 保持开启
+execute as @a[scores={签到=1}] at @s run scoreboard players add @s 签到天数 1
+
+#13连锁 无条件 保持开启
+execute as @a[scores={签到=1}] at @s run titleraw @s title {"rawtext":[{"text":"§a§l签到成功"}]}
+
+#14连锁 无条件 保持开启
+execute as @a[scores={签到=1}] at @s run titleraw @s subtitle {"rawtext":[{"text":"§9您已累计签到 §f"},{"score":{"name":"@s","objective":"签到天数"}},{"text":" §9天"}]}
+
+#15连锁 无条件 保持开启
+execute as @a[scores={签到=1}] at @s run tellraw @s {"rawtext":[{"text":"§e签到获得金币 "},{"score":{"name":"签到金币","objective":"金币"}}]}
+
+#16连锁 无条件 保持开启
+execute as @a[scores={签到=1}] at @s run scoreboard players operation @s 金币 += 签到金币 金币
+
+#17连锁 无条件 保持开启
+execute as @a[scores={签到=1}] at @s run playsound random.levelup @s
+
+#18连锁 无条件 保持开启
+execute as @a[scores={签到=1}] at @s run scoreboard players add @s 签到 1
+
+#19连锁 无条件 保持开启
+tag @a remove 签到
+
+
+
+
+#计时
+#20.循环保持开启 延迟1200
+scoreboard players remove 签到计时 时间 1
+
+#21循环保持开启 无延迟
+execute if score 签到计时 时间 matches ..0 run scoreboard objectives remove 签到
+
+#22连锁 无条件 保持开启
+execute if score 签到计时 时间 matches ..0 run scoreboard objectives add 签到 dummy
+
+#23连锁 无条件 保持开启
+execute if score 签到计时 时间 matches ..0 run scoreboard players set 签到计时 时间 1440

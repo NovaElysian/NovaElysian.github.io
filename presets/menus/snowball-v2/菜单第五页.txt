@@ -1,0 +1,45 @@
+execute as @a[rx=-85,rxm=-90,scores={菜单=30}] at @s run scoreboard players set @s 菜单 120
+
+execute as @a[rx=-85,rxm=-90,scores={菜单=120}] at @s run tp @s ~~~ facing ~~~
+
+execute as @a[scores={菜单=120..127}] run scoreboard players add @s 菜单 1
+
+execute as @a[scores={菜单=120..127}] at @s run playsound random.click @s ~ ~ ~ 1 5.5 1
+
+
+execute as @a[scores={菜单=120..127}] at @s run titleraw @s actionbar {"rawtext":[{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..120}]"},{"selector":"@s[scores={菜单=..121}]"},{"selector":"@s[scores={菜单=..122}]"},{"selector":"@s[scores={菜单=..123}]"},{"selector":"@s[scores={菜单=..124}]"},{"selector":"@s[scores={菜单=..125}]"},{"selector":"@s[scores={菜单=..126}]"},{"selector":"@s[scores={菜单=..127}]"},{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n"},{"text":"\n\n\n\n\n"},{"text":"\n\n\n"}]}},{"text":"         §b✿§f音乐 选项§b✿"},{"text":"\n    §b◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§b ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §b◇---§s----§3----§9--§b--§9--§3----§s----§b---◇ "},{"text":" §s◇---§3----§9----§b--§s--§b--§9----§3----§s---◇ "},{"text":" §3◇---§9----§b----§s--§3--§s--§b----§9----§3---◇ "},{"text":" §9◇---§b----§s----§3--§9--§3--§s----§b----§9---◇ "}]}},{"text":"\n\n"},{"text":"     §7ｏｔｈｅｒｓｉｄｅ\n§7     ｃｒｅａｔｏｒ\n§7     ｐｒｅｃｉｐｉｃｅ\n§7     ｐｉｇｓｔｅｐ\n§7     ｃａｔ\n§7     ｍｅｌｌｏｈｉ\n§7     ｔｕｒｎｏｆｆ"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §b◇---§s----§3----§9--§b--§9--§3----§s----§b---◇ "},{"text":" §s◇---§3----§9----§b--§s--§b--§9----§3----§s---◇ "},{"text":" §3◇---§9----§b----§s--§3--§s--§b----§9----§3---◇ "},{"text":" §9◇---§b----§s----§3--§9--§3--§s----§b----§9---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @e[type=snowball] at @s run scoreboard players add @p[r=2,rx=60,rxm=0,scores={菜单=128..135}] 菜单 1
+
+execute as @e[type=snowball] at @s run scoreboard players remove @p[r=2,rx=0,rxm=-60,scores={菜单=129..135}] 菜单 1
+
+execute as @e[type=snowball] at @s run scoreboard players set @p[r=2,rx=0,rxm=-60,scores={菜单=128}] 菜单 135
+
+execute as @a[scores={菜单=136..139}] at @s run scoreboard players set @s 菜单 129
+
+execute as @a[rx=90,rxm=85,scores={菜单=128..135}] at @s run scoreboard players set @s 菜单 30
+
+#此文件由b站乱写指令的雷狮制作
+
+#有条件
+execute as @a[rx=90,rxm=85,scores={菜单=30}] at @s run tp @s ~~~ facing ~~~
+
+execute as @a[scores={菜单=128..135}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §b✿§f更改 模式§b✿"},{"text":"\n    §b◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§b ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §b◇---§s----§3----§9--§b--§9--§3----§s----§b---◇ "},{"text":" §s◇---§3----§9----§b--§s--§b--§9----§3----§s---◇ "},{"text":" §3◇---§9----§b----§s--§3--§s--§b----§9----§3---◇ "},{"text":" §9◇---§b----§s----§3--§9--§3--§s----§b----§9---◇ "}]}},{"text":"\n\n"},{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..128}]"},{"selector":"@s[scores={菜单=..129}]"},{"selector":"@s[scores={菜单=..130}]"},{"selector":"@s[scores={菜单=..131}]"},{"selector":"@s[scores={菜单=..132}]"},{"selector":"@s[scores={菜单=..133}]"},{"selector":"@s[scores={菜单=..134}]"},{"selector":"@s[scores={菜单=..135}]"},{"text":"     §7ｏｔｈｅｒｓｉｄｅ\n§7     ｃｒｅａｔｏｒ\n§7     ｐｒｅｃｉｐｉｃｅ\n§7     ｐｉｇｓｔｅｐ\n§7     ｃａｔ\n§7     ｍｅｌｌｏｈｉ\n§7     ｔｕｒｎｏｆｆ"},{"text":"     §fｏｔｈｅｒｓｉｄｅ   §d◆ ◆ ◆ ◆ ◆ §r\n§7     ｃｒｅａｔｏｒ\n§7     ｐｒｅｃｉｐｉｃｅ\n§7     ｐｉｇｓｔｅｐ\n§7     ｃａｔ\n§7     ｍｅｌｌｏｈｉ\n§7     ｔｕｒｎｏｆｆ"},{"text":"     §7ｏｔｈｅｒｓｉｄｅ\n§f     ｃｒｅａｔｏｒ   §a◆ ◆ ◆ ◆ ◆ §r\n§7     ｐｒｅｃｉｐｉｃｅ\n§7     ｐｉｇｓｔｅｐ\n§7     ｃａｔ\n§7     ｍｅｌｌｏｈｉ\n§7     ｔｕｒｎｏｆｆ"},{"text":"     §7ｏｔｈｅｒｓｉｄｅ\n§7     ｃｒｅａｔｏｒ\n§f     ｐｒｅｃｉｐｉｃｅ   §b◆ ◆ ◆ ◆ ◆ §r\n§7     ｐｉｇｓｔｅｐ\n§7     ｃａｔ\n§7     ｍｅｌｌｏｈｉ\n§7     ｔｕｒｎｏｆｆ"},{"text":"     §7ｏｔｈｅｒｓｉｄｅ\n§7     ｃｒｅａｔｏｒ\n§7     ｐｒｅｃｉｐｉｃｅ\n§f     ｐｉｇｓｔｅｐ   §e◆ ◆ ◆ ◆ ◆ §r\n§7     ｃａｔ\n§7     ｍｅｌｌｏｈｉ\n§7     ｔｕｒｎｏｆｆ"},{"text":"     §7ｏｔｈｅｒｓｉｄｅ\n§7     ｃｒｅａｔｏｒ\n§7     ｐｒｅｃｉｐｉｃｅ\n§7     ｐｉｇｓｔｅｐ\n§f     ｃａｔ   §h◆ ◆ ◆ ◆ ◆ §r\n§7     ｍｅｌｌｏｈｉ\n§7     ｔｕｒｎｏｆｆ"},{"text":"     §7ｏｔｈｅｒｓｉｄｅ\n§7     ｃｒｅａｔｏｒ\n§7     ｐｒｅｃｉｐｉｃｅ\n§7     ｐｉｇｓｔｅｐ\n§7     ｃａｔ\n§f     ｍｅｌｌｏｈｉ   §c◆ ◆ ◆ ◆ ◆ §r\n§7     ｔｕｒｎｏｆｆ"},{"text":"     §7ｏｔｈｅｒｓｉｄｅ\n§7     ｃｒｅａｔｏｒ\n§7     ｐｒｅｃｉｐｉｃｅ\n§7     ｐｉｇｓｔｅｐ\n§7     ｃａｔ\n§7     ｍｅｌｌｏｈｉ\n§f     ｔｕｒｎｏｆｆ   §m◆ ◆ ◆ ◆ ◆ §r"}]}},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §b◇---§s----§3----§9--§b--§9--§3----§s----§b---◇ "},{"text":" §s◇---§3----§9----§b--§s--§b--§9----§3----§s---◇ "},{"text":" §3◇---§9----§b----§s--§3--§s--§b----§9----§3---◇ "},{"text":" §9◇---§b----§s----§3--§9--§3--§s----§b----§9---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @a[rx=-85,rxm=-90,scores={菜单=129..135}] at @s run stopsound @s
+
+execute as @a[scores={菜单=129},rx=-85,rxm=-90] at @s run playsound record.otherside @s
+
+execute as @a[scores={菜单=130},rx=-85,rxm=-90] at @s run playsound record.creator @s
+
+execute as @a[scores={菜单=131},rx=-85,rxm=-90] at @s run playsound record.precipice @s
+
+execute as @a[scores={菜单=132},rx=-85,rxm=-90] at @s run playsound record.pigstep @s
+
+execute as @a[scores={菜单=133},rx=-85,rxm=-90] at @s run playsound record.cat @s
+
+execute as @a[scores={菜单=134},rx=-85,rxm=-90] at @s run playsound record.mellohi @s
+
+execute as @a[scores={菜单=135},rx=-85,rxm=-90] at @s run stopsound @s
+
+execute as @a[rx=-85,rxm=-90,scores={菜单=129..135}] at @s run tp @s ~~~ facing ~~~

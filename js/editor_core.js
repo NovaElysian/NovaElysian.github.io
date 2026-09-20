@@ -21,7 +21,7 @@
  *
  * 本模块完全离线、无任何外部依赖，可独立加载或内联进单文件 HTML。
  */
-window.__EDITOR_CORE_GENERATE__ = function (projectState, frames, scoreName, mergeMode) {
+window.__EDITOR_CORE_GENERATE__ = function(projectState, frames, scoreName, mergeMode) {
     "use strict";
 
     const menuLines = projectState.menuLines || [];
@@ -59,7 +59,12 @@ window.__EDITOR_CORE_GENERATE__ = function (projectState, frames, scoreName, mer
             if (remainingSelectors > 8) {
                 rawtext.push(chunk(selStart + takeSelectors, textStart + takeTexts));
             }
-            return { translate: "%%" + (selSlice.length + 1), with: { rawtext: rawtext } };
+            return {
+                translate: "%%" + (selSlice.length + 1),
+                with: {
+                    rawtext: rawtext
+                }
+            };
         }
         return chunk(0, 0);
     }
@@ -78,7 +83,11 @@ window.__EDITOR_CORE_GENERATE__ = function (projectState, frames, scoreName, mer
                 expanded.push(line);
             } else if (line.type === "gap") {
                 for (let i = 0; i < line.lines; i++) {
-                    expanded.push({ type: "empty", text: "", x: 0 });
+                    expanded.push({
+                        type: "empty",
+                        text: "",
+                        x: 0
+                    });
                 }
             }
         }
@@ -127,15 +136,24 @@ window.__EDITOR_CORE_GENERATE__ = function (projectState, frames, scoreName, mer
         let match;
         while ((match = placeholderRe.exec(full)) !== null) {
             if (match.index > lastIndex) {
-                nodes.push({ text: full.substring(lastIndex, match.index) });
+                nodes.push({
+                    text: full.substring(lastIndex, match.index)
+                });
             }
 
             if (match[1] !== undefined) {
                 // {{selector:...}} → 实体选择器变量
-                nodes.push({ selector: match[1] });
+                nodes.push({
+                    selector: match[1]
+                });
             } else if (match[2] !== undefined && match[3] !== undefined) {
                 // {{score:name,obj}} → 计分板分数变量
-                nodes.push({ score: { name: match[2], objective: match[3] } });
+                nodes.push({
+                    score: {
+                        name: match[2],
+                        objective: match[3]
+                    }
+                });
             } else if (match[4] !== undefined) {
                 // {{marquee:id}} → 跑马灯循环积木：每个选择器负责一段分数区间的帧显示
                 const blockId = match[4];
@@ -149,7 +167,9 @@ window.__EDITOR_CORE_GENERATE__ = function (projectState, frames, scoreName, mer
                             selector: "@s[scores={" + block.scoreName + "=.." + f * block.ticksPerFrame + "}]"
                         });
                     }
-                    block.frames.forEach(frameText => texts.push({ text: frameText }));
+                    block.frames.forEach(frameText => texts.push({
+                        text: frameText
+                    }));
                     nodes.push(buildChunkedTranslate(selectors, texts));
 
                     initCommands.add("scoreboard objectives add " + block.scoreName + " dummy");
@@ -168,9 +188,13 @@ window.__EDITOR_CORE_GENERATE__ = function (projectState, frames, scoreName, mer
                     for (let b = 1; b < branchCount; b++) {
                         const branch = block.branches[b];
                         const selector = branch.selector || "@s";
-                        selectors.push({ selector: selector + "[" + branch.condition + "]" });
+                        selectors.push({
+                            selector: selector + "[" + branch.condition + "]"
+                        });
                     }
-                    block.branches.forEach(branch => texts.push({ text: branch.text }));
+                    block.branches.forEach(branch => texts.push({
+                        text: branch.text
+                    }));
                     nodes.push(buildChunkedTranslate(selectors, texts));
                 }
             }
@@ -178,7 +202,9 @@ window.__EDITOR_CORE_GENERATE__ = function (projectState, frames, scoreName, mer
             lastIndex = placeholderRe.lastIndex;
         }
         if (lastIndex < full.length) {
-            nodes.push({ text: full.substring(lastIndex) });
+            nodes.push({
+                text: full.substring(lastIndex)
+            });
         }
         return nodes;
     }
@@ -196,7 +222,9 @@ window.__EDITOR_CORE_GENERATE__ = function (projectState, frames, scoreName, mer
             const endTick = tick + duration - 1;
 
             const rawtextArr = buildRawtextArr(expandLines(frame.lines));
-            const payload = JSON.stringify({ rawtext: rawtextArr });
+            const payload = JSON.stringify({
+                rawtext: rawtextArr
+            });
             const scoreRange = tick === endTick ? "" + tick : tick + ".." + endTick;
             output += "execute as @a at @s if score @s " + scoreName + " matches " + scoreRange + " run titleraw @s actionbar " + payload + "\n";
             tick += duration;
@@ -216,7 +244,10 @@ window.__EDITOR_CORE_GENERATE__ = function (projectState, frames, scoreName, mer
             const endTick = tick + duration - 1;
 
             const rawtextArr = buildRawtextArr(expandLines(frame.lines));
-            entries.push({ endTick: endTick, rawtextArr: rawtextArr });
+            entries.push({
+                endTick: endTick,
+                rawtextArr: rawtextArr
+            });
             tick += duration;
         }
 
@@ -246,12 +277,21 @@ window.__EDITOR_CORE_GENERATE__ = function (projectState, frames, scoreName, mer
         const middleEntries = entries.map(entry => {
             const middle = entry.rawtextArr.slice(prefixLen, entry.rawtextArr.length - suffixLen);
             let textObj;
-            textObj = middle.length === 1 ? middle[0] : middle.length > 1 ? { rawtext: middle } : { text: "" };
+            textObj = middle.length === 1 ? middle[0] : middle.length > 1 ? {
+                rawtext: middle
+            } : {
+                text: ""
+            };
             if (middle.some(node => node.translate || node.score || node.selector)) {
                 hasDynamic = true;
             }
-            const selectorObj = { selector: "@s[scores={" + scoreName + "=.." + entry.endTick + "}]" };
-            return { selectorObj: selectorObj, textObj: textObj };
+            const selectorObj = {
+                selector: "@s[scores={" + scoreName + "=.." + entry.endTick + "}]"
+            };
+            return {
+                selectorObj: selectorObj,
+                textObj: textObj
+            };
         });
 
         if (hasDynamic) {
@@ -276,14 +316,18 @@ window.__EDITOR_CORE_GENERATE__ = function (projectState, frames, scoreName, mer
             bodyNodes.push(...suffixNodes);
         }
 
-        const payload = JSON.stringify({ rawtext: bodyNodes });
+        const payload = JSON.stringify({
+            rawtext: bodyNodes
+        });
         const lastTick = tick - 1;
         animationSection = "execute as @a at @s if score @s " + scoreName + " matches 1.." + lastTick + " run titleraw @s actionbar " + payload;
     } else {
         // ===== 单帧 / 静态：只输出一条指令，持续 1..duration =====
         initCommands.add("scoreboard objectives add " + scoreName + " dummy");
         const rawtextArr = buildRawtextArr(expandLines(menuLines));
-        const payload = JSON.stringify({ rawtext: rawtextArr });
+        const payload = JSON.stringify({
+            rawtext: rawtextArr
+        });
         const duration = frames && frames.frames && frames.frames.length > 0 && frames.frames[0].duration || 20;
         animationSection = "execute as @a at @s if score @s " + scoreName + " matches 1.." + duration + " run titleraw @s actionbar " + payload;
     }

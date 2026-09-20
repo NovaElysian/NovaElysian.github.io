@@ -1,0 +1,160 @@
+平安日 圆月 难度普通
+幸运日 平安夜 难度简单
+血月 霉运日 难度困难 死亡掉落
+烈日 极夜 特殊事件 难度困难
+酸雨 特殊事件
+进服时间生日 6.1 特殊时节
+
+平安夜 简单难度
+平安日 满月 普通难度
+幸运日 简单难度 给急迫2 饱和1
+霉运日 困难难度 一分钟随机一个人遭雷劈
+血月 困难难度 怪物增强 力量2 速度1 抗性2 死亡掉落
+烈日 检测玩家50格是否有方块 没有就自燃 难度困难
+极夜 会随机二到四天都为夜晚 并且困难
+酸雨早晚随机事件 跟烈日一样检测方块 没有就给伤害
+进服时间保存为生日 每年今日都会给一个蛋糕 和520金币
+6.1儿童节 每年这月都会给一个蛋糕 并且有各种buff
+
+
+
+#初始化 脉冲连锁 全部创建完成后点
+
+scoreboard players set 年 年 你想设置的年份
+
+scoreboard players set 月 月 1
+
+scoreboard players set 天 天 1
+
+
+
+#弄个阳光传感器 五格红石信号 
+#去除血月 循环 红石开启
+
+fog @a remove 血月
+
+
+#白日 阳光传感器 白天模式 放六格红石信号 第一个脉冲 后面连锁
+
+title @a times 60 100 60
+
+scoreboard players add 天 天 1
+
+scoreboard players random 随机白天 随机日 1 1000
+
+scoreboard players set 随机晚上 随机日 0
+
+execute if score 随机白天 随机日 matches 1..1000 unless score 随机白天 随机日 matches 200..250 unless score 随机白天 随机日 matches 550..600 unless score 随机白天 随机日 matches 900..950 run title @a title §f平安日 §e▎ §7Ｐｅａｃｅ Ｄａｙ
+
+execute if score 随机白天 随机日 matches 200..250 run title @a title §a幸运日 §f▎ §aＬｕｃｋｙ Ｄａｙ
+
+execute if score 随机白天 随机日 matches 550..600 run title @a title §c霉运日 §4▎ §mＵｎｌｕｃｋｙ Ｄａｙ
+
+execute if score 随机白天 随机日 matches 900..950 run title @a title §6烈日 §e▎ §6Ｂｌａｚｉｎｇ ｓｕｎ
+
+execute as @a run titleraw @s subtitle {"rawtext":[{"text":"§7日期 "},{"score":{"name":"年","objective":"年"}},{"text":" 年 "},{"score":{"name":"月","objective":"月"}},{"text":" 月 "},{"score":{"name":"天","objective":"天"}},{"text":" 日 "},{"translate":"%%2","with":{"rawtext":[{"selector":"@e[name=季节,type=armor_stand,scores={季节=1}]"},{"text":"§a春天"}]}},{"translate":"%%2","with":{"rawtext":[{"selector":"@e[name=季节,type=armor_stand,scores={季节=2}]"},{"text":"§e夏天"}]}},{"translate":"%%2","with":{"rawtext":[{"selector":"@e[name=季节,type=armor_stand,scores={季节=3}]"},{"text":"§6秋天"}]}},{"translate":"%%2","with":{"rawtext":[{"selector":"@e[name=季节,type=armor_stand,scores={季节=4}]"},{"text":"§b冬天"}]}}]}
+
+#难度
+
+execute if score 随机白天 随机日 matches 1..1000 unless score 随机白天 随机日 matches 200..250 unless score 随机白天 随机日 matches 550..600 unless score 随机白天 随机日 matches 900..950 run difficulty normal
+
+execute if score 随机白天 随机日 matches 200..250 run difficulty easy
+
+execute if score 随机白天 随机日 matches 550..600 run difficulty hard
+
+execute if score 随机白天 随机日 matches 900..950 run difficulty hard
+
+#音效
+
+execute if score 随机白天 随机日 matches 1..1000 unless score 随机白天 随机日 matches 550..600 unless score 随机白天 随机日 matches 900..950 run playsound random.levelup @a
+
+execute if score 随机白天 随机日 matches 550..600 run playsound ambient.weather.thunder @a
+
+execute if score 随机白天 随机日 matches 900..950 run playsound ambient.weather.thunder @a
+
+#儿童节
+execute if score 月 月 matches 6 if score 天 天 matches 1 run give @a cake 1
+
+execute if score 月 月 matches 6 if score 天 天 matches 1 run tellraw @a {"rawtext":[{"text":"§f今日 "},{"score":{"name":"年","objective":"年"}},{"text":" 年 "},{"score":{"name":"月","objective":"月"}},{"text":" 月 "},{"score":{"name":"天","objective":"天"}},{"text":" 日 "},{"text":"\n\n§f不论今日天气好坏，都祝你§a儿童节§f快乐！"}]}
+
+execute if score 月 月 matches 6 if score 天 天 matches 1 as @a at @s run summon fireworks_rocket ~ ~ ~
+
+
+#进服生日
+execute as @a at @s if score @s 月 = 月 月 if score @s 日 = 日 日 run give @a cake 1
+
+execute as @a at @s if score @s 月 = 月 月 if score @s 日 = 日 日 run tellraw @s {"rawtext":[{"text":"§f今日 "},{"score":{"name":"年","objective":"年"}},{"text":" 年 "},{"score":{"name":"月","objective":"月"}},{"text":" 月 "},{"score":{"name":"天","objective":"天"}},{"text":" 日 "},{"text":"\n\n§f不论今日天气好坏，都祝你§a进服生日§f快乐！"}]}
+
+execute as @a at @s if score @s 月 = 月 月 if score @s 日 = 日 日 run summon fireworks_rocket ~ ~ ~
+
+
+
+
+
+# 阳关传感器 六格信号 夜晚模式 第一个脉冲 其他连锁
+#夜晚
+
+title @a times 60 100 60
+
+scoreboard players random 随机晚上 随机日 1 1000
+
+scoreboard players set 随机白天 随机日 0
+
+execute if score 随机晚上 随机日 matches 1..299 run title @a title §f平安夜 §9▎ §7Ｐｅａｃｅ Ｎｉｇｈｔ
+
+execute if score 随机晚上 随机日 matches 300..1000 unless score 随机晚上 随机日 matches 550..600 unless score 随机晚上 随机日 matches 900..950 run title @a title §f圆月 §9▎ §7Ｍｏｏｎ Ｎｉｇｈｔ
+
+execute if score 随机晚上 随机日 matches 550..600 run title @a title §c血月 §4▎ §mＢｌｏｏｄ Ｎｉｇｈｔ
+
+execute if score 随机晚上 随机日 matches 900..950 run title @a title §9极夜 §b▎ §9Ｐｏｌａｒ Ｎｉｇｈｔ
+
+
+#副标题提示
+
+execute if score 随机晚上 随机日 matches 1..299 run title @a subtitle §i月儿晃悠上班，今晚也是摸鱼的一天。
+
+execute if score 随机晚上 随机日 matches 300..1000 unless score 随机晚上 随机日 matches 550..600 unless score 随机晚上 随机日 matches 900..950 run title @a subtitle §i月儿圆又圆，细风吹过缝，又是凉爽的晚上！
+
+execute if score 随机晚上 随机日 matches 550..600 run title @a subtitle §e！ 全员警备，今晚怪物暴增发狂，死亡掉落 ！
+
+execute if score 随机晚上 随机日 matches 900..950 run title @a subtitle §i夜是长久的，她有自己的心事，长夜漫漫长
+
+
+#音效
+
+execute if score 随机晚上 随机日 matches 1..299 run playsound resonate.amethyst_block @a ~~~ 10 1 10
+
+execute if score 随机晚上 随机日 matches 1..299 run playsound random.levelup @a ~~~ 1 1.5 1
+
+execute if score 随机晚上 随机日 matches 1..299 run playsound note.bell @a ~~~ 1 1 1
+
+execute if score 随机晚上 随机日 matches 300..1000 unless score 随机晚上 随机日 matches 550..600 unless score 随机晚上 随机日 matches 900..950 run playsound resonate.amethyst_block @a ~~~ 10 1 10
+
+execute if score 随机晚上 随机日 matches 300..1000 unless score 随机晚上 随机日 matches 550..600 unless score 随机晚上 随机日 matches 900..950 run playsound random.levelup @a ~~~ 1 1.5 1
+
+execute if score 随机晚上 随机日 matches 300..1000 unless score 随机晚上 随机日 matches 550..600 unless score 随机晚上 随机日 matches 900..950 run playsound note.bell @a ~~~ 1 1 1
+
+execute if score 随机晚上 随机日 matches 550..600 run playsound ambient.weather.thunder @a
+
+execute if score 随机晚上 随机日 matches 900..950 run playsound random.levelup @a ~~~ 1 0.4 1
+
+
+#难度
+
+execute if score 随机晚上 随机日 matches 1..299 run difficulty easy
+
+execute if score 随机晚上 随机日 matches 300..1000 unless score 随机晚上 随机日 matches 550..600 unless score 随机晚上 随机日 matches 900..950 run difficulty normal
+
+execute if score 随机晚上 随机日 matches 550..600 run difficulty hard
+
+execute if score 随机晚上 随机日 matches 900..950 run difficulty hard
+
+
+#设定极夜长度 2-4天 48到96分钟之间
+execute if score 随机晚上 随机日 matches 900..950 run scoreboard players random 极夜 极夜 57600 115200
+
+#血月
+
+execute if score 随机晚上 随机日 matches 550..600 run fog @a push minecraft:fog_crimson_forest 血月
+
+

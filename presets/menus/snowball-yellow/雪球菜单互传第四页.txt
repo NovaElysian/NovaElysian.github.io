@@ -1,0 +1,178 @@
+#接着连锁
+
+
+execute as @a[rx=-85,rxm=-90,scores={菜单=58..71}] at @s run scoreboard players set @s 菜单 300
+
+execute as @a[scores={菜单=300},rx=-85,rxm=-90] at @s run tp @s ~~~ ~~120
+
+execute as @a[scores={菜单=240..260}] at @s run playsound random.click @s ~ ~ ~ 1 5.5 1
+
+
+execute as @a[scores={菜单=300..310}] at @s run titleraw @s actionbar {"rawtext":[{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..300}]"},{"selector":"@s[scores={菜单=..301}]"},{"selector":"@s[scores={菜单=..302}]"},{"selector":"@s[scores={菜单=..303}]"},{"selector":"@s[scores={菜单=..304}]"},{"selector":"@s[scores={菜单=..305}]"},{"selector":"@s[scores={菜单=..306}]"},{"selector":"@s[scores={菜单=..307}]"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7        <〈 多维☫传送 〉>§r\n§7        <〈 金币☫转账 〉>\n§7     §o§6▎§e▎▎ §r§f<〈 玩家☫互传 〉> §o§e▎▎§6▎§r\n§7        <〈 锚点☫传送 〉>\n§7        <〈 其他☫功能 〉>\n\n§f ◇----------------------------◇ \n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n        <〈 多维☫传送 〉>§r\n§7        <〈 金币☫转账 〉>\n§7     §o§6▎§e▎▎ §r§f<〈 玩家☫互传 〉> §o§e▎▎§6▎§r\n§7        <〈 锚点☫传送 〉>\n§7        <〈 其他☫功能 〉>\n\n§f ◇----------------------------◇ \n\n\n\n\n"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7        <〈 多维☫传送 〉>\n§7        <〈 金币☫转账 〉>\n§7     §o§6▎§e▎▎ §r§f<〈 玩家☫互传 〉> §o§e▎▎§6▎§r\n§7        <〈 锚点☫传送 〉>\n§7        <〈 其他☫功能 〉>\n\n\n\n"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7        <〈 多维☫传送 〉>\n§7        <〈 金币☫转账 〉>\n§7     §o§6▎§e▎▎ §r§f<〈 玩家☫互传 〉> §o§e▎▎§6▎§r\n§7        <〈 锚点☫传送 〉>\n\n\n"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7        <〈 多维☫传送 〉>\n§7        <〈 金币☫转账 〉>\n§7     §o§6▎§e▎▎ §r§f<〈 玩家☫互传 〉> §o§e▎▎§6▎§r\n\n"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7        <〈 多维☫传送 〉>\n§7        <〈 金币☫转账 〉>\n\n"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7        <〈 多维☫传送 〉>"},{"text":"         §e✿§f雪球 菜单§e✿\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n"},{"translate":"%%4","with":{"rawtext":[{"selector":"@s[scores={菜单=..308}]"},{"selector":"@s[scores={菜单=..309}]"},{"selector":"@s[scores={菜单=..310}]"},{"text":"         §e✿§f雪球 菜单§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"         §e✿§f雪球 菜单§e✿           "},{"text":"                             "}]}}]}}]}
+
+execute as @a[scores={菜单=311..320}] at @s run titleraw @s actionbar {"rawtext":[{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..311}]"},{"selector":"@s[scores={菜单=..312}]"},{"selector":"@s[scores={菜单=..313}]"},{"selector":"@s[scores={菜单=..314}]"},{"selector":"@s[scores={菜单=..315}]"},{"selector":"@s[scores={菜单=..316}]"},{"selector":"@s[scores={菜单=..317}]"},{"selector":"@s[scores={菜单=..318}]"},{"text":"         §e✿§f玩家 互传§e✿           "},{"text":"         §e✿§f玩家 互传§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"         §e✿§f玩家 互传§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n"},{"text":"         §e✿§f玩家 互传§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7  ▶▶➤"},{"text":"         §e✿§f玩家 互传§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7  ▶▶➤\n§7  ▶▶➤"},{"text":"         §e✿§f玩家 互传§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7  ▶▶➤\n§7  ▶▶➤\n§7  ▶▶➤"},{"text":"         §e✿§f玩家 互传§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7  ▶▶➤\n§7  ▶▶➤\n§7  ▶▶➤\n§7  ▶▶➤\n"},{"text":"         §e✿§f玩家 互传§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7  ▶▶➤\n§7  ▶▶➤\n§7  ▶▶➤\n§7  ▶▶➤\n§7  ▶▶➤\n\n  §f刷新玩家           刷新列表\n"},{"translate":"%%3","with":{"rawtext":[{"selector":"@s[scores={菜单=..319}]"},{"selector":"@s[scores={菜单=..320}]"},{"text":"         §e✿§f玩家 互传§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7  ▶▶➤\n§7  ▶▶➤\n§7  ▶▶➤\n§7  ▶▶➤\n§7  ▶▶➤\n\n  §f刷新玩家           刷新列表\n\n§f ◇----------------------------◇ "},{"text":"         §e✿§f玩家 互传§e✿           \n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷\n§f ◇----------------------------◇ \n\n§7  ▶▶➤\n§7  ▶▶➤\n§7  ▶▶➤\n§7  ▶▶➤\n§7  ▶▶➤\n\n  §f刷新玩家           刷新列表\n\n§f ◇----------------------------◇  \n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n\n\n"}]}}]}}]}
+
+
+execute as @a[scores={菜单=321}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f玩家 互传§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=1}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=2}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=3}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=4}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=5}]"},{"text":"\n\n  §f刷新玩家           刷新列表"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=322}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f玩家 互传§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§6  ▶▶➤ §f"},{"selector":"@a[scores={TPAUID=1}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=2}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=3}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=4}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=5}]"},{"text":"\n\n  §f刷新玩家           刷新列表"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=323}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f玩家 互传§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=1}]"},{"text":"\n§6  ▶▶➤ §f"},{"selector":"@a[scores={TPAUID=2}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=3}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=4}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=5}]"},{"text":"\n\n  §f刷新玩家           刷新列表"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=324}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f玩家 互传§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=1}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=2}]"},{"text":"\n§6  ▶▶➤ §f"},{"selector":"@a[scores={TPAUID=3}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=4}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=5}]"},{"text":"\n\n  §f刷新玩家           刷新列表"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+
+execute as @a[scores={菜单=325}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f玩家 互传§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=1}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=2}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=3}]"},{"text":"\n§6  ▶▶➤ §f"},{"selector":"@a[scores={TPAUID=4}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=5}]"},{"text":"\n\n  §f刷新玩家           刷新列表"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+
+execute as @a[scores={菜单=326}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f玩家 互传§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=1}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=2}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=3}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=4}]"},{"text":"\n§6  ▶▶➤ §f"},{"selector":"@a[scores={TPAUID=5}]"},{"text":"\n\n  §f刷新玩家           刷新列表"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+
+execute as @a[scores={菜单=327..328}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f玩家 互传§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n\n"},{"text":"§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=1}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=2}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=3}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=4}]"},{"text":"\n§7  ▶▶➤ "},{"selector":"@a[scores={TPAUID=5}]"},{"translate":"%%3","with":{"rawtext":[{"selector":"@s[scores={菜单=..327}]"},{"selector":"@s[scores={菜单=..328}]"},{"text":"\n\n  §e刷新玩家           §f刷新列表"},{"text":"\n\n  §f刷新玩家           §e刷新列表"}]}},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §e◇---§g----§p----§6--§e--§6--§p----§g----§e---◇ "},{"text":" §g◇---§p----§6----§e--§g--§e--§6----§p----§g---◇ "},{"text":" §p◇---§6----§e----§g--§p--§g--§e----§6----§p---◇ "},{"text":" §6◇---§e----§g----§p--§6--§p--§g----§e----§6---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @a[scores={菜单=330}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §e✿§f玩家 互传§e✿"},{"text":"\n    §e◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§e ｝▷"},{"text":"\n§f ◇----------------------------◇ "},{"text":"\n\n§a  申请传送中\n  §c30s后自动取消\n  §e可以扔出雪球取消传送"},{"text":"\n\n§f ◇----------------------------◇ "},{"text":"\n\n\n"}]}
+
+
+execute as @a[scores={菜单=329}] at @s run scoreboard players set @s 菜单 322
+
+execute as @a[scores={菜单=321..328},rx=90,rxm=85] at @s run scoreboard players set @s 菜单 320
+
+execute as @a[scores={菜单=320},rx=90,rxm=85] at @s run tp @s ~~~ ~ ~-120
+
+execute as @a[scores={菜单=299}] at @s run scoreboard players set @s 菜单 71
+
+
+
+
+#互传部分 单独弄 循环连锁
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90] at @s run scoreboard players operation @s TPAN = @s 菜单
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90] at @s run  scoreboard players remove @s TPAN 321
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90] at @s if score @s TPAN = @s TPAUID run title @s title §c请勿自己传自己
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90] at @s if score @s TPAN = @s TPAUID run tp @s ~~~ facing ~~~
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run tag @s add 检测是否有人
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90,tag=!检测是否有人] at @s run title @s title §c此处没有人可以刷新试试
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90,tag=!检测是否有人] at @s run tp @s ~~~ facing ~~~
+
+tag @a remove 检测是否有人
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPA run title @s title §c有人正在传送此人
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPA run tag @s add 有人正在传送
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90,tag=!有人正在传送] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run tellraw @p {"rawtext":[{"text":"§e〉>> §f"},{"selector":"@a[scores={菜单=322..326},rx=-85,rxm=-90,tag=!有人正在传送]"},{"text":" §e正在对您申请传送 §730S后自动结束"},{"text":"\n§f抬头确认§a✔     §f低头取消§c✘"}]}
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90,tag=!有人正在传送] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run scoreboard players operation @s TPA = @s TPAN
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90,tag=!有人正在传送] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run scoreboard players set @s DTPA 1
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90,tag=!有人正在传送] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run scoreboard players set @p DTPA 1
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90,tag=!有人正在传送] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run scoreboard players set @s TPA计时 600
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90,tag=!有人正在传送] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run scoreboard players set @p TPA计时 600
+
+execute as @a[scores={菜单=322..326},rx=-85,rxm=-90,tag=!有人正在传送] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run scoreboard players set @s 菜单 330
+
+execute as @a[scores={菜单=330},rx=-85,rxm=-90,tag=!有人正在传送] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run scoreboard players reset @s TPAN
+
+tag @a remove 有人正在传送
+
+execute as @a[scores={菜单=330,rx=90,rxm=85}] at @s run scoreboard players set @s 菜单 331
+
+execute as @a[scores={菜单=331}] at @s at @a[rm=0.1] if score @s TPA = @p TPAUID run scoreboard players set @p DTPA 0 
+
+execute as @a[scores={菜单=331}] at @s at @a[rm=0.1] if score @s TPA = @p TPAUID run scoreboard players set @s DTPA 0
+
+execute as @a[scores={菜单=331}] at @s at @a[rm=0.1] if score @s TPA = @p TPAUID run tellraw @p {"rawtext":[{"text":"§e〉>> §c对方已取消传送"}]}
+
+execute as @a[scores={菜单=331}] at @s run scoreboard players reset @s TPA
+
+execute as @a[scores={菜单=331}] at @s run title @s title §c已取消传送
+
+execute as @a[scores={菜单=331}] at @s run scoreboard players set @s 菜单 0
+
+execute as @a[scores={DTPA=1},rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run tellraw @p {"rawtext":[{"text":"§e〉>> §c对方已拒绝传送"}]}
+
+execute as @a[scores={DTPA=1},rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run scoreboard players set @p DTPA 0
+
+execute as @a[scores={DTPA=1},rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run scoreboard players set @p 菜单 331
+
+execute as @a[scores={DTPA=1},rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run scoreboard players set @s DTPA 0
+
+execute as @a[rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run scoreboard players reset @p TPA计时
+
+execute as @a[rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run scoreboard players reset @s TPA
+
+execute as @a[rx=90,rxm=85] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run scoreboard players reset @p TPA
+
+execute as @a[scores={DTPA=1},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run tag @s add 传送成功
+
+execute as @a[scores={DTPA=1},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAUID = @p TPA run tag @p add 传送成功a
+
+execute as @a[tag=传送成功] at @s run scoreboard players reset @s TPA计时
+
+execute as @a[tag=传送成功] at @s run scoreboard players reset @s DTPA
+
+execute as @a[tag=传送成功a] at @s run scoreboard players reset @s TPA计时
+
+execute as @a[tag=传送成功a] at @s run scoreboard players reset @s DTPA
+
+execute as @a[tag=传送成功a] at @s run scoreboard players reset @s TPA
+
+execute as @a[tag=传送成功a] at @s run title @p title §a传送成功
+
+tp @a[tag=传送成功a] @a[tag=传送成功]
+
+execute as @a[tag=传送成功a] at @s run scoreboard players set @s 菜单 0
+
+tag @a remove 传送成功
+
+tag @a remove 传送成功a
+
+scoreboard players remove @a[scores={TPA计时=1..}] TPA计时 1
+
+execute as @a[scores={TPA计时=..1}] at @s run tellraw @s {"rawtext":[{"text":"§e〉>> §c时间已到期"}]}
+
+execute as @a[scores={TPA计时=..1}] at @s run scoreboard players reset @s TPA
+
+execute as @a[scores={TPA计时=..1}] at @s run scoreboard players reset @s DTPA
+
+execute as @a[scores={TPA计时=..1}] at @s run scoreboard players set @s 菜单 0
+
+execute as @a[scores={TPA计时=..1}] at @s run scoreboard players reset @s TPA计时
+
+
+
+
+
+#刷新玩家 断链 单独弄 x+坐标一条线
+
+execute as @a[scores={菜单=327},rx=-85,rxm=-90] run execute as @a[scores={TPA=!1..}] run setblock ~1~~ chain_command_block 5
+
+空
+
+setblock ~-1~~ air
+
+scoreboard players set @a TPAUID 0
+
+scoreboard players set @a TPAUID -1
+
+scoreboard players operation @a TPAUID -= @a TPAUID
+
+scoreboard players add @a TPAUID 1
+
+execute as @a[scores={菜单=286},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~
+
+
+#刷新UID单独弄
+
+execute as @a[scores={菜单=328},rx=-85,rxm=-90] run scoreboard players operation @a[scores={TPAUID=1}] TPAUID >< @a[scores={TPAUID=1..}] TPAUID
+
+execute as @a[scores={菜单=328},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~

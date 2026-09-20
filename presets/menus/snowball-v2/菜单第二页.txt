@@ -1,0 +1,40 @@
+#多维传送
+execute as @a[rx=-85,rxm=-90,scores={菜单=27}] at @s run scoreboard players set @s 菜单 40
+
+execute as @a[rx=-85,rxm=-90,scores={菜单=40}] at @s run tp @s ~~~ facing ~~~
+
+execute as @a[scores={菜单=40..47}] run scoreboard players add @s 菜单 1
+
+execute as @a[scores={菜单=40..47}] at @s run playsound random.click @s ~ ~ ~ 1 5.5 1
+
+#此文件由b站乱写指令的雷狮制作
+
+execute as @a[scores={菜单=40..47}] at @s run titleraw @s actionbar {"rawtext":[{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={菜单=..40}]"},{"selector":"@s[scores={菜单=..41}]"},{"selector":"@s[scores={菜单=..42}]"},{"selector":"@s[scores={菜单=..43}]"},{"selector":"@s[scores={菜单=..44}]"},{"selector":"@s[scores={菜单=..45}]"},{"selector":"@s[scores={菜单=..46}]"},{"selector":"@s[scores={菜单=..47}]"},{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n\n\n\n"},{"text":"\n\n\n\n\n\n"},{"text":"\n\n\n\n\n"},{"text":"\n\n\n"}]}},{"text":"         §b✿§f多维 传送§b✿"},{"text":"\n    §b◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§b ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §b◇---§s----§3----§9--§b--§9--§3----§s----§b---◇ "},{"text":" §s◇---§3----§9----§b--§s--§b--§9----§3----§s---◇ "},{"text":" §3◇---§9----§b----§s--§3--§s--§b----§9----§3---◇ "},{"text":" §9◇---§b----§s----§3--§9--§3--§s----§b----§9---◇ "}]}},{"text":"\n\n"},{"text":"  §7┃ 回到主城 §r\n §7 ┃ §7前往商店\n §7 ┃ §7自己设置\n §7 ┃ §7自己设置\n §7 ┃ §7指令区域"},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §b◇---§s----§3----§9--§b--§9--§3----§s----§b---◇ "},{"text":" §s◇---§3----§9----§b--§s--§b--§9----§3----§s---◇ "},{"text":" §3◇---§9----§b----§s--§3--§s--§b----§9----§3---◇ "},{"text":" §9◇---§b----§s----§3--§9--§3--§s----§b----§9---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n"}]}
+
+execute as @e[type=snowball] at @s run scoreboard players add @p[r=2,rx=60,rxm=0,scores={菜单=48..53}] 菜单 1
+
+execute as @e[type=snowball] at @s run scoreboard players remove @p[r=2,rx=0,rxm=-60,scores={菜单=49..53}] 菜单 1
+
+execute as @e[type=snowball] at @s run scoreboard players set @p[r=2,rx=0,rxm=-60,scores={菜单=48}] 菜单 53
+
+execute as @a[scores={菜单=54..59}] at @s run scoreboard players set @s 菜单 49
+
+execute as @a[rx=90,rxm=85,scores={菜单=48..53}] at @s run scoreboard players set @s 菜单 27
+
+#有条件
+execute as @a[rx=90,rxm=85,scores={菜单=27}] at @s run tp @s ~~~ facing ~~~
+
+execute as @a[scores={菜单=48..53}] at @s run titleraw @s actionbar {"rawtext":[{"text":"         §b✿§f多维 传送§b✿"},{"text":"\n    §b◁｛§f§l Ｓｎｏｗｂａｌｌ Ｍｅｎｕ§r§b ｝▷"},{"text":"\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §b◇---§s----§3----§9--§b--§9--§3----§s----§b---◇ "},{"text":" §s◇---§3----§9----§b--§s--§b--§9----§3----§s---◇ "},{"text":" §3◇---§9----§b----§s--§3--§s--§b----§9----§3---◇ "},{"text":" §9◇---§b----§s----§3--§9--§3--§s----§b----§9---◇ "}]}},{"text":"\n\n"},{"translate":"%%7","with":{"rawtext":[{"selector":"@s[scores={菜单=..48}]"},{"selector":"@s[scores={菜单=..49}]"},{"selector":"@s[scores={菜单=..50}]"},{"selector":"@s[scores={菜单=..51}]"},{"selector":"@s[scores={菜单=..52}]"},{"selector":"@s[scores={菜单=..53}]"},{"text":"  §7┃ 回到主城 §r\n §7 ┃ §7前往商店\n §7 ┃ §7自己设置\n §7 ┃ §7自己设置\n §7 ┃ §7指令区域"},{"text":"  §9┃ §f回到主城 〉>  §f一〈§bｓｐａｗｎ§f〉一§r \n §7 ┃ §7前往商店\n §7 ┃ §7自己设置\n §7 ┃ §7自己设置\n §7 ┃ §7指令区域"},{"text":"  §7┃ 回到主城 §r\n  §9┃ §f前往商店 〉>  §f一〈§bｓｈｏｐ§f〉一§r \n §7 ┃ §7自己设置\n §7 ┃ §7自己设置\n §7 ┃ §7指令区域"},{"text":"  §7┃ 回到主城 §r\n §7 ┃ §7前往商店\n  §9┃ §f自己设置 〉>  §f一〈§bｏｐｓｅｔ§f〉一§r \n §7 ┃ §7自己设置\n §7 ┃ §7指令区域"},{"text":"  §7┃ 回到主城 §r\n §7 ┃ §7前往商店\n §7 ┃ §7自己设置\n  §9┃ §f自己设置 〉>  §f一〈§bｏｐｓｅｔ§f〉一§r \n §7 ┃ §7指令区域"},{"text":"  §7┃ 回到主城 §r\n §7 ┃ §7前往商店\n §7 ┃ §7自己设置\n §7 ┃ §7自己设置\n  §9┃ §f指令区域 〉>  §f一〈§bｃｏｍｍａｎｄ§f〉一§r "}]}},{"text":"\n\n"},{"translate":"%%5","with":{"rawtext":[{"selector":"@s[scores={彩色字=..1}]"},{"selector":"@s[scores={彩色字=..2}]"},{"selector":"@s[scores={彩色字=..3}]"},{"selector":"@s[scores={彩色字=..4}]"},{"text":" §b◇---§s----§3----§9--§b--§9--§3----§s----§b---◇ "},{"text":" §s◇---§3----§9----§b--§s--§b--§9----§3----§s---◇ "},{"text":" §3◇---§9----§b----§s--§3--§s--§b----§9----§3---◇ "},{"text":" §9◇---§b----§s----§3--§9--§3--§s----§b----§9---◇ "}]}},{"text":"\n§7  抬头确认    §f━●━§7    低头返回\n\n\n\n\n\n\n\n"}]}
+
+#此文件由星月牙月制作3122191515
+execute as @a[rx=-85,rxm=-90,scores={菜单=49}] at @s run tp 主城
+
+execute as @a[rx=-85,rxm=-90,scores={菜单=50}] at @s run tp 商店
+
+execute as @a[rx=-85,rxm=-90,scores={菜单=51}] at @s run tp 自定义
+
+execute as @a[rx=-85,rxm=-90,scores={菜单=52}] at @s run tp 自定义
+
+execute as @a[rx=-85,rxm=-90,scores={菜单=53},tag=op] at @s run tp 指令
+
+execute as @a[rx=-85,rxm=-90,scores={菜单=49..53}] at @s run tp @s ~~~ facing ~~~

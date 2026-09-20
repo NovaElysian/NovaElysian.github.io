@@ -1,0 +1,14 @@
+#前台 创建地皮的位置要高一点
+
+#创建地皮
+tag @p[tag=!已经创建] add 创建地皮
+
+tag @a[tag=创建地皮] add 已经创建
+
+execute as @a[tag=创建地皮] at @s run tp @s 创建地皮的位置
+
+
+#回到地皮
+tag @p[tag=已经创建] add 回到地皮
+
+execute as @a[tag=回到地皮] at @s run tp @s 创建地皮的位置

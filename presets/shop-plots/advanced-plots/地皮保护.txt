@@ -1,0 +1,226 @@
+#初始化
+#循环 后面全连锁
+
+scoreboard objectives add 数据检测 dummy
+
+scoreboard objectives add 数据判定 dummy
+
+scoreboard objectives add 进入地皮 dummy
+
+scoreboard players add @a 数据检测 0
+
+scoreboard players add @a 数据判定 0
+
+#UID设置
+#循环循环后面连锁
+scoreboard objectives add uid dummy
+
+execute as @r if score @s uid matches 0 run scoreboard players add uid uid 1
+
+execute as @r if score @s uid matches 0 run scoreboard players operation @s uid = uid uid
+
+scoreboard players add @a uid 0
+
+
+#地皮验证
+#循环 后面连锁
+execute as @a[scores={数据检测=1..}] at @s unless block ~ 91 ~ allow run scoreboard players set @s 数据检测 0
+
+execute as @a[scores={数据检测=0}] at @s if block ~ 91 ~ allow run tag @s add 地皮验证
+
+execute as @a at @s unless block ~ 91 ~ allow run tag @s remove 地皮验证
+
+
+
+#进入地皮欢迎
+#循环后面连锁
+execute as @a[scores={数据检测=1}] at @s if block ~ 91 ~ allow run scoreboard players add @s 进入地皮 1
+
+execute as @a[scores={进入地皮=1}] run tellraw @s {"rawtext":[{"text":"§a┃ §f欢迎主人回家"}]}
+
+execute as @a at @s unless block ~ 91 ~ allow run scoreboard players reset @s 进入地皮
+
+
+
+
+#正片开始 这里需要看视频教程
+#################################
+
+#数据写入
+
+execute as @e[name=防护检测] run clone ~~1~ ~~1~ ~1~~
+
+空一格
+
+setblock ~-1~~ air
+
+execute as @e[name=防护检测] at @s if score @s uid matches 16384.. run replaceitem block ~ ~-1 ~ slot.container 0 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 16384.. run scoreboard players remove @s uid 16384
+
+execute as @e[name=防护检测] at @s if score @s uid matches 8192.. run replaceitem block ~ ~-1 ~ slot.container 1 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 8192.. run scoreboard players remove @s uid 8192
+
+execute as @e[name=防护检测] at @s if score @s uid matches 4096.. run replaceitem block ~ ~-1 ~ slot.container 2 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 4096.. run scoreboard players remove @s uid 4096
+
+execute as @e[name=防护检测] at @s if score @s uid matches 2048.. run replaceitem block ~ ~-1 ~ slot.container 3 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 2048.. run scoreboard players remove @s uid 2048
+
+execute as @e[name=防护检测] at @s if score @s uid matches 1024.. run replaceitem block ~ ~-1 ~ slot.container 4 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 1024.. run scoreboard players remove @s uid 1024
+
+execute as @e[name=防护检测] at @s if score @s uid matches 512.. run replaceitem block ~ ~-1 ~ slot.container 5 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 512.. run scoreboard players remove @s uid 512
+
+execute as @e[name=防护检测] at @s if score @s uid matches 256.. run replaceitem block ~ ~-1 ~ slot.container 6 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 256.. run scoreboard players remove @s uid 256
+
+execute as @e[name=防护检测] at @s if score @s uid matches 128.. run replaceitem block ~ ~-1 ~ slot.container 7 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 128.. run scoreboard players remove @s uid 128
+
+execute as @e[name=防护检测] at @s if score @s uid matches 64.. run replaceitem block ~ ~-1 ~ slot.container 8 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 64.. run scoreboard players remove @s uid 64
+
+execute as @e[name=防护检测] at @s if score @s uid matches 32.. run replaceitem block ~ ~-1 ~ slot.container 9 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 32.. run scoreboard players remove @s uid 32
+
+execute as @e[name=防护检测] at @s if score @s uid matches 16.. run replaceitem block ~ ~-1 ~ slot.container 10 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 16.. run scoreboard players remove @s uid 16
+
+execute as @e[name=防护检测] at @s if score @s uid matches 8.. run replaceitem block ~ ~-1 ~ slot.container 11 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 8.. run scoreboard players remove @s uid 8
+
+execute as @e[name=防护检测] at @s if score @s uid matches 4.. run replaceitem block ~ ~-1 ~ slot.container 12 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 4.. run scoreboard players remove @s uid 4
+
+execute as @e[name=防护检测] at @s if score @s uid matches 2.. run replaceitem block ~ ~-1 ~ slot.container 13 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 2.. run scoreboard players remove @s uid 2
+
+execute as @e[name=防护检测] at @s if score @s uid matches 1.. run replaceitem block ~ ~-1 ~ slot.container 14 air 1 0
+
+#有条件
+execute as @e[name=防护检测] at @s if score @s uid matches 1.. run scoreboard players remove @s uid 1
+
+execute as @e[name=防护检测] at @s if score @s uid matches ..0 run structure load 地皮检测 ~ 86 ~
+
+execute as @e[name=防护检测] at @s if score @s uid matches ..0 run kill @s
+
+
+
+
+
+#数据读取部分
+
+execute as @e[name=数据读取] run clone ~~1~ ~~1~ ~1~~
+
+空
+
+setblock ~-1~~ air
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 0 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 16384
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 1 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 8192
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 2 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 4096
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 3 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 2048
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 4 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 1024
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 5 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 512
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 6 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 256
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 7 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 128
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 8 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 64
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 9 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 32
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 10 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 16
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 11 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 8
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 12 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 4
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 13 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 2
+
+execute as @e[name=数据读取] at @s run replaceitem block ~ ~-1 ~ slot.container 14 keep air 1 0
+
+#有条件
+execute as @e[name=数据读取] at @s run scoreboard players add @s 数据检测 1
+
+execute as @e[name=数据读取] at @s at @a[rm=0.1,x=~,y=~,z=~,dx=50,dy=100,dz=50] if score @s 数据检测 = @p uid run scoreboard players set @p 数据检测 1
+
+execute as @e[name=数据读取] at @s positioned ~ 91 ~ at @p[x=~,y=~,z=~,dx=50,dy=100,dz=50,scores={数据检测=0}] run tp @p ^^^-1
+execute as @e[name=数据读取] at @s run kill @s

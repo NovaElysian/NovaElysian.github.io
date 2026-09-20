@@ -1,0 +1,33 @@
+#备注:只有三处地方需要调 分别是#2,#6,#7
+
+
+
+#1.在聊天框输入这段指令
+/scoreboard objectives add 撤离 dummy
+
+
+#主体部分
+
+#2.循环保持无条件 延迟建议10 可随便调
+execute as @a at @s if block ~ ~ ~ lime_carpet run scoreboard players add @s 撤离 1
+
+#3.循环保持无条件无延迟
+execute as @a[scores={撤离=1..9}] at @s unless block ~ ~ ~ green_carpet run titleraw @s actionbar {"rawtext":[{"text":"┏                                ┓\n"},{"text":"    §c请勿离开撤离点进度已重置"},{"text":"\n§f┗                                ┛"}]}
+
+#4.连锁保持无条件
+execute as @a[scores={撤离=1..}] at @s unless block ~ ~ ~ lime_carpet run scoreboard players set @s 撤离 0
+
+#5.连锁保持无条件
+execute as @a[scores={撤离=1..}] at @s run titleraw @s actionbar {"rawtext":[{"text":"┏                                ┓\n"},{"translate":"%%9","with":{"rawtext":[{"selector":"@s[scores={撤离=..1}]"},{"selector":"@s[scores={撤离=..2}]"},{"selector":"@s[scores={撤离=..3}]"},{"selector":"@s[scores={撤离=..4}]"},{"selector":"@s[scores={撤离=..5}]"},{"selector":"@s[scores={撤离=..6}]"},{"selector":"@s[scores={撤离=..7}]"},{"selector":"@s[scores={撤离=..8}]"},{"text":" §a撤离中: §f\n §aࡇࡇ§fࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ"},{"text":" §a撤离中: §f\n §aࡇࡇࡇࡇ§fࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ"},{"text":" §a撤离中: §f\n §aࡇࡇࡇࡇࡇࡇ§fࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ"},{"text":" §a撤离中: §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇ§fࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ"},{"text":" §a撤离中: §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ§fࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ"},{"text":" §a撤离中: §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ§fࡇࡇࡇࡇࡇࡇࡇࡇ"},{"text":" §a撤离中: §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ§fࡇࡇࡇࡇࡇࡇ"},{"text":" §a撤离中: §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ§fࡇࡇࡇࡇ"},{"translate":"%%3","with":{"rawtext":[{"selector":"@s[scores={撤离=..9}]"},{"selector":"@s[scores={撤离=..10}]"},{"text":" §a撤离中: §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ§fࡇࡇ"},{"text":" §a撤离成功 §f\n §aࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇࡇ"}]}}]}},{"text":"\n\n§f┗                                ┛"}]}
+
+#6.连锁保持无条件 撤离成功后tp回主城（自己设置）
+execute as @a[scores={撤离=10..}] at @s run tp 位置
+
+
+
+#音效部分 可加可不加
+#7.循环保持无条件 跟#2指令部分设置成一样的延迟
+execute as @a[scores={撤离=1..9}] at @s run playsound random.orb @s
+
+#8.循环保持无条件
+execute as @a[scores={撤离=10..}] at @s run playsound random.levelup @s

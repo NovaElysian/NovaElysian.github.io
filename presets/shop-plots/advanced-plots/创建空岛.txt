@@ -1,0 +1,163 @@
+#初始化
+scoreboard objectives add 后台地皮 dummy
+
+scoreboard objectives add 玩家x dummy
+
+scoreboard objectives add 玩家z dummy
+
+scoreboard objectives add 传送x dummy
+
+scoreboard objectives add 传送z dummy
+
+scoreboard players add x 后台地皮 0
+
+scoreboard players add z 后台地皮 0
+
+scoreboard players add b 后台地皮 0
+
+#玩家初始化
+
+scoreboard players add @a 玩家x 0
+
+scoreboard players add @a 玩家z 0
+
+scoreboard players add @a 传送x 0
+
+scoreboard players add @a 传送z 0
+
+
+
+
+#地皮生成公式#看视频学
+
+execute if entity @a[tag=创建地皮] run tag @a[tag=创建地皮] add 传送地皮
+
+execute if entity @a[tag=创建地皮] run clone ~~1~ ~~1~ ~1~~
+
+空
+
+setblock ~-1~~ air
+
+scoreboard players operation b 后台地皮 = x 后台地皮
+
+scoreboard players operation b 后台地皮 -= z 后台地皮
+
+execute if score b 后台地皮 matches ..0 run scoreboard players add x 后台地皮 1
+
+
+execute if score b 后台地皮 matches ..0 run scoreboard players add x 后台地皮 1
+
+execute if score b 后台地皮 matches 0 run scoreboard players set z 后台地皮 0
+
+execute if score b 后台地皮 matches !0 run scoreboard players operation x 后台地皮 >< z 后台地皮
+
+execute as @a[tag=创建地皮] at @s run scoreboard players operation @s 玩家x = x 后台地皮
+
+execute as @a[tag=创建地皮] at @s run scoreboard players operation @s 玩家z = z 后台地皮
+
+execute as @a[tag=创建地皮] at @s run scoreboard players operation @s 传送x = x 后台地皮
+
+execute as @a[tag=创建地皮] at @s run scoreboard players operation @s 传送z = z 后台地皮
+
+execute as @a[tag=创建地皮] at @s run titleraw @s title {"rawtext":[{"text":"§a§l创建成功"}]}
+
+execute as @a[tag=创建地皮] at @s run titleraw @s subtitle {"rawtext":[{"text":"§a地皮编号§f：( §e"},{"score":{"objective":"玩家x","name":"@s"}},{"text":" §f, §e"},{"score":{"objective":"玩家z","name":"@s"}},{"text":"§f )\n\n"}]}
+
+execute as @a[tag=创建地皮] at @s run tp 1031 120 1031
+
+effect @a[tag=创建地皮] slow_falling 10 3
+
+execute as @a[tag=创建地皮] at @s run tag @s add 传送
+
+tag @a remove 创建地皮
+
+
+
+
+#回到地皮
+
+execute if entity @a[tag=回到地皮] run clone ~~1~ ~~1~ ~1~~
+
+#空
+
+setblock ~-1~~ air
+
+execute as @a[tag=回到地皮] at @s run scoreboard players operation @s 玩家x = @s 传送x
+
+execute as @a[tag=回到地皮] at @s run scoreboard players operation @s 玩家z = @s 传送z
+
+execute as @a[tag=回到地皮] at @s run tp 1031 120 1031
+
+execute as @a[tag=回到地皮] at @s run title @s title §a回到家咯
+
+execute as @a[tag=回到地皮] at @s run tag @s add 传送
+
+tag @a remove 回到地皮
+
+
+
+#自闭链传送 必看视频
+
+execute as @a[tag=传送] run clone ~~1~ ~~1~ ~1~~
+
+空 下面 setblock ~~1~ air
+
+tag @a remove 传送
+
+execute as @a at @s if score @s 玩家x matches 1000.. run tp ~64000~~
+
+#有条件
+execute as @a at @s if score @s 玩家x matches 1000.. run scoreboard players remove @s 玩家x 1000
+
+execute as @a at @s if score @s 玩家x matches 100.. run tp ~6400~~
+
+#有条件
+execute as @a at @s if score @s 玩家x matches 100.. run scoreboard players remove @s 玩家x 100
+
+execute as @a at @s if score @s 玩家x matches 10.. run tp ~640~~
+
+#有条件
+execute as @a at @s if score @s 玩家x matches 10.. run scoreboard players remove @s 玩家x 10
+
+execute as @a at @s if score @s 玩家x matches 1.. run tp ~64~~
+
+#有条件
+execute as @a at @s if score @s 玩家x matches 1.. run scoreboard players remove @s 玩家x 1
+
+execute as @a at @s if score @s 玩家z matches 1000.. run tp ~~~64000
+
+#有条件
+execute as @a at @s if score @s 玩家z matches 1000.. run scoreboard players remove @s 玩家z 1000
+
+execute as @a at @s if score @s 玩家z matches 100.. run tp ~~~6400
+
+#有条件
+execute as @a at @s if score @s 玩家z matches 100.. run scoreboard players remove @s 玩家z 100
+
+execute as @a at @s if score @s 玩家z matches 10.. run tp ~~~640
+
+#有条件
+execute as @a at @s if score @s 玩家z matches 10.. run scoreboard players remove @s 玩家z 10
+
+execute as @a at @s if score @s 玩家z matches 1.. run tp ~~~64
+
+#有条件
+execute as @a at @s if score @s 玩家z matches 1.. run scoreboard players remove @s 玩家z 1
+
+execute as @a[tag=传送地皮,scores={玩家z=0,玩家x=0}] at @s run structure load 地皮 ~-31 91 ~-31
+
+execute as @a unless entity @s[scores={玩家x=!1..,玩家z=!1..}] run structure load 地皮传送 ~~~
+
+
+
+
+#结构
+
+#地皮检测
+
+execute positioned ~ 91 ~ as @a[x=~,y=~,z=~,dx=50,dy=100,dz=50,tag=地皮验证,scores={数据检测=0}] unless entity @e[name=数据读取,r=10,c=1] positioned ~ 89 ~ run summon armor_stand 数据读取 ~ ~ ~
+
+
+#数据箱
+
+/give @s name_tag 64 520

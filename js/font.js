@@ -1,1 +1,168 @@
-!function(){let t={},e={};const o={};function n(e){if(" "===e)return 8;const o=t[e];return o&&Array.isArray(o)?o[1]:16}function r(t){return new Promise(o=>{if(void 0===e[t])if(window.bedrockFontData&&window.bedrockFontData[t]){const n=new Image;n.onload=()=>{e[t]=n,o(n)},n.onerror=()=>{e[t]=null,o(null)},n.src=window.bedrockFontData[t]}else e[t]=null,o(null);else o(e[t])})}window.App.font={colorMap:{0:"#000000",1:"#0000AA",2:"#00AA00",3:"#00AAAA",4:"#AA0000",5:"#AA00AA",6:"#FFAA00",7:"#AAAAAA",8:"#555555",9:"#5555FF",a:"#55FF55",b:"#55FFFF",c:"#FF5555",d:"#FF55FF",e:"#FFFF55",f:"#FFFFFF",g:"#DDD605",h:"#E3D4D1",i:"#CECACA",j:"#443A3B",m:"#971607",n:"#B4684D",p:"#DEB12D",q:"#47A036",s:"#2CBAA8",t:"#21497B",u:"#9A5CC6"},getShadowColor:function(t){let e=Math.floor(parseInt(t.substr(1,2),16)/4),o=Math.floor(parseInt(t.substr(3,2),16)/4),n=Math.floor(parseInt(t.substr(5,2),16)/4);return`#${e.toString(16).padStart(2,"0")}${o.toString(16).padStart(2,"0")}${n.toString(16).padStart(2,"0")}`},loadWidths:async function(){"undefined"!=typeof window.bedrockWidths?t=window.bedrockWidths:console.error("未能加载 bedrock_widths.js"),void 0===window.bedrockFontData&&console.error("致命错误：未能加载 font_base64.js，字体图片数据为空！")},getCharWidth:n,getCharOffset:function(e){if(" "===e)return 0;const o=t[e];return o&&Array.isArray(o)?o[0]:0},getGlyphImage:r,preloadImagesForText:async function(t){const e=[];for(let o=0;o<t.length;o++){const n=t.charCodeAt(o);if(10===n||"§"===t[o])continue;let a=n.toString(16).toUpperCase().padStart(4,"0");e.push(r(a.substring(0,2)))}await Promise.all(e)},getCachedTintedGlyph:function(t,e,n,r,a,i){const s=`${a}_${i}_${e}`;if(o[s])return o[s];const l=document.createElement("canvas");l.width=16,l.height=16;const c=l.getContext("2d");return c.imageSmoothingEnabled=!1,c.drawImage(t,n,r,16,16,0,0,16,16),"#ffffff"!==e.toLowerCase()&&(c.globalCompositeOperation="source-in",c.fillStyle=e,c.fillRect(0,0,16,16)),o[s]=l,l},measureTextWidth:function(t,e){let o=0,r=e;for(let e=0;e<t.length;e++){if("§"===t[e]&&e+1<t.length){const o=t[e+1].toLowerCase();"l"===o?r=!0:"r"===o&&(r=!1),e++;continue}const a=t[e];o+=n(a)+(" "===a?0:2),r&&(o+=1)}return o},getFinalBoldState:function(t,e){let o=e;for(let e=0;e<t.length;e++)if("§"===t[e]&&e+1<t.length){const n=t[e+1].toLowerCase();"l"===n?o=!0:"r"===n&&(o=!1),e++}return o},get loadedImages(){return e}}}();
+(function() {
+    let t = {};
+    let e = {};
+    const o = {};
+
+    function n(e) {
+        if (e === " ") {
+            return 8;
+        }
+        const o = t[e];
+        if (o && Array.isArray(o)) {
+            return o[1];
+        } else {
+            return 16;
+        }
+    }
+
+    function r(t) {
+        return new Promise(o => {
+            if (e[t] === undefined) {
+                // 直接从外部独立图片目录按需异步加载（例如 data/fonts/00.png）
+                const n = new Image();
+                n.onload = () => {
+                    e[t] = n;
+                    o(n);
+                };
+                n.onerror = () => {
+                    console.error(`未能加载字体纹理文件: data/fonts/${t}.png`);
+                    e[t] = null;
+                    o(null);
+                };
+                // 指向外部独立的图片资源路径
+                n.src = `data/fonts/${t}.png`;
+            } else {
+                o(e[t]);
+            }
+        });
+    }
+    window.App.font = {
+        colorMap: {
+            0: "#000000",
+            1: "#0000AA",
+            2: "#00AA00",
+            3: "#00AAAA",
+            4: "#AA0000",
+            5: "#AA00AA",
+            6: "#FFAA00",
+            7: "#AAAAAA",
+            8: "#555555",
+            9: "#5555FF",
+            a: "#55FF55",
+            b: "#55FFFF",
+            c: "#FF5555",
+            d: "#FF55FF",
+            e: "#FFFF55",
+            f: "#FFFFFF",
+            g: "#DDD605",
+            h: "#E3D4D1",
+            i: "#CECACA",
+            j: "#443A3B",
+            m: "#971607",
+            n: "#B4684D",
+            p: "#DEB12D",
+            q: "#47A036",
+            s: "#2CBAA8",
+            t: "#21497B",
+            u: "#9A5CC6"
+        },
+        getShadowColor: function(t) {
+            let e = Math.floor(parseInt(t.substr(1, 2), 16) / 4);
+            let o = Math.floor(parseInt(t.substr(3, 2), 16) / 4);
+            let n = Math.floor(parseInt(t.substr(5, 2), 16) / 4);
+            return `#${e.toString(16).padStart(2, "0")}${o.toString(16).padStart(2, "0")}${n.toString(16).padStart(2, "0")}`;
+        },
+        loadWidths: async function() {
+            if (typeof bedrockWidths != "undefined") {
+                t = bedrockWidths;
+            } else {
+                console.error("未能加载 bedrock_widths.js");
+            }
+            // 已彻底摆脱 font_base64.js 的同步阻塞，实现纯外链异步加载
+        },
+        getCharWidth: n,
+        getCharOffset: function(e) {
+            if (e === " ") {
+                return 0;
+            }
+            const o = t[e];
+            if (o && Array.isArray(o)) {
+                return o[0];
+            } else {
+                return 0;
+            }
+        },
+        getGlyphImage: r,
+        preloadImagesForText: async function(t) {
+            const e = [];
+            for (let o = 0; o < t.length; o++) {
+                const n = t.charCodeAt(o);
+                if (n === 10 || t[o] === "§") {
+                    continue;
+                }
+                let a = n.toString(16).toUpperCase().padStart(4, "0");
+                e.push(r(a.substring(0, 2)));
+            }
+            await Promise.all(e);
+        },
+        getCachedTintedGlyph: function(t, e, n, r, a, i) {
+            const s = `${a}_${i}_${e}`;
+            if (o[s]) {
+                return o[s];
+            }
+            const l = document.createElement("canvas");
+            l.width = 16;
+            l.height = 16;
+            const c = l.getContext("2d");
+            c.imageSmoothingEnabled = false;
+            c.drawImage(t, n, r, 16, 16, 0, 0, 16, 16);
+            if (e.toLowerCase() !== "#ffffff") {
+                c.globalCompositeOperation = "source-in";
+                c.fillStyle = e;
+                c.fillRect(0, 0, 16, 16);
+            }
+            o[s] = l;
+            return l;
+        },
+        measureTextWidth: function(t, e) {
+            let o = 0;
+            let r = e;
+            for (let e = 0; e < t.length; e++) {
+                if (t[e] === "§" && e + 1 < t.length) {
+                    const o = t[e + 1].toLowerCase();
+                    if (o === "l") {
+                        r = true;
+                    } else if (o === "r") {
+                        r = false;
+                    }
+                    e++;
+                    continue;
+                }
+                const a = t[e];
+                o += n(a) + (a === " " ? 0 : 2);
+                if (r) {
+                    o += 1;
+                }
+            }
+            return o;
+        },
+        getFinalBoldState: function(t, e) {
+            let o = e;
+            for (let e = 0; e < t.length; e++) {
+                if (t[e] === "§" && e + 1 < t.length) {
+                    const n = t[e + 1].toLowerCase();
+                    if (n === "l") {
+                        o = true;
+                    } else if (n === "r") {
+                        o = false;
+                    }
+                    e++;
+                }
+            }
+            return o;
+        },
+        get loadedImages() {
+            return e;
+        }
+    };
+})();

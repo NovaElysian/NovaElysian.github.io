@@ -1,0 +1,119 @@
+
+#低级
+give @s tropical_fish 64 520
+
+#中级
+give @s tropical_fish 64 521
+
+#高级
+give @s tropical_fish 64 522
+
+#特殊
+give @s tropical_fish 64 523
+
+#自动钓鱼
+give @s nautilus_shell 1 520
+
+
+
+#铁砧改名
+§r§f[§a低级§f] 鲢鱼饵料
+§r§f[§b中级§f] 鲫鱼饵料
+§r§f[§e高级§f] 鳕鱼饵料
+§r§f[§c特殊§f] 鲟鱼饵料
+§r§f[§c神器§f] §6自动钓鱼
+
+
+#备注
+唯一需要改的就是汇聚点 填写汇聚点XYZ即可
+
+
+#分配uid
+scoreboard objectives add 钓鱼UID dummy
+
+execute as @a at @s run scoreboard players add @s 钓鱼UID 0
+
+execute as @r[scores={钓鱼UID=0}] run scoreboard players add 钓鱼UID 钓鱼UID 1
+
+execute as @r[scores={钓鱼UID=0}] at @s run scoreboard players operation @s 钓鱼UID = 钓鱼UID 钓鱼UID
+
+
+#开始检测
+scoreboard players add @e[type=fishing_hook] 钓鱼UID 0
+
+execute as @e[type=fishing_hook,scores={钓鱼UID=0}] at @s at @p[r=1.5] run scoreboard players operation @s 钓鱼UID = @p[hasitem={item=tropical_fish,location=slot.hotbar,slot=0,quantity=1..}] 钓鱼UID
+
+#检测鱼钩进水
+execute as @e[type=fishing_hook,scores={钓鱼UID=1..},tag=!入水] at @s if block ~~0.1~ water run tag @s add 入水
+
+#检测入水后浮出
+execute as @e[type=fishing_hook,scores={钓鱼UID=1..},tag=入水] at @s unless block ~~0.1~ water run tag @s add 浮出
+
+#检测浮出后入水
+execute as @e[type=fishing_hook,scores={钓鱼UID=1..},tag=浮出] at @s if block ~~0.1~ water run tag @s add 咬钩
+
+#如果咬钩后没有钓上来检测未咬钩
+execute as @e[type=fishing_hook,scores={钓鱼UID=1..},tag=咬钩] at @s unless block ~~0.1~ water run tag @s add 未咬钩
+
+#如果未咬钩检测到水就是咬钩了
+execute as @e[type=fishing_hook,scores={钓鱼UID=1..},tag=未咬钩] at @s if block ~~0.1~ water run tag @s add 咬钩
+
+execute as @e[type=fishing_hook,tag=咬钩] at @s if block ~~0.1~ water run tag @s remove 未咬钩
+
+execute as @e[type=fishing_hook,tag=未咬钩] at @s unless block ~~0.1~ water run tag @s remove 咬钩
+
+#检测咬钩后给上钩tag
+execute as @e[type=fishing_hook,tag=咬钩] at @s at @a[rm=0.1] if score @s 钓鱼UID = @p 钓鱼UID run tag @p add 上钩了
+
+execute as @e[type=fishing_hook,tag=咬钩,tag=!鱼钩咬钩] at @s at @a[rm=0.1] if score @s 钓鱼UID = @p 钓鱼UID run tag @p[tag=上钩了,tag=!获得物资,hasitem={item=nautilus_shell,data=520,quantity=1..,location=slot.weapon.offhand}] add 获得物资
+
+execute as @e[type=fishing_hook,tag=咬钩] at @s run tag @s add 鱼钩咬钩
+
+execute as @e[type=fishing_hook,tag=未咬钩] at @s run tag @s remove 鱼钩咬钩
+
+execute as @a[tag=上钩了] at @s at @e[rm=0.1] if score @s 钓鱼UID = @e[c=1,type=fishing_hook] 钓鱼UID run tag @s add 鱼钩还存在
+
+execute as @a[tag=上钩了,tag=!鱼钩还存在] at @s run tag @s add 获得物资
+
+execute as @e[type=fishing_hook,tag=未咬钩] at @s at @a[rm=0.1] if score @s 钓鱼UID = @p 钓鱼UID run tag @p remove 上钩了
+
+tag @a[tag=获得物资] remove 上钩了
+
+tag @a remove 鱼钩还存在
+
+
+#检测鱼饵发放物资
+
+execute as @a[tag=获得物资,hasitem={item=tropical_fish,data=520,location=slot.hotbar,slot=0,quantity=1..}] at @s run structure load 低级物资 汇聚点
+
+execute as @a[tag=获得物资,hasitem={item=tropical_fish,data=521,location=slot.hotbar,slot=0,quantity=1..}] at @s run structure load 中级物资 汇聚点
+
+execute as @a[tag=获得物资,hasitem={item=tropical_fish,data=522,location=slot.hotbar,slot=0,quantity=1..}] at @s run structure load 高级物资 汇聚点
+
+execute as @a[tag=获得物资,hasitem={item=tropical_fish,data=523,location=slot.hotbar,slot=0,quantity=1..}] at @s run structure load 顶级物资 汇聚点
+
+execute as @a[tag=获得物资,hasitem={item=tropical_fish,data=520,location=slot.hotbar,slot=0,quantity=1..}] at @s run clear @s tropical_fish 520 1
+
+execute as @a[tag=获得物资,hasitem={item=tropical_fish,data=521,location=slot.hotbar,slot=0,quantity=1..}] at @s run clear @s tropical_fish 521 1
+
+execute as @a[tag=获得物资,hasitem={item=tropical_fish,data=522,location=slot.hotbar,slot=0,quantity=1..}] at @s run clear @s tropical_fish 522 1
+
+execute as @a[tag=获得物资,hasitem={item=tropical_fish,data=523,location=slot.hotbar,slot=0,quantity=1..}] at @s run clear @s tropical_fish 523 1
+
+execute as @a[tag=获得物资] at @s run setblock 汇聚点 air destroy
+
+execute as @a[tag=获得物资] at @s run tag @e[name=!木桶,c=1,type=item,x=汇,y=聚,z=点,r=1.5] add 物资
+
+execute as @a[tag=获得物资] at @s run tellraw @s {"rawtext":[{"text":"\n\n§a| §f鱼儿上钩\n§i ----------------------- \n§f§r"},{"text":"§f - §6获得§i\n    §e"},{"selector":"@e[tag=物资]"},{"text":" §7x §f1"},{"text":"\n\n§f - §6消耗§i\n    "},{"translate":"%%2","with":{"rawtext":[{"selector":"@s[hasitem={item=tropical_fish,data=520,location=slot.hotbar,slot=0}]"},{"text":"§r§f[§a低级§f] 鲢鱼饵料"},{"text":""}]}},{"translate":"%%2","with":{"rawtext":[{"selector":"@s[hasitem={item=tropical_fish,data=521,location=slot.hotbar,slot=0}]"},{"text":"§r§f[§b中级§f] 鲫鱼饵料"},{"text":""}]}},{"translate":"%%2","with":{"rawtext":[{"selector":"@s[hasitem={item=tropical_fish,data=522,location=slot.hotbar,slot=0}]"},{"text":"§r§f[§e高级§f] 鳕鱼饵料"},{"text":""}]}},{"translate":"%%2","with":{"rawtext":[{"selector":"@s[hasitem={item=tropical_fish,data=523,location=slot.hotbar,slot=0}]"},{"text":"§r§f[§c特殊§f] 鲟鱼饵料"},{"text":""}]}},{"text":" §7x §f1"},{"text":"\n§i -----------------------\n"}]}
+
+execute as @a[tag=获得物资] at @s run playsound note.bell @s
+
+execute as @a[tag=获得物资] at @s run tp @e[tag=物资] @s
+
+execute if entity @a[tag=获得物资] as @e[tag=!物资,type=item,ry=0,rym=0] at @s if block ~~~ water run kill @s
+
+kill @e[x=汇,y=聚,z=点,r=1.5]
+
+tag @a remove 获得物资
+
+execute as @e[type=fishing_hook] at @s at @a[rm=0.1] if score @s 钓鱼UID = @p[hasitem={item=tropical_fish,location=slot.hotbar,slot=0,quantity=0}] 钓鱼UID run kill @s
