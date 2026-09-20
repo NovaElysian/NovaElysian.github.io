@@ -2,4 +2,4 @@ execute as @a[rx=-85,rxm=-90,scores={菜单=31}] at @s run kill @s
 
 execute as @a[rx=-85,rxm=-90,scores={菜单=31}] at @s run scoreboard players set @s 菜单 200
 
-#此文件由星月牙月制作3122191515
+#此文件由雪球雪球制作3122191515

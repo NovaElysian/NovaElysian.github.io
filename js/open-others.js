@@ -35,7 +35,13 @@
         {"name": "前台", "path": "./presets/shop-plots/basic-plots/前台.txt", "category": "shop-plots"},
         {"name": "后台", "path": "./presets/shop-plots/basic-plots/后台.txt", "category": "shop-plots"},
         {"name": "[前置]创建栓绳", "path": "./presets/shop-plots/bulk-shop/[前置]创建栓绳.txt", "category": "shop-plots"},
-        {"name": "免举商店 完整版", "path": "./presets/shop-plots/bulk-shop/免举商店 完整版.txt", "category": "shop-plots"}
+        {"name": "免举商店 完整版", "path": "./presets/shop-plots/bulk-shop/免举商店 完整版.txt", "category": "shop-plots"},
+        {"name":"常用生存指令","path":"./presets/misc/common-commands/常用生存指令.txt","category":"misc"},
+        {"name":"快捷命令合集","path":"./presets/misc/common-commands/快捷命令合集.txt","category":"misc"},
+        {"name":"粒子特效","path":"./presets/misc/particle-sound/粒子特效.txt","category":"misc"},
+        {"name":"精简标题菜单","path":"./presets/menus/simple/精简标题菜单.txt","category":"menus"},
+        {"name":"简易地皮保护","path":"./presets/shop-plots/simple/简易地皮保护.txt","category":"shop-plots"},
+        {"name":"基础撤离指引","path":"./presets/extraction/simple/基础撤离指引.txt","category":"extraction"}
     ];
 
     // 注入美化后的 UI 样式
@@ -69,7 +75,13 @@
         #preset-center-overlay .pc-modal-footer { display: flex; justify-content: flex-end; }
         #preset-center-overlay .pc-close-btn { background: var(--dark-btn); color: var(--text-main); padding: 8px 20px; border-radius: 8px; }
         #pc-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--dark-btn); color: #fff; padding: 10px 20px; border-radius: 10px; font-size: 0.9rem; font-weight: 500; box-shadow: 0 10px 15px -3px rgba(0,0,0,.3); z-index: 1000001; opacity: 0; transition: all 0.25s cubic-bezier(0.16,1,0.3,1); pointer-events: none; }
-        #pc-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        #pc-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }/* 预设中心 filter/search */
+        #preset-center-overlay .pc-nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+        #preset-center-overlay .pc-filter-chip { padding:6px 14px; border-radius:16px; background:var(--card-bg); border:1px solid var(--border-color); color:var(--text-sub); font-size:0.8rem; cursor:pointer; user-select:none; transition:all .15s; }
+        #preset-center-overlay .pc-filter-chip.active { background:var(--accent-color); color:#fff; border-color:var(--accent-color); }
+        #preset-center-overlay .pc-search { width:100%; padding:9px 12px; background:var(--card-bg); border:1px solid var(--border-color); border-radius:8px; color:var(--text-main); font-size:0.85rem; margin-bottom:16px; outline:none; }
+        #preset-center-overlay .pc-search:focus { border-color:var(--accent-color); }
+
     `;
     document.head.appendChild(style);
 
@@ -82,6 +94,8 @@
                 <h1>预设指令中心</h1>
                 <button id="preset-center-back">返回</button>
             </div>
+            <div class="pc-nav" id="pc-nav"><span class="pc-filter-chip" data-cat="all">全部</span><span class="pc-filter-chip" data-cat="extraction">撤离</span><span class="pc-filter-chip" data-cat="menus">菜单</span><span class="pc-filter-chip" data-cat="misc">杂项</span><span class="pc-filter-chip" data-cat="shop-plots">地皮商店</span></div>
+            <input class="pc-search" id="pc-search" placeholder="搜索预设名称或分类..." />
             <div class="pc-grid" id="pc-grid"></div>
         </div>
         <div id="pc-modal">
@@ -110,23 +124,42 @@
 
     // 渲染卡片列表
     const grid = document.getElementById('pc-grid');
-    presetFiles.forEach(file => {
-        const card = document.createElement('div');
-        card.className = 'pc-card';
-        card.innerHTML = `
-            <div>
-                <div class="pc-card-header">${file.name}</div>
-                <div class="pc-card-category">${file.category}</div>
-            </div>
-            <div>
-                <button class="pc-btn-preview" data-action="preview" data-path="${file.path}">预览代码</button>
-                <div class="pc-btn-group">
-                    <button class="pc-btn-copy" data-action="copy" data-path="${file.path}">一键复制</button>
-                    <button class="pc-btn-download" data-action="download" data-path="${file.path}" data-name="${file.name}.txt">下载文件</button>
-                </div>
-            </div>`;
-        grid.appendChild(card);
+    window.__pcCat = 'all';
+    window.__pcQ = '';
+    function renderGrid(){
+        const q = (window.__pcQ||'').toLowerCase();
+        const cat = window.__pcCat||'all';
+        grid.innerHTML = '';
+        const list = presetFiles.filter(function(f){
+            if(cat!=='all' && f.category!==cat) return false;
+            if(q && (f.name+' '+f.category).toLowerCase().indexOf(q)<0) return false;
+            return true;
+        });
+        if(list.length===0){ grid.innerHTML='<div style="padding:30px;text-align:center;color:var(--text-sub);">未找到匹配的预设</div>'; return; }
+        list.forEach(function(file){
+            const card = document.createElement('div');
+            card.className = 'pc-card';
+            card.innerHTML = '<div><div class="pc-card-header">'+(file.name||'')+'</div><div class="pc-card-category">'+(file.category||'')+'</div></div><div><button class="pc-btn-preview" data-action="preview" data-path="'+file.path+'">预览代码</button><div class="pc-btn-group"><button class="pc-btn-copy" data-action="copy" data-path="'+file.path+'">一键复制</button><button class="pc-btn-download" data-action="download" data-path="'+file.path+'" data-name="'+file.name+'.txt">下载文件</button></div></div>';
+            grid.appendChild(card);
+        });
+    }
+    renderGrid();
+    /* 分类 chip 切换 */
+    document.getElementById('pc-nav').querySelectorAll('.pc-filter-chip').forEach(function(chip){
+        chip.addEventListener('click', function(){
+            document.querySelectorAll('#pc-nav .pc-filter-chip').forEach(function(c){c.classList.remove('active');});
+            chip.classList.add('active');
+            window.__pcCat = chip.getAttribute('data-cat');
+            renderGrid();
+        });
     });
+    document.querySelectorAll('#pc-nav .pc-filter-chip').forEach(function(c){ if(c.getAttribute('data-cat')==='all') c.classList.add('active'); });
+    /* 搜索 */
+    document.getElementById('pc-search').addEventListener('input', function(e){
+        window.__pcQ = e.target.value;
+        renderGrid();
+    });
+
 
     // 交互逻辑绑定
     grid.addEventListener('click', async function(e) {

@@ -6,7 +6,7 @@ execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s run scoreboard player
 
 #减去68变为1-5
 execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s run  scoreboard players remove @s TPAN 68
-#此文件由星月牙月制作3122191515
+#此文件由雪球雪球制作3122191515
 #检测是否是自己传自己
 execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s if score @s TPAN = @s TPAUID run title @s title §c请勿自娱自乐
 
@@ -31,7 +31,7 @@ execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s at @a[rm=0.1] if scor
 #更正视角
 execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPA run tp @s
 
-#此文件由星月牙月制作3122191515
+#此文件由雪球雪球制作3122191515
 #若前面的都没有更正视角，那么就确认传送
 execute as @a[scores={菜单=69..73},rx=-85,rxm=-90] at @s at @a[rm=0.1] if score @s TPAN = @p TPAUID run tellraw @p {"rawtext":[{"text":"§b〉>> §f"},{"selector":"@a[scores={菜单=69..73},rx=-85,rxm=-90,tag=!有人正在传送]"},{"text":" §b正在对您申请传送 §730S后自动结束"},{"text":"\n§f抬头确认§a✔     §f低头取消§c✘"}]}
 
@@ -108,7 +108,7 @@ execute as @a at @s unless entity @s[tag=!传送,tag=!被传送] run scoreboard 
 execute as @a at @s unless entity @s[tag=!传送,tag=!被传送] run scoreboard players reset @s TPA
 
 execute as @a at @s unless entity @s[tag=!传送,tag=!被传送] run scoreboard players set @s 菜单 200
-#此文件由星月牙月制作3122191515
+#此文件由雪球雪球制作3122191515
 tag @a remove 传送
 
 tag @a remove 被传送

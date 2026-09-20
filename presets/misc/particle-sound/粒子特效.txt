@@ -1,0 +1,4 @@
+particle minecraft:villager_happy ~ ~1 ~
+particle minecraft:heart ~ ~1 ~ 1 1 1 0 20
+/effect @s speed 60 3 true
+/particle block ~ ~1 ~ minecraft:stone 0 0 0 0 10

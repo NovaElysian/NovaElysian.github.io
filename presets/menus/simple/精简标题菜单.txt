@@ -1,0 +1,2 @@
+/titleraw @a title {"rawtext":[{"text":"§l§b=== §f服务器菜单 §b==="}]}
+/titleraw @a subtitle {"rawtext":[{"text":"§7输入 /menu 打开"}]}

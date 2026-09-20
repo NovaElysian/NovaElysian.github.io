@@ -41,23 +41,40 @@ textarea{flex:1;background:var(--bg-color);color:var(--text-main);border:1px sol
 .modal-foot{display:flex;gap:10px}
 .close-btn{background:#ef4444;padding:8px 14px}
 .copy-modal-btn{background:var(--accent-color)}
+.toolbar{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{flex:0 0 auto;padding:8px 16px;border:1px solid var(--border-color);border-radius:20px;
+  background:var(--card-bg);color:var(--text-sub);font-size:13px;font-weight:600;cursor:pointer;transition:.2s}
+.chip:hover{border-color:var(--accent-color);color:var(--text-main)}
+.chip.active{background:var(--accent-color);border-color:var(--accent-color);color:#fff}
+.search-box{display:flex;align-items:center;gap:10px;background:var(--card-bg);
+  border:1px solid var(--border-color);border-radius:var(--radius);padding:10px 14px;box-shadow:var(--shadow)}
+.search-box input{flex:1;border:none;outline:none;background:transparent;color:var(--text-main);font-size:14px}
+.search-box input::placeholder{color:var(--text-sub)}
+.search-icon{color:var(--text-sub);font-size:14px}
+.empty-tip{text-align:center;color:var(--text-sub);font-size:14px;padding:40px 0}
 </style>
 </head>
 <body>
 <script>
-<script>
 (function(){function addBack(){var b=document.createElement("div");b.id="back-btn";
-b.textContent="\u2190 返回";b.style.cssText="position:fixed;left:12px;top:12px;z-index:1000;"+
+b.textContent="← 返回";b.style.cssText="position:fixed;left:12px;top:12px;z-index:1000;"+
 "background:var(--accent-color);color:#fff;padding:7px 14px;border-radius:18px;font-size:13px;"+
 "font-weight:600;cursor:pointer;box-shadow:var(--shadow);";
 b.addEventListener("click",function(){if(window.history.length>1)window.history.back();else window.location.href="./index.html";});
 document.body.appendChild(b);}
 if(document.body)addBack();else document.addEventListener("DOMContentLoaded",addBack);})();
 </script>
-</script>
 
     <div class="container">
         <h1>Minecraft Preset Code Center</h1>
+        <div class="toolbar">
+            <div class="chips" id="chips"></div>
+            <div class="search-box">
+                <span class="search-icon">&#128269;</span>
+                <input type="text" id="searchInput" placeholder="搜索指令预设（名称/分类）...">
+            </div>
+        </div>
         <div class="grid" id="grid"></div>
     </div>
     
@@ -69,13 +86,61 @@ if(document.body)addBack();else document.addEventListener("DOMContentLoaded",add
     </div>
 
     <script>
-        const files = [{"name": "撤离5cb教程版新", "path": "./presets/extraction/extraction-tutorial-v2/撤离5cb教程版新.txt", "category": "extraction"}, {"name": "开箱", "path": "./presets/extraction/loot-airdrop/开箱.txt", "category": "extraction"}, {"name": "开箱（压缩版未测试）", "path": "./presets/extraction/loot-airdrop/开箱（压缩版未测试）.txt", "category": "extraction"}, {"name": "空投", "path": "./presets/extraction/loot-airdrop/空投.txt", "category": "extraction"}, {"name": "匹配系统，固定随机刷新点", "path": "./presets/extraction/matchmaking/匹配系统，固定随机刷新点.txt", "category": "extraction"}, {"name": "雪球菜单参赛作品", "path": "./presets/menus/snowball-contest/雪球菜单参赛作品.txt", "category": "menus"}, {"name": "互传", "path": "./presets/menus/snowball-v2/互传.txt", "category": "menus"}, {"name": "前置（必看）", "path": "./presets/menus/snowball-v2/前置（必看）.txt", "category": "menus"}, {"name": "菜单第一页", "path": "./presets/menus/snowball-v2/菜单第一页.txt", "category": "menus"}, {"name": "菜单第七页", "path": "./presets/menus/snowball-v2/菜单第七页.txt", "category": "menus"}, {"name": "菜单第三页", "path": "./presets/menus/snowball-v2/菜单第三页.txt", "category": "menus"}, {"name": "菜单第二页", "path": "./presets/menus/snowball-v2/菜单第二页.txt", "category": "menus"}, {"name": "菜单第五页", "path": "./presets/menus/snowball-v2/菜单第五页.txt", "category": "menus"}, {"name": "菜单第六页", "path": "./presets/menus/snowball-v2/菜单第六页.txt", "category": "menus"}, {"name": "菜单第四页", "path": "./presets/menus/snowball-v2/菜单第四页.txt", "category": "menus"}, {"name": "转账", "path": "./presets/menus/snowball-v2/转账.txt", "category": "menus"}, {"name": "前置［必看第一个］", "path": "./presets/menus/snowball-yellow/前置［必看第一个］.txt", "category": "menus"}, {"name": "第一页雪球菜单", "path": "./presets/menus/snowball-yellow/第一页雪球菜单.txt", "category": "menus"}, {"name": "雪球菜单互传第四页", "path": "./presets/menus/snowball-yellow/雪球菜单互传第四页.txt", "category": "menus"}, {"name": "雪球菜单其他第五页", "path": "./presets/menus/snowball-yellow/雪球菜单其他第五页.txt", "category": "menus"}, {"name": "雪球菜单多维第二页", "path": "./presets/menus/snowball-yellow/雪球菜单多维第二页.txt", "category": "menus"}, {"name": "雪球菜单转账第三页", "path": "./presets/menus/snowball-yellow/雪球菜单转账第三页.txt", "category": "menus"}, {"name": "防熊指令", "path": "./presets/misc/anti-grief/防熊指令.txt", "category": "misc"}, {"name": "日历前台", "path": "./presets/misc/calendar/日历前台.txt", "category": "misc"}, {"name": "日历后台", "path": "./presets/misc/calendar/日历后台.txt", "category": "misc"}, {"name": "自定义钓鱼", "path": "./presets/misc/custom-fishing/自定义钓鱼.txt", "category": "misc"}, {"name": "抽奖指令", "path": "./presets/misc/lottery/抽奖指令.txt", "category": "misc"}, {"name": "手动签到教程版", "path": "./presets/misc/manual-signin/手动签到教程版.txt", "category": "misc"}, {"name": "创建地皮模板", "path": "./presets/shop-plots/advanced-plots/创建地皮模板.txt", "category": "shop-plots"}, {"name": "创建空岛", "path": "./presets/shop-plots/advanced-plots/创建空岛.txt", "category": "shop-plots"}, {"name": "前台", "path": "./presets/shop-plots/advanced-plots/前台.txt", "category": "shop-plots"}, {"name": "地皮保护", "path": "./presets/shop-plots/advanced-plots/地皮保护.txt", "category": "shop-plots"}, {"name": "前台", "path": "./presets/shop-plots/basic-plots/前台.txt", "category": "shop-plots"}, {"name": "后台", "path": "./presets/shop-plots/basic-plots/后台.txt", "category": "shop-plots"}, {"name": "[前置]创建栓绳", "path": "./presets/shop-plots/bulk-shop/[前置]创建栓绳.txt", "category": "shop-plots"}, {"name": "免举商店 完整版", "path": "./presets/shop-plots/bulk-shop/免举商店 完整版.txt", "category": "shop-plots"}];
+        const files = [{"name": "撤离5cb教程版新", "path": "./presets/extraction/extraction-tutorial-v2/撤离5cb教程版新.txt", "category": "extraction"}, {"name": "开箱", "path": "./presets/extraction/loot-airdrop/开箱.txt", "category": "extraction"}, {"name": "开箱（压缩版未测试）", "path": "./presets/extraction/loot-airdrop/开箱（压缩版未测试）.txt", "category": "extraction"}, {"name": "空投", "path": "./presets/extraction/loot-airdrop/空投.txt", "category": "extraction"}, {"name": "匹配系统，固定随机刷新点", "path": "./presets/extraction/matchmaking/匹配系统，固定随机刷新点.txt", "category": "extraction"}, {"name": "雪球菜单参赛作品", "path": "./presets/menus/snowball-contest/雪球菜单参赛作品.txt", "category": "menus"}, {"name": "互传", "path": "./presets/menus/snowball-v2/互传.txt", "category": "menus"}, {"name": "前置（必看）", "path": "./presets/menus/snowball-v2/前置（必看）.txt", "category": "menus"}, {"name": "菜单第一页", "path": "./presets/menus/snowball-v2/菜单第一页.txt", "category": "menus"}, {"name": "菜单第七页", "path": "./presets/menus/snowball-v2/菜单第七页.txt", "category": "menus"}, {"name": "菜单第三页", "path": "./presets/menus/snowball-v2/菜单第三页.txt", "category": "menus"}, {"name": "菜单第二页", "path": "./presets/menus/snowball-v2/菜单第二页.txt", "category": "menus"}, {"name": "菜单第五页", "path": "./presets/menus/snowball-v2/菜单第五页.txt", "category": "menus"}, {"name": "菜单第六页", "path": "./presets/menus/snowball-v2/菜单第六页.txt", "category": "menus"}, {"name": "菜单第四页", "path": "./presets/menus/snowball-v2/菜单第四页.txt", "category": "menus"}, {"name": "转账", "path": "./presets/menus/snowball-v2/转账.txt", "category": "menus"}, {"name": "前置［必看第一个］", "path": "./presets/menus/snowball-yellow/前置［必看第一个］.txt", "category": "menus"}, {"name": "第一页雪球菜单", "path": "./presets/menus/snowball-yellow/第一页雪球菜单.txt", "category": "menus"}, {"name": "雪球菜单互传第四页", "path": "./presets/menus/snowball-yellow/雪球菜单互传第四页.txt", "category": "menus"}, {"name": "雪球菜单其他第五页", "path": "./presets/menus/snowball-yellow/雪球菜单其他第五页.txt", "category": "menus"}, {"name": "雪球菜单多维第二页", "path": "./presets/menus/snowball-yellow/雪球菜单多维第二页.txt", "category": "menus"}, {"name": "雪球菜单转账第三页", "path": "./presets/menus/snowball-yellow/雪球菜单转账第三页.txt", "category": "menus"}, {"name": "防熊指令", "path": "./presets/misc/anti-grief/防熊指令.txt", "category": "misc"}, {"name": "日历前台", "path": "./presets/misc/calendar/日历前台.txt", "category": "misc"}, {"name": "日历后台", "path": "./presets/misc/calendar/日历后台.txt", "category": "misc"}, {"name": "自定义钓鱼", "path": "./presets/misc/custom-fishing/自定义钓鱼.txt", "category": "misc"}, {"name": "抽奖指令", "path": "./presets/misc/lottery/抽奖指令.txt", "category": "misc"}, {"name": "手动签到教程版", "path": "./presets/misc/manual-signin/手动签到教程版.txt", "category": "misc"}, {"name": "创建地皮模板", "path": "./presets/shop-plots/advanced-plots/创建地皮模板.txt", "category": "shop-plots"}, {"name": "创建空岛", "path": "./presets/shop-plots/advanced-plots/创建空岛.txt", "category": "shop-plots"}, {"name": "前台", "path": "./presets/shop-plots/advanced-plots/前台.txt", "category": "shop-plots"}, {"name": "地皮保护", "path": "./presets/shop-plots/advanced-plots/地皮保护.txt", "category": "shop-plots"}, {"name": "前台", "path": "./presets/shop-plots/basic-plots/前台.txt", "category": "shop-plots"}, {"name": "后台", "path": "./presets/shop-plots/basic-plots/后台.txt", "category": "shop-plots"}, {"name": "[前置]创建栓绳", "path": "./presets/shop-plots/bulk-shop/[前置]创建栓绳.txt", "category": "shop-plots"}, {"name": "免举商店 完整版", "path": "./presets/shop-plots/bulk-shop/免举商店 完整版.txt", "category": "shop-plots"}, {"name": "常用生存指令", "path": "./presets/misc/common-commands/常用生存指令.txt", "category": "misc"}, {"name": "快捷命令合集", "path": "./presets/misc/common-commands/快捷命令合集.txt", "category": "misc"}, {"name": "粒子特效", "path": "./presets/misc/particle-sound/粒子特效.txt", "category": "misc"}, {"name": "精简标题菜单", "path": "./presets/menus/simple/精简标题菜单.txt", "category": "menus"}, {"name": "简易地皮保护", "path": "./presets/shop-plots/simple/简易地皮保护.txt", "category": "shop-plots"}, {"name": "基础撤离指引", "path": "./presets/extraction/simple/基础撤离指引.txt", "category": "extraction"}];
         const grid = document.getElementById('grid');
 
-        files.forEach(file => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
+        const categories = [
+            {key: 'all', label: '全部'},
+            {key: 'extraction', label: '撤离'},
+            {key: 'menus', label: '菜单'},
+            {key: 'misc', label: '杂项'},
+            {key: 'shop-plots', label: '地皮商店'}
+        ];
+        let currentCategory = 'all';
+        let keyword = '';
+
+        // 渲染分类导航 chips
+        function renderChips() {
+            const chipsEl = document.getElementById('chips');
+            chipsEl.innerHTML = '';
+            categories.forEach(cat => {
+                const chip = document.createElement('button');
+                chip.type = 'button';
+                chip.className = 'chip' + (cat.key === currentCategory ? ' active' : '');
+                chip.textContent = cat.label;
+                chip.onclick = function() {
+                    currentCategory = cat.key;
+                    renderChips();
+                    renderGrid();
+                };
+                chipsEl.appendChild(chip);
+            });
+        }
+
+        // 根据当前分类 + 关键词筛选并渲染卡片
+        function renderGrid() {
+            grid.innerHTML = '';
+            const k = keyword.trim().toLowerCase();
+            const filtered = files.filter(file => {
+                const matchCat = currentCategory === 'all' || file.category === currentCategory;
+                const matchKw = !k ||
+                    file.name.toLowerCase().includes(k) ||
+                    file.category.toLowerCase().includes(k);
+                return matchCat && matchKw;
+            });
+
+            if (filtered.length === 0) {
+                const tip = document.createElement('div');
+                tip.className = 'empty-tip';
+                tip.textContent = '没有找到匹配的预设';
+                grid.appendChild(tip);
+                return;
+            }
+
+            filtered.forEach(file => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
                 <div>
                     <div class="card-header">${file.name}</div>
                     <div class="card-category">分类: ${file.category}</div>
@@ -87,8 +152,18 @@ if(document.body)addBack();else document.addEventListener("DOMContentLoaded",add
                         <button class="btn-download" onclick="downloadFile('${file.path}', '${file.name}.txt')">下载</button>
                     </div>
                 </div>`;
-            grid.appendChild(card);
+                grid.appendChild(card);
+            });
+        }
+
+        // 搜索框监听
+        document.getElementById('searchInput').addEventListener('input', function() {
+            keyword = this.value;
+            renderGrid();
         });
+
+        renderChips();
+        renderGrid();
 
         async function loadText(path, isPreview) {
             try {

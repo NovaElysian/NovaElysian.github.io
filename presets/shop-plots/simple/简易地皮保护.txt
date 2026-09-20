@@ -1,0 +1,3 @@
+execute @p ~ ~ ~ detect ~ ~-1 ~ minecraft:grass 0 say 脚下是草方块
+/give @p dirt 1
+gamemode adventure @a[scores={shop=1}]

@@ -1,0 +1,2 @@
+/titleraw @a title {"rawtext":[{"text":"§c撤离点已开启"}]}
+/execute @a ~ ~ ~ detect ~ ~-1 ~ minecraft:iron_block 0 run title @s actionbar {"rawtext":[{"text":"§a你到撤离点了"}]}

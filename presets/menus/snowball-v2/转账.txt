@@ -23,7 +23,7 @@ execute as @a[scores={菜单=100},rx=-85,rxm=-90] at @s if score @s 金币 < @s 
 
 execute as @a[scores={菜单=89..100},rx=-85,rxm=-90] at @s run tp @s ~~~ facing ~~~
 
-#此文件由星月牙月制作3122191515
+#此文件由雪球雪球制作3122191515
 
 execute as @a[scores={菜单=111..115},rx=-85,rxm=-90] at @s run scoreboard players operation @s PAY = @s 菜单
 

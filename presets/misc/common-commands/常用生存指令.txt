@@ -1,0 +1,8 @@
+/give @p diamond 64
+/give @s torch 64
+/effect @p speed 30 2
+gamemode creative @s
+time set day
+weather clear
+kill @e[type=!player]
+/item replace entity @s slot.weapon.mainhand with minecraft:netherite_sword

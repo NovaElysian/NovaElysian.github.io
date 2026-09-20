@@ -1,0 +1,7 @@
+gamemode 0 @s
+/teleport @p 0 100 0
+/title @a title {"rawtext":[{"text":"§d你好 §b玩家"}]}
+/playsound random.levelup @a
+/xp 30L @s
+/enchant @s sharpness 5
+/setblock ~ ~1 ~ minecraft:command_block
