@@ -43,6 +43,7 @@
         {"name":"简易地皮保护","path":"./presets/shop-plots/simple/简易地皮保护.txt","category":"shop-plots"},
         {"name":"基础撤离指引","path":"./presets/extraction/simple/基础撤离指引.txt","category":"extraction"}
     ];
+    window.__pcPresets = presetFiles;
 
     // 注入美化后的 UI 样式
     const style = document.createElement('style');
