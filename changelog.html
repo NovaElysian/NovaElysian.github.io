@@ -52,8 +52,9 @@ footer{max-width:680px;margin:22px auto 0;padding:0 14px;font-size:.74rem;color:
   <div class="tl">
 
     <div class="rel latest">
-      <div class="relhead"><span class="ver">v1.8.8</span><span class="badge">最新</span><span class="date">2026-09-20</span></div>
+      <div class="relhead"><span class="ver">v1.8.9</span><span class="badge">最新</span><span class="date">2026-09-20</span></div>
       <ul>
+        <li><b>修复</b>：编辑器是 z-index:200 的全屏浮层，不属于 <code>.view-section</code> —— 用底栏从编辑器切到其它页面时它的 <code>active</code> 不会被清除，会<b>残留并盖住页面</b>；现已显式收起</li>
         <li><b>修正</b>：「T显编辑器」= <b>完整应用</b>：点进去即进入编辑器，其内页 <b>标题模板 / 交互教程 / 我的项目</b> 通过<b>应用内底栏</b>切换（与「编辑器逆向」原版的 主页/教程/项目/模板/工坊 一致），<b>不再占用抽屉条目</b></li>
         <li><b>抽屉</b>：T显编辑器 / 指令工坊 / 预设指令中心 / 字形符号库 / 更新日志 / 网站导航 / 更多网站 + 搜索 + 设置</li>
         <li><b>应用底栏</b>：主页 / 教程 / 项目 / 模板 —— 不含工坊（工坊是抽屉里的工具入口）</li>
