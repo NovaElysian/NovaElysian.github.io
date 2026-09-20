@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="manifest" href="manifest.json">
 <style>
-:root{--accent:#fb7299;--bg:#f5f6f8;--card:#fff;--text:#1a1a1a;--sub:#777;--border:#e0e0e0}
+:root{--accent:#5c6672;--bg:#f5f6f8;--card:#fff;--text:#1a1a1a;--sub:#777;--border:#e0e0e0}
 @media (prefers-color-scheme:dark){:root{--bg:#151724;--card:#1a1c29;--text:#e0e0e0;--sub:#a0a0a0;--border:#2a2d3e}}
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -52,14 +52,23 @@ footer{max-width:680px;margin:22px auto 0;padding:0 14px;font-size:.74rem;color:
   <div class="tl">
 
     <div class="rel latest">
-      <div class="relhead"><span class="ver">v1.8.2</span><span class="badge">最新</span><span class="date">2026-09-20</span></div>
+      <div class="relhead"><span class="ver">v1.8.3</span><span class="badge">最新</span><span class="date">2026-09-20</span></div>
+      <ul>
+        <li><b>改版</b>：主页配色由粉色改为<b>简洁现代白</b>，强调色换为<b>银灰 / 石墨</b>（横幅、徽章、按钮、图标同步调整）</li>
+        <li><b>改版</b>：抽屉「功能」精简为 5 项 —— <b>T显编辑器</b>（原「指令编辑器」）、指令工坊、预设指令中心、字形符号库、更新日志</li>
+        <li><b>调整</b>：标题模板 / 交互教程 / 我的项目 归入 T显编辑器，不再作为独立功能入口；移除抽屉里的「主页 / 关于」分组，改为点顶部标题回主页</li>
+        <li><b>改版</b>：主页只保留介绍（含版本号）与开发者 / 交流群信息</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <div class="relhead"><span class="ver">v1.8.2</span><span class="date">2026-09-20</span></div>
       <ul>
         <li><b>修复</b>：左上角功能导航<b>全空白</b>且<b>点 X 无法关闭</b> —— 同一个根因：脚本按 <code>id</code> 取抽屉内容容器，而页面里只有 <code>class</code>，取不到便提前退出，导致关闭按钮的事件与条目点击全部没绑定，同时条目被 CSS 的 <code>opacity:0</code> 隐藏后无人恢复</li>
         <li><b>修复</b>：导航条目改为<b>默认可见</b>，入场动效降级为纯增强 —— 动画失败或被打断都不会再把内容留在隐藏状态</li>
-        <li><b>改进</b>：主页的<b>功能分格</b>整体迁入左上角抽屉（2 列卡片，新增「字形符号库」「更新日志」两个入口）；主页只保留介绍与开发者 / 交流群</li>
+        <li><b>改进</b>：主页的<b>功能分格</b>整体迁入左上角抽屉；主页只保留介绍与开发者信息</li>
         <li><b>改进</b>：站内搜索移入抽屉，点击搜索结果后自动收起抽屉</li>
         <li><b>改进</b>：抽屉支持点遮罩关闭、Esc 关闭、卡片键盘操作（Enter / 空格）</li>
-        <li><b>清理</b>：移除主页 <code>#tool-grid</code> 渲染代码与重复的工具数据（现以抽屉卡片为唯一数据源）</li>
       </ul>
     </div>
 
