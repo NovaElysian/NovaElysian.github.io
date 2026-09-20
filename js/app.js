@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
             const e = localStorage.getItem("editor_theme") || "light";
-            const t = localStorage.getItem("editor_color") || "#5c6672";
+            const t = localStorage.getItem("editor_color") || "#1f2328";
             document.addEventListener("click", e => {
                 const t = e.target.closest("[data-open-url]");
                 if (t) {

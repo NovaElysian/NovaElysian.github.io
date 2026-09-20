@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>更多网站 · 通用T显编辑器</title>
+<meta name="description" content="综合网站导航：337 个精选站点、53 个分类，覆盖工具、开发、设计、教育、娱乐、生活等，支持搜索与分类筛选。">
+<meta name="keywords" content="网站导航,实用工具,网址大全,综合导航,MC工具">
+<meta name="theme-color" content="#1f2328">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--accent:#1f2328;--bg:#ffffff;--card:#ffffff;--text:#1a1a1a;--sub:#6b7280;--border:#e6e8ec;--soft:#f5f6f8}
+@media (prefers-color-scheme:dark){:root{--bg:#151724;--card:#1a1c29;--text:#e6e9ed;--sub:#9aa1ab;--border:#2a2d3e;--soft:#1f2328}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans SC",sans-serif;padding:0 0 40px;-webkit-tap-highlight-color:transparent}
+header{position:sticky;top:0;z-index:30;background:var(--bg);border-bottom:1px solid var(--border);padding:calc(12px + env(safe-area-inset-top,0px)) 14px 12px}
+.hrow{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:10px}
+h1{font-size:1.05rem;margin:0;font-weight:700;flex:1}
+h1 span{color:var(--accent)}
+a.back{font-size:.82rem;color:var(--sub);text-decoration:none;border:1px solid var(--border);padding:6px 11px;border-radius:9px;white-space:nowrap}
+a.back:hover{color:var(--accent);border-color:var(--accent)}
+main{max-width:860px;margin:0 auto;padding:14px}
+.searchbar{display:flex;gap:8px;margin-bottom:10px}
+input[type=search]{flex:1;font:inherit;font-size:.9rem;padding:11px 13px;border-radius:11px;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none}
+input[type=search]:focus{border-color:var(--accent)}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;font:inherit;font-size:.78rem;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--sub);cursor:pointer;white-space:nowrap}
+.chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.meta{font-size:.76rem;color:var(--sub);margin:2px 0 12px;line-height:1.6}
+.meta b{color:var(--accent);font-weight:600}
+.sec{margin:20px 0 8px;font-size:.88rem;font-weight:700;display:flex;align-items:baseline;gap:8px}
+.sec small{font-weight:400;color:var(--sub);font-size:.74rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:9px}
+.site{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;background:var(--card);border:1px solid var(--border);text-decoration:none;color:var(--text);transition:transform .12s,border-color .12s}
+.site:hover{transform:translateY(-2px);border-color:var(--accent)}
+.site:active{transform:scale(.98)}
+.fav{width:34px;height:34px;border-radius:9px;flex:none;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;background:var(--accent);overflow:hidden}
+.fav img{width:18px;height:18px;display:block}
+.txt{min-width:0}
+.nm{font-size:.9rem;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ds{font-size:.74rem;color:var(--sub);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.empty{padding:34px 0;text-align:center;color:var(--sub);font-size:.86rem}
+footer{max-width:860px;margin:28px auto 0;padding:0 14px;font-size:.74rem;color:var(--sub);text-align:center;line-height:1.8}
+footer a{color:var(--sub)}
+#toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:#1f2328;color:#fff;padding:11px 18px;border-radius:11px;font-size:.86rem;opacity:0;pointer-events:none;transition:.22s;z-index:99;max-width:88vw}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<header>
+  <div class="hrow">
+    <h1>更多 / <span>网站</span></h1>
+    <a class="back" href="sites.html">网站导航</a>
+    <a class="back" href="index.html">主页</a>
+  </div>
+</header>
+
+<main>
+  <div class="searchbar">
+    <input type="search" id="q" placeholder="搜索 337 个站点：名称 / 简介 / 分类…" autocomplete="off" spellcheck="false">
+  </div>
+  <div class="chips" id="chips"></div>
+  <p class="meta">共 <b id="cnt">0</b> 个站点 · <b id="cn">0</b> 个分类 · 点击卡片直接打开</p>
+  <div id="wrap"></div>
+</main>
+
+<footer>通用T显编辑器 · 更多网站 —— 数据源自公开综合导航整理，收录不代表推荐</footer>
+<div id="toast"></div>
+
+<script>
+/* 数据：综合导航 348 站 / 53 类（已排除原站自推广条目） */
+var SITES = [{"sec":"工具","items":[{"name":"短视频解析","desc":"支持各平台短视频解析","url":"https://api.spapi.cn/","category":"工具"},{"name":"UD工具箱","desc":"包含了各种在线实用工具","url":"https://www.udtool.com/","category":"工具"},{"name":"工具屋","desc":"包含了各种在线实用工具","url":"https://www.freetoolhouse.com/","category":"工具"},{"name":"短视频解析","desc":"全平台短视频解析工具","url":"https://dy.kukutool.com/","category":"工具"},{"name":"爱资料工具","desc":"实用工具箱","url":"https://www.toolnb.com/","category":"工具"},{"name":"临时邮箱","desc":"免费临时邮箱","url":"https://tempmail.cn/","category":"工具"},{"name":"文件传输","desc":"隔空传输文件","url":"https://www.wenshushu.cn/","category":"工具"},{"name":"高清免费音乐","desc":"无损音质免费音乐","url":"https://www.gequhai.com","category":"工具"},{"name":"网站源码捕捉","desc":"网站开发者F12源码捕捉","url":"https://shanhe.kim/paz/","category":"工具"},{"name":"IP签名档","desc":"IP签名档","url":"https://api.suyanw.cn//api/ipimg.php","category":"工具"},{"name":"IP自查","desc":"点开后就能看到自己的公网IP了","url":"https://jcy.meiaodai.xyz/api/api/ip.php","category":"工具"},{"name":"三角洲每日密码","desc":"三角洲行动游戏每日密码自动更新接口","url":"https://tmini.net/api/sjzmm","category":"工具"},{"name":"图标制作","desc":"在线ICO图标制作","url":"https://api.suyanw.cn/api/favicon1/","category":"工具"},{"name":"iLovePDF","desc":"PDF在线工具","url":"https://www.ilovepdf.com","category":"工具"},{"name":"Smallpdf","desc":"PDF解决方案","url":"https://smallpdf.com","category":"工具"},{"name":"PDF派","desc":"PDF工具集合","url":"https://www.pdfpai.com","category":"工具"},{"name":"PDF24 Tools","desc":"免费PDF工具","url":"https://tools.pdf24.org","category":"工具"},{"name":"格式工厂","desc":"多媒体格式转换","url":"http://www.pcfreetime.com","category":"工具"},{"name":"在线转换","desc":"文件格式转换","url":"https://www.online-convert.com","category":"工具"},{"name":"Convertio","desc":"在线转换工具","url":"https://convertio.co","category":"工具"},{"name":"Zamzar","desc":"文件转换服务","url":"https://www.zamzar.com","category":"工具"},{"name":"时间戳转换","desc":"Unix时间戳转换","url":"https://tool.lu/timestamp","category":"工具"},{"name":"在线工具","desc":"工具集合网站","url":"https://tool.lu","category":"工具"},{"name":"爱资料工具","desc":"在线工具大全","url":"https://www.toolnb.com","category":"工具"},{"name":"一个木函","desc":"多功能工具集合","url":"https://ol.woobx.cn","category":"工具"},{"name":"兔小乖工具","desc":"实用工具集合","url":"https://www.tuxiaoguai.com","category":"工具"},{"name":"万年历","desc":"农历公历查询工具","url":"https://wannianrili.51240.com","category":"工具"},{"name":"老黄历","desc":"传统农历查询","url":"https://www.laohuangli.net","category":"工具"},{"name":"吉日查询","desc":"黄道吉日查询","url":"https://www.nongli.com/item4","category":"工具"},{"name":"生辰八字","desc":"八字排盘查询","url":"https://www.threetong.com","category":"工具"},{"name":"八字排盘","desc":"在线八字命理分析","url":"https://bz.iwzwh.com","category":"工具"},{"name":"世界时间","desc":"全球时间查询工具","url":"http://www.shijian.cc","category":"工具"},{"name":"收款三合一","desc":"聚合收款码生成器","url":"https://piaofang.maoyan.com/box-office","category":"工具"}]},{"sec":"娱乐","items":[{"name":"表白网页","desc":"在线生成表白情书","url":"http://yigeqige.com/","category":"娱乐"},{"name":"视频库","desc":"缓存视频，看完一个退出去再点一次","url":"https://api.hgovo.cn/API/luoli?type=video/text/json","category":"娱乐"},{"name":"快手DJ阿志的视频","desc":"DJ阿志的600个视频，看完一个退出去再点一次","url":"https://1.xingmianapi1.ccwu.cc/API/djazhi.php","category":"娱乐"},{"name":"原神图片生成","desc":"想要多次生成的话，得退出去重点往返此操作","url":"http://api.sgyyds.club/API/ystp.php","category":"娱乐"},{"name":"王者荣耀","desc":"获取王者荣耀所有英雄的列表","url":"http://api.dovis.work/api/qvq_hero_list.php","category":"娱乐"},{"name":"历史上的今天","desc":"了解历史上的今天发生了什么","url":"https://wzapi.com/api/lishi?num=5&format=json","category":"娱乐"},{"name":"全球时间","desc":"获取全球所有时区的时间","url":"https://www.cunyuapi.top/all_timezones?type=json","category":"娱乐"},{"name":"实时电影票房","desc":"猫眼实时国内电影票房信息","url":"https://www.cunyuapi.top/realtime_movie_CN","category":"娱乐"},{"name":"全球地震信息","desc":"实时播报全球的地震事件","url":"https://www.cunyuapi.top/earthquake","category":"娱乐"},{"name":"聚合热搜榜","desc":"汇聚全网热搜，播报最新事件","url":"https://ryapi.sbs/API/resou.php?type=douyin","category":"娱乐"},{"name":"每日金价","desc":"每日各个品牌实时金价","url":"https://api.xn--ei1aa.cn/API/Au.php","category":"娱乐"},{"name":"星座运势","desc":"十二星座运势","url":"https://www.xzw.com","category":"娱乐"},{"name":"塔罗牌","desc":"在线塔罗占卜","url":"https://tarot.51240.com","category":"娱乐"},{"name":"姓名测试","desc":"姓名吉凶测试","url":"https://xingming.51240.com","category":"娱乐"},{"name":"在线钢琴","desc":"网页钢琴模拟器","url":"https://gangqin.bmcx.com","category":"娱乐"}]},{"sec":"查询","items":[{"name":"IP查询","desc":"IP地址查询","url":"https://ip.cn","category":"查询"},{"name":"WHOIS查询","desc":"域名信息查询","url":"https://whois.chinaz.com","category":"查询"},{"name":"ICP备案查询","desc":"网站备案查询","url":"https://beian.miit.gov.cn","category":"查询"},{"name":"手机归属地","desc":"手机号查询","url":"https://www.ip138.com","category":"查询"},{"name":"邮编查询","desc":"全国邮编查询","url":"https://www.youbianku.com","category":"查询"},{"name":"天眼查","desc":"企业信息查询","url":"https://www.tianyancha.com","category":"查询"},{"name":"企查查","desc":"企业信用查询","url":"https://www.qichacha.com","category":"查询"},{"name":"启信宝","desc":"企业征信平台","url":"https://www.qixin.com","category":"查询"},{"name":"国家企业信用信息","desc":"官方企业查询","url":"https://www.gsxt.gov.cn","category":"查询"},{"name":"商标查询","desc":"商标信息查询","url":"https://sbj.cnipa.gov.cn","category":"查询"},{"name":"专利查询","desc":"专利检索系统","url":"https://pss-system.cnipa.gov.cn","category":"查询"},{"name":"版权登记","desc":"作品著作权查询","url":"https://www.ccopyright.com.cn","category":"查询"}]},{"sec":"教育","items":[{"name":"中国大学MOOC","desc":"高校在线课程","url":"https://www.icourse163.org","category":"教育"},{"name":"学堂在线","desc":"清华大学慕课","url":"https://www.xuetangx.com","category":"教育"},{"name":"网易公开课","desc":"国内外公开课","url":"https://open.163.com","category":"教育"},{"name":"网易云课堂","desc":"在线学习平台","url":"https://study.163.com","category":"教育"},{"name":"腾讯课堂","desc":"在线职业教育","url":"https://ke.qq.com","category":"教育"},{"name":"慕课网","desc":"IT技能学习平台","url":"https://www.imooc.com","category":"教育"},{"name":"极客时间","desc":"IT知识付费平台","url":"https://time.geekbang.org","category":"教育"},{"name":"Coursera","desc":"国际在线课程","url":"https://www.coursera.org","category":"教育"},{"name":"edX","desc":"哈佛MIT在线课程","url":"https://www.edx.org","category":"教育"},{"name":"Udemy","desc":"技能学习平台","url":"https://www.udemy.com","category":"教育"},{"name":"Khan Academy","desc":"免费在线学习","url":"https://www.khanacademy.org","category":"教育"}]},{"sec":"开发","items":[{"name":"GitHub","desc":"代码托管平台","url":"https://github.com","category":"开发"},{"name":"GitLab","desc":"开源代码平台","url":"https://gitlab.com","category":"开发"},{"name":"Gitee","desc":"码云代码托管","url":"https://gitee.com","category":"开发"},{"name":"Coding","desc":"腾讯云开发者平台","url":"https://coding.net","category":"开发"},{"name":"VS Code","desc":"代码编辑器","url":"https://code.visualstudio.com","category":"开发"},{"name":"WebStorm","desc":"前端开发工具","url":"https://www.jetbrains.com/webstorm/","category":"开发"},{"name":"IntelliJ IDEA","desc":"Java开发工具","url":"https://www.jetbrains.com/idea/","category":"开发"},{"name":"PyCharm","desc":"Python开发工具","url":"https://www.jetbrains.com/pycharm/","category":"开发"},{"name":"Sublime Text","desc":"文本编辑器","url":"https://www.sublimetext.com","category":"开发"},{"name":"Atom","desc":"GitHub编辑器","url":"https://atom.io","category":"开发"},{"name":"Notepad++","desc":"Windows编辑器","url":"https://notepad-plus-plus.org","category":"开发"}]},{"sec":"视频","items":[{"name":"B站","desc":"哔哩哔哩视频站","url":"https://www.bilibili.com","category":"视频"},{"name":"抖音","desc":"短视频平台","url":"https://www.douyin.com","category":"视频"},{"name":"快手","desc":"快手短视频","url":"https://www.kuaishou.com","category":"视频"},{"name":"腾讯视频","desc":"腾讯视频平台","url":"https://v.qq.com","category":"视频"},{"name":"爱奇艺","desc":"爱奇艺视频平台","url":"https://www.iqiyi.com","category":"视频"},{"name":"优酷","desc":"优酷视频平台","url":"https://www.youku.com","category":"视频"},{"name":"芒果TV","desc":"湖南卫视视频平台","url":"https://www.mgtv.com","category":"视频"},{"name":"YouTube","desc":"全球视频平台","url":"https://www.youtube.com","category":"视频"},{"name":"Netflix","desc":"流媒体平台","url":"https://www.netflix.com","category":"视频"},{"name":"Disney+","desc":"迪士尼流媒体","url":"https://www.disneyplus.com","category":"视频"}]},{"sec":"设计","items":[{"name":"Canva","desc":"在线设计平台","url":"https://www.canva.com","category":"设计"},{"name":"Figma","desc":"界面设计工具","url":"https://www.figma.com","category":"设计"},{"name":"Sketch","desc":"UI设计工具","url":"https://www.sketch.com","category":"设计"},{"name":"Adobe XD","desc":"用户体验设计","url":"https://www.adobe.com/products/xd.html","category":"设计"},{"name":"墨刀","desc":"原型设计工具","url":"https://modao.cc","category":"设计"},{"name":"蓝湖","desc":"产品设计协作","url":"https://lanhuapp.com","category":"设计"},{"name":"MasterGo","desc":"在线UI设计","url":"https://mastergo.com","category":"设计"},{"name":"即时设计","desc":"国产设计工具","url":"https://js.design","category":"设计"},{"name":"稿定设计","desc":"在线设计工具","url":"https://www.gaoding.com","category":"设计"},{"name":"创客贴","desc":"在线设计平台","url":"https://www.chuangkit.com","category":"设计"}]},{"sec":"技术","items":[{"name":"CSDN","desc":"IT技术社区","url":"https://www.csdn.net","category":"技术"},{"name":"博客园","desc":"开发者技术博客","url":"https://www.cnblogs.com","category":"技术"},{"name":"掘金","desc":"开发者社区","url":"https://juejin.cn","category":"技术"},{"name":"SegmentFault","desc":"开发者技术问答","url":"https://segmentfault.com","category":"技术"},{"name":"V2EX","desc":"创意工作者社区","url":"https://www.v2ex.com","category":"技术"},{"name":"开源中国","desc":"开源技术社区","url":"https://www.oschina.net","category":"技术"},{"name":"InfoQ","desc":"技术资讯社区","url":"https://www.infoq.cn","category":"技术"},{"name":"51CTO","desc":"IT技术网站","url":"https://www.51cto.com","category":"技术"}]},{"sec":"新闻","items":[{"name":"新浪新闻","desc":"新浪新闻门户","url":"https://news.sina.com.cn","category":"新闻"},{"name":"腾讯新闻","desc":"腾讯新闻客户端","url":"https://news.qq.com","category":"新闻"},{"name":"网易新闻","desc":"网易新闻门户","url":"https://news.163.com","category":"新闻"},{"name":"搜狐新闻","desc":"搜狐新闻门户","url":"https://news.sohu.com","category":"新闻"},{"name":"今日头条","desc":"个性化新闻推荐","url":"https://www.toutiao.com","category":"新闻"},{"name":"人民日报","desc":"人民日报电子版","url":"https://www.people.com.cn","category":"新闻"},{"name":"新华社","desc":"新华社官方网站","url":"https://www.xinhuanet.com","category":"新闻"},{"name":"央视网","desc":"中央电视台官网","url":"https://www.cctv.com","category":"新闻"}]},{"sec":"旅游","items":[{"name":"马蜂窝","desc":"旅游社交网站","url":"https://www.mafengwo.cn","category":"旅游"},{"name":"穷游网","desc":"出境游社区","url":"https://www.qyer.com","category":"旅游"},{"name":"途牛旅游网","desc":"在线旅游预订","url":"https://www.tuniu.com","category":"旅游"},{"name":"驴妈妈旅游","desc":"旅游预订平台","url":"https://www.lvmama.com","category":"旅游"},{"name":"Booking","desc":"酒店预订网站","url":"https://www.booking.com","category":"旅游"},{"name":"Agoda","desc":"酒店预订平台","url":"https://www.agoda.com","category":"旅游"},{"name":"Tripadvisor","desc":"旅游点评网站","url":"https://www.tripadvisor.cn","category":"旅游"},{"name":"Airbnb","desc":"民宿预订平台","url":"https://www.airbnb.cn","category":"旅游"}]},{"sec":"办公","items":[{"name":"WPS","desc":"金山办公软件","url":"https://www.wps.cn","category":"办公"},{"name":"腾讯文档","desc":"在线协作文档","url":"https://docs.qq.com","category":"办公"},{"name":"石墨文档","desc":"在线协作文档","url":"https://shimo.im","category":"办公"},{"name":"语雀","desc":"阿里知识库平台","url":"https://www.yuque.com","category":"办公"},{"name":"Notion","desc":"全能工作空间","url":"https://notion.so","category":"办公"},{"name":"有道云笔记","desc":"网易笔记应用","url":"https://note.youdao.com","category":"办公"},{"name":"印象笔记","desc":"Evernote中国版","url":"https://www.yinxiang.com","category":"办公"}]},{"sec":"快递","items":[{"name":"快递100","desc":"快递查询平台","url":"https://www.kuaidi100.com","category":"快递"},{"name":"菜鸟裹裹","desc":"阿里快递服务","url":"https://www.cainiao.com","category":"快递"},{"name":"顺丰速运","desc":"顺丰快递查询","url":"https://www.sf-express.com","category":"快递"},{"name":"中通快递","desc":"中通快递查询","url":"https://www.zto.com","category":"快递"},{"name":"圆通速递","desc":"圆通快递查询","url":"https://www.yto.net.cn","category":"快递"},{"name":"申通快递","desc":"申通快递查询","url":"https://www.sto.cn","category":"快递"},{"name":"韵达快递","desc":"韵达快递查询","url":"https://www.yundaex.com","category":"快递"}]},{"sec":"算法","items":[{"name":"LeetCode","desc":"算法练习平台","url":"https://leetcode.cn","category":"算法"},{"name":"牛客网","desc":"IT求职刷题","url":"https://www.nowcoder.com","category":"算法"},{"name":"洛谷","desc":"算法竞赛平台","url":"https://www.luogu.com.cn","category":"算法"},{"name":"力扣","desc":"中文算法平台","url":"https://leetcode-cn.com","category":"算法"},{"name":"Codeforces","desc":"竞赛编程平台","url":"https://codeforces.com","category":"算法"},{"name":"Topcoder","desc":"编程竞赛网站","url":"https://www.topcoder.com","category":"算法"},{"name":"HackerRank","desc":"技术面试准备","url":"https://www.hackerrank.com","category":"算法"}]},{"sec":"云服务","items":[{"name":"阿里云","desc":"阿里云计算","url":"https://www.aliyun.com","category":"云服务"},{"name":"腾讯云","desc":"腾讯云计算","url":"https://cloud.tencent.com","category":"云服务"},{"name":"华为云","desc":"华为云计算","url":"https://www.huaweicloud.com","category":"云服务"},{"name":"百度智能云","desc":"百度云计算","url":"https://cloud.baidu.com","category":"云服务"},{"name":"AWS","desc":"亚马逊云服务","url":"https://aws.amazon.com","category":"云服务"},{"name":"Azure","desc":"微软云服务","url":"https://azure.microsoft.com","category":"云服务"},{"name":"Google Cloud","desc":"谷歌云服务","url":"https://cloud.google.com","category":"云服务"}]},{"sec":"游戏","items":[{"name":"Steam","desc":"游戏发行平台","url":"https://store.steampowered.com","category":"游戏"},{"name":"Epic Games","desc":"游戏平台","url":"https://www.epicgames.com/store/","category":"游戏"},{"name":"斗鱼直播","desc":"游戏直播平台","url":"https://www.douyu.com","category":"游戏"},{"name":"虎牙直播","desc":"游戏直播平台","url":"https://www.huya.com","category":"游戏"},{"name":"游民星空","desc":"游戏资讯网站","url":"https://www.gamersky.com","category":"游戏"},{"name":"3DM游戏","desc":"游戏资源网站","url":"https://www.3dmgame.com","category":"游戏"},{"name":"游侠网","desc":"单机游戏门户","url":"https://www.ali213.net","category":"游戏"}]},{"sec":"搜索","items":[{"name":"百度","desc":"中国最大搜索引擎","url":"https://www.baidu.com","category":"搜索"},{"name":"谷歌","desc":"全球最大搜索引擎","url":"https://www.google.com","category":"搜索"},{"name":"必应","desc":"微软搜索引擎","url":"https://cn.bing.com","category":"搜索"},{"name":"搜狗","desc":"搜狗搜索引擎","url":"https://www.sogou.com","category":"搜索"},{"name":"360搜索","desc":"360安全搜索","url":"https://www.so.com","category":"搜索"},{"name":"DuckDuckGo","desc":"隐私搜索引擎","url":"https://duckduckgo.com","category":"搜索"}]},{"sec":"社交","items":[{"name":"微信","desc":"腾讯社交平台","url":"https://weixin.qq.com","category":"社交"},{"name":"QQ","desc":"腾讯即时通讯","url":"https://im.qq.com","category":"社交"},{"name":"微博","desc":"新浪微博","url":"https://weibo.com","category":"社交"},{"name":"知乎","desc":"知识问答社区","url":"https://www.zhihu.com","category":"社交"},{"name":"小红书","desc":"生活方式分享平台","url":"https://www.xiaohongshu.com","category":"社交"},{"name":"豆瓣","desc":"文化社区平台","url":"https://www.douban.com","category":"社交"}]},{"sec":"前端","items":[{"name":"Vue.js","desc":"渐进式JavaScript框架","url":"https://vuejs.org","category":"前端"},{"name":"React","desc":"Facebook前端框架","url":"https://reactjs.org","category":"前端"},{"name":"Angular","desc":"Google前端框架","url":"https://angular.io","category":"前端"},{"name":"jQuery","desc":"JavaScript库","url":"https://jquery.com","category":"前端"},{"name":"Bootstrap","desc":"CSS框架","url":"https://getbootstrap.com","category":"前端"},{"name":"Tailwind CSS","desc":"CSS框架","url":"https://tailwindcss.com","category":"前端"}]},{"sec":"后端","items":[{"name":"Node.js","desc":"JavaScript运行环境","url":"https://nodejs.org","category":"后端"},{"name":"Python","desc":"编程语言","url":"https://www.python.org","category":"后端"},{"name":"Django","desc":"Python Web框架","url":"https://www.djangoproject.com","category":"后端"},{"name":"Flask","desc":"Python微框架","url":"https://flask.palletsprojects.com","category":"后端"},{"name":"Spring","desc":"Java框架","url":"https://spring.io","category":"后端"},{"name":"Express","desc":"Node.js框架","url":"https://expressjs.com","category":"后端"}]},{"sec":"移动","items":[{"name":"Flutter","desc":"Google移动UI框架","url":"https://flutter.dev","category":"移动"},{"name":"React Native","desc":"跨平台移动开发","url":"https://reactnative.dev","category":"移动"},{"name":"Android开发","desc":"安卓开发者网站","url":"https://developer.android.com","category":"移动"},{"name":"iOS开发","desc":"苹果开发者网站","url":"https://developer.apple.com","category":"移动"},{"name":"微信小程序","desc":"小程序开发文档","url":"https://developers.weixin.qq.com/miniprogram/dev/","category":"移动"},{"name":"支付宝小程序","desc":"支付宝小程序开发","url":"https://opendocs.alipay.com/mini","category":"移动"}]},{"sec":"音乐","items":[{"name":"QQ音乐","desc":"腾讯音乐平台","url":"https://y.qq.com","category":"音乐"},{"name":"网易云音乐","desc":"网易音乐平台","url":"https://music.163.com","category":"音乐"},{"name":"酷狗音乐","desc":"酷狗音乐平台","url":"https://www.kugou.com","category":"音乐"},{"name":"酷我音乐","desc":"酷我音乐平台","url":"https://www.kuwo.cn","category":"音乐"},{"name":"Spotify","desc":"全球音乐流媒体","url":"https://www.spotify.com","category":"音乐"},{"name":"Apple Music","desc":"苹果音乐服务","url":"https://www.apple.com/apple-music/","category":"音乐"}]},{"sec":"阅读","items":[{"name":"起点中文网","desc":"网络文学平台","url":"https://www.qidian.com","category":"阅读"},{"name":"纵横中文网","desc":"原创文学网站","url":"https://www.zongheng.com","category":"阅读"},{"name":"晋江文学城","desc":"女性文学网站","url":"https://www.jjwxc.net","category":"阅读"},{"name":"番茄小说","desc":"免费小说平台","url":"https://fanqienovel.com","category":"阅读"},{"name":"微信读书","desc":"腾讯阅读平台","url":"https://weread.qq.com","category":"阅读"},{"name":"Kindle中国","desc":"亚马逊电子书","url":"https://www.amazon.cn/kindle","category":"阅读"}]},{"sec":"财经","items":[{"name":"东方财富","desc":"财经门户网站","url":"https://www.eastmoney.com","category":"财经"},{"name":"同花顺","desc":"股票交易软件","url":"https://www.10jqka.com.cn","category":"财经"},{"name":"雪球","desc":"投资社交网络","url":"https://xueqiu.com","category":"财经"},{"name":"新浪财经","desc":"新浪财经频道","url":"https://finance.sina.com.cn","category":"财经"},{"name":"和讯网","desc":"财经资讯网站","url":"https://www.hexun.com","category":"财经"},{"name":"华尔街见闻","desc":"财经资讯平台","url":"https://wallstreetcn.com","category":"财经"}]},{"sec":"体育","items":[{"name":"虎扑体育","desc":"体育社区平台","url":"https://www.hupu.com","category":"体育"},{"name":"腾讯体育","desc":"腾讯体育频道","url":"https://sports.qq.com","category":"体育"},{"name":"新浪体育","desc":"新浪体育频道","url":"https://sports.sina.com.cn","category":"体育"},{"name":"央视体育","desc":"央视体育频道","url":"https://sports.cctv.com","category":"体育"},{"name":"直播吧","desc":"体育直播导航","url":"https://www.zhibo8.cc","category":"体育"},{"name":"懂球帝","desc":"足球资讯社区","url":"https://www.dongqiudi.com","category":"体育"}]},{"sec":"招聘","items":[{"name":"BOSS直聘","desc":"互联网招聘平台","url":"https://www.zhipin.com","category":"招聘"},{"name":"智联招聘","desc":"招聘网站","url":"https://www.zhaopin.com","category":"招聘"},{"name":"前程无忧","desc":"招聘求职网站","url":"https://www.51job.com","category":"招聘"},{"name":"猎聘网","desc":"高端人才招聘","url":"https://www.liepin.com","category":"招聘"},{"name":"拉勾网","desc":"互联网招聘","url":"https://www.lagou.com","category":"招聘"},{"name":"实习僧","desc":"实习生招聘","url":"https://www.shixiseng.com","category":"招聘"}]},{"sec":"AI","items":[{"name":"ChatGPT","desc":"AI对话系统","url":"https://chat.openai.com","category":"AI"},{"name":"Midjourney","desc":"AI图像生成","url":"https://www.midjourney.com","category":"AI"},{"name":"文心一言","desc":"百度AI助手","url":"https://yiyan.baidu.com","category":"AI"},{"name":"通义千问","desc":"阿里AI助手","url":"https://tongyi.aliyun.com","category":"AI"},{"name":"讯飞星火","desc":"科大讯飞AI","url":"https://xinghuo.xfyun.cn","category":"AI"},{"name":"Claude","desc":"AI助手","url":"https://claude.ai","category":"AI"}]},{"sec":"云存储","items":[{"name":"百度网盘","desc":"云存储服务","url":"https://pan.baidu.com","category":"云存储"},{"name":"阿里云盘","desc":"阿里巴巴云存储","url":"https://www.aliyundrive.com","category":"云存储"},{"name":"腾讯微云","desc":"腾讯云存储","url":"https://www.weiyun.com","category":"云存储"},{"name":"蓝奏云","desc":"文件分享平台","url":"https://www.lanzou.com","category":"云存储"},{"name":"奶牛快传","desc":"文件传输服务","url":"https://cowtransfer.com","category":"云存储"}]},{"sec":"出行","items":[{"name":"12306","desc":"火车票订票官网","url":"https://www.12306.cn","category":"出行"},{"name":"携程","desc":"在线旅行服务","url":"https://www.ctrip.com","category":"出行"},{"name":"去哪儿","desc":"旅游搜索平台","url":"https://www.qunar.com","category":"出行"},{"name":"飞猪","desc":"阿里旅行平台","url":"https://www.fliggy.com","category":"出行"},{"name":"滴滴出行","desc":"网约车平台","url":"https://www.didiglobal.com","category":"出行"}]},{"sec":"生活","items":[{"name":"美团","desc":"本地生活服务平台","url":"https://www.meituan.com","category":"生活"},{"name":"饿了么","desc":"在线外卖订餐","url":"https://www.ele.me","category":"生活"},{"name":"大众点评","desc":"本地生活信息","url":"https://www.dianping.com","category":"生活"},{"name":"58同城","desc":"本地分类信息","url":"https://www.58.com","category":"生活"},{"name":"赶集网","desc":"分类信息网站","url":"https://www.ganji.com","category":"生活"}]},{"sec":"编程","items":[{"name":"菜鸟教程","desc":"编程学习网站","url":"https://www.runoob.com","category":"编程"},{"name":"W3School","desc":"Web技术教程","url":"https://www.w3school.com.cn","category":"编程"},{"name":"MDN Web Docs","desc":"Web开发文档","url":"https://developer.mozilla.org","category":"编程"},{"name":"freeCodeCamp","desc":"免费编程学习","url":"https://www.freecodecamp.org","category":"编程"},{"name":"Codecademy","desc":"交互式编程学习","url":"https://www.codecademy.com","category":"编程"}]},{"sec":"图片","items":[{"name":"Photoshop在线","desc":"在线PS工具","url":"https://www.photopea.com","category":"图片"},{"name":"TinyPNG","desc":"图片压缩工具","url":"https://tinypng.com","category":"图片"},{"name":"Remove.bg","desc":"AI抠图工具","url":"https://www.remove.bg","category":"图片"},{"name":"Bigjpg","desc":"AI图片放大","url":"https://bigjpg.com","category":"图片"},{"name":"Pixlr","desc":"在线图片编辑","url":"https://pixlr.com","category":"图片"}]},{"sec":"服务器","items":[{"name":"宝塔面板","desc":"服务器管理面板","url":"https://www.bt.cn","category":"服务器"},{"name":"Docker","desc":"容器化平台","url":"https://www.docker.com","category":"服务器"},{"name":"Kubernetes","desc":"容器编排系统","url":"https://kubernetes.io","category":"服务器"},{"name":"Nginx","desc":"高性能Web服务器","url":"https://nginx.org","category":"服务器"},{"name":"Apache","desc":"HTTP服务器","url":"https://httpd.apache.org","category":"服务器"}]},{"sec":"数据库","items":[{"name":"MySQL","desc":"关系型数据库","url":"https://www.mysql.com","category":"数据库"},{"name":"PostgreSQL","desc":"开源数据库","url":"https://www.postgresql.org","category":"数据库"},{"name":"MongoDB","desc":"NoSQL数据库","url":"https://www.mongodb.com","category":"数据库"},{"name":"Redis","desc":"内存数据库","url":"https://redis.io","category":"数据库"},{"name":"SQLite","desc":"轻量数据库","url":"https://www.sqlite.org","category":"数据库"}]},{"sec":"健康","items":[{"name":"春雨医生","desc":"在线医疗咨询","url":"https://www.chunyuyisheng.com","category":"健康"},{"name":"好大夫在线","desc":"医疗服务平台","url":"https://www.haodf.com","category":"健康"},{"name":"丁香医生","desc":"医学健康平台","url":"https://dxy.com","category":"健康"},{"name":"39健康网","desc":"健康资讯门户","url":"https://www.39.net","category":"健康"},{"name":"寻医问药","desc":"健康咨询网站","url":"https://www.xywy.com","category":"健康"}]},{"sec":"汽车","items":[{"name":"汽车之家","desc":"汽车资讯网站","url":"https://www.autohome.com.cn","category":"汽车"},{"name":"懂车帝","desc":"汽车资讯平台","url":"https://www.dongchedi.com","category":"汽车"},{"name":"易车网","desc":"汽车垂直网站","url":"https://www.yiche.com","category":"汽车"},{"name":"太平洋汽车网","desc":"汽车资讯门户","url":"https://www.pcauto.com.cn","category":"汽车"},{"name":"爱卡汽车","desc":"汽车互动社区","url":"https://www.xcar.com.cn","category":"汽车"}]},{"sec":"房产","items":[{"name":"链家","desc":"房产服务平台","url":"https://www.lianjia.com","category":"房产"},{"name":"安居客","desc":"房产信息网站","url":"https://www.anjuke.com","category":"房产"},{"name":"贝壳找房","desc":"找房大平台","url":"https://www.ke.com","category":"房产"},{"name":"房天下","desc":"房地产门户","url":"https://www.fang.com","category":"房产"},{"name":"我爱我家","desc":"房产中介服务","url":"https://www.5i5j.com","category":"房产"}]},{"sec":"摄影","items":[{"name":"图虫","desc":"摄影师社区","url":"https://tuchong.com","category":"摄影"},{"name":"500px","desc":"摄影作品分享","url":"https://500px.com.cn","category":"摄影"},{"name":"蜂鸟网","desc":"摄影门户网站","url":"https://www.fengniao.com","category":"摄影"},{"name":"色影无忌","desc":"摄影器材社区","url":"https://www.xitek.com","category":"摄影"},{"name":"POCO摄影","desc":"摄影图片社区","url":"https://www.poco.cn","category":"摄影"}]},{"sec":"购物","items":[{"name":"淘宝","desc":"阿里巴巴电商平台","url":"https://www.taobao.com","category":"购物"},{"name":"京东","desc":"京东商城","url":"https://www.jd.com","category":"购物"},{"name":"拼多多","desc":"拼多多购物平台","url":"https://www.pinduoduo.com","category":"购物"},{"name":"天猫","desc":"天猫商城","url":"https://www.tmall.com","category":"购物"}]},{"sec":"邮箱","items":[{"name":"QQ邮箱","desc":"腾讯邮箱服务","url":"https://mail.qq.com","category":"邮箱"},{"name":"网易邮箱","desc":"163免费邮箱","url":"https://mail.163.com","category":"邮箱"},{"name":"Gmail","desc":"谷歌邮箱","url":"https://mail.google.com","category":"邮箱"},{"name":"Outlook","desc":"微软邮箱","url":"https://outlook.live.com","category":"邮箱"}]},{"sec":"地图","items":[{"name":"百度地图","desc":"在线地图导航","url":"https://map.baidu.com","category":"地图"},{"name":"高德地图","desc":"高德导航地图","url":"https://www.amap.com","category":"地图"},{"name":"腾讯地图","desc":"腾讯在线地图","url":"https://map.qq.com","category":"地图"},{"name":"谷歌地图","desc":"谷歌全球地图","url":"https://maps.google.com","category":"地图"}]},{"sec":"文档","items":[{"name":"百度文库","desc":"文档分享平台","url":"https://wenku.baidu.com","category":"文档"},{"name":"豆丁网","desc":"文档分享社区","url":"https://www.docin.com","category":"文档"},{"name":"道客巴巴","desc":"文档在线阅读","url":"https://www.doc88.com","category":"文档"},{"name":"原创力文档","desc":"专业文档平台","url":"https://max.book118.com","category":"文档"}]},{"sec":"域名","items":[{"name":"阿里云域名","desc":"域名注册服务","url":"https://wanwang.aliyun.com","category":"域名"},{"name":"腾讯云域名","desc":"域名注册服务","url":"https://dnspod.cloud.tencent.com","category":"域名"},{"name":"GoDaddy","desc":"全球域名注册","url":"https://www.godaddy.com","category":"域名"},{"name":"Namecheap","desc":"便宜域名注册","url":"https://www.namecheap.com","category":"域名"}]},{"sec":"音频","items":[{"name":"喜马拉雅","desc":"音频分享平台","url":"https://www.ximalaya.com","category":"音频"},{"name":"蜻蜓FM","desc":"网络收音机","url":"https://www.qingting.fm","category":"音频"},{"name":"荔枝FM","desc":"人人都是主播","url":"https://www.lizhi.fm","category":"音频"},{"name":"猫耳FM","desc":"二次元声音社区","url":"https://www.missevan.com","category":"音频"}]},{"sec":"美食","items":[{"name":"下厨房","desc":"美食菜谱分享","url":"https://www.xiachufang.com","category":"美食"},{"name":"豆果美食","desc":"美食菜谱社区","url":"https://www.douguo.com","category":"美食"},{"name":"美食天下","desc":"美食资讯网站","url":"https://www.meishichina.com","category":"美食"},{"name":"香哈网","desc":"菜谱分享平台","url":"https://www.xiangha.com","category":"美食"}]},{"sec":"母婴","items":[{"name":"宝宝树","desc":"母婴社区平台","url":"https://www.babytree.com","category":"母婴"},{"name":"妈妈网","desc":"母婴知识社区","url":"https://www.mama.cn","category":"母婴"},{"name":"亲宝宝","desc":"亲子成长记录","url":"https://www.qbb6.com","category":"母婴"},{"name":"蜜芽","desc":"母婴电商平台","url":"https://www.mia.com","category":"母婴"}]},{"sec":"动漫","items":[{"name":"AcFun","desc":"弹幕视频网站","url":"https://www.acfun.cn","category":"动漫"},{"name":"哔哩哔哩","desc":"二次元文化社区","url":"https://www.bilibili.com","category":"动漫"},{"name":"动漫之家","desc":"动漫资讯网站","url":"https://www.dmzj.com","category":"动漫"},{"name":"腾讯动漫","desc":"动漫原创平台","url":"https://ac.qq.com","category":"动漫"}]},{"sec":"区块链","items":[{"name":"CoinMarketCap","desc":"加密货币行情","url":"https://coinmarketcap.com","category":"区块链"},{"name":"币安","desc":"加密货币交易所","url":"https://www.binance.com","category":"区块链"},{"name":"欧易OKX","desc":"数字资产交易","url":"https://www.okx.com","category":"区块链"},{"name":"火币","desc":"数字货币交易","url":"https://www.huobi.com","category":"区块链"}]},{"sec":"政府","items":[{"name":"中国政府网","desc":"中央政府门户","url":"https://www.gov.cn","category":"政府"},{"name":"国家政务服务","desc":"政务服务平台","url":"https://www.gjzwfw.gov.cn","category":"政府"},{"name":"个人所得税","desc":"个税申报系统","url":"https://www.etax.chinatax.gov.cn","category":"政府"},{"name":"交管12123","desc":"交通管理平台","url":"https://gd.122.gov.cn","category":"政府"}]},{"sec":"金融","items":[{"name":"支付宝","desc":"蚂蚁集团支付平台","url":"https://www.alipay.com","category":"金融"},{"name":"微信支付","desc":"腾讯支付平台","url":"https://pay.weixin.qq.com","category":"金融"},{"name":"云闪付","desc":"银联移动支付","url":"https://www.unionpay.com","category":"金融"}]},{"sec":"天气","items":[{"name":"中国天气网","desc":"官方天气查询","url":"http://www.weather.com.cn","category":"天气"},{"name":"墨迹天气","desc":"天气信息查询","url":"https://tianqi.moji.com","category":"天气"},{"name":"天气通","desc":"专业天气预报","url":"https://tq121.com.cn","category":"天气"}]},{"sec":"时尚","items":[{"name":"蘑菇街","desc":"时尚购物社区","url":"https://www.mogu.com","category":"时尚"},{"name":"美丽说","desc":"女性时尚社区","url":"https://www.meilishuo.com","category":"时尚"},{"name":"OnlyLady","desc":"女性时尚网站","url":"https://www.onlylady.com","category":"时尚"}]},{"sec":"安全","items":[{"name":"泪痕智能AI","desc":"泪痕开发的AI机器人","url":"https://pub-98e77454d5fc46438fe6f46cf574e4e5.r2.dev/4e484b9a-b525-4f66-b780-560c6e4c7eb6.html","category":"安全"}]},{"sec":"学习","items":[{"name":"历史上的今天","desc":"历史事件查询","url":"https://www.lssjt.com","category":"学习"}]}];
+
+var wrap = document.getElementById('wrap');
+var qEl = document.getElementById('q');
+var chipsEl = document.getElementById('chips');
+var cntEl = document.getElementById('cnt');
+var cnEl = document.getElementById('cn');
+var all = [];                 /* {el, kw, cat, secEl, gridEl} */
+var curCat = '全部';
+
+/* 渲染分类区 */
+SITES.forEach(function (sec) {
+  var box = document.createElement('section');
+  var h = document.createElement('div');
+  h.className = 'sec';
+  h.innerHTML = '<span></span><small></small>';
+  h.querySelector('span').textContent = sec.sec;
+  h.querySelector('small').textContent = sec.items.length + ' 个';
+  var g = document.createElement('div');
+  g.className = 'grid';
+  sec.items.forEach(function (it) {
+    var host = (it.url || '').replace(/^https?:\/\//, '').split('/')[0];
+    var a = document.createElement('a');
+    a.className = 'site';
+    a.href = it.url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.setAttribute('data-cat', sec.sec);
+    var kw = (sec.sec + ' ' + it.name + ' ' + it.desc).toLowerCase();
+    a.setAttribute('data-kw', kw);
+    var fav = document.createElement('span');
+    fav.className = 'fav';
+    fav.textContent = (it.name || '?').charAt(0);
+    var img = document.createElement('img');
+    img.alt = ''; img.loading = 'lazy';
+    img.src = 'https://' + host + '/favicon.ico';
+    img.onerror = function () { img.remove(); };
+    fav.appendChild(img);
+    var t = document.createElement('span');
+    t.className = 'txt';
+    t.innerHTML = '<span class="nm"></span><span class="ds"></span>';
+    t.querySelector('.nm').textContent = it.name;
+    t.querySelector('.ds').textContent = it.desc || '';
+    a.appendChild(fav); a.appendChild(t);
+    g.appendChild(a);
+    all.push({ el: a, kw: kw, cat: sec.sec, gridEl: g, secEl: box });
+  });
+  box.appendChild(h);
+  box.appendChild(g);
+  wrap.appendChild(box);
+});
+
+cntEl.textContent = all.length;
+cnEl.textContent = SITES.length;
+
+/* 分类筛选 chips */
+function toast(m) {
+  var t = document.getElementById('toast');
+  t.textContent = m; t.classList.add('on');
+  clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('on'); }, 1400);
+}
+
+function chipRow() {
+  var mk = function (label, val) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip' + (val === curCat ? ' on' : '');
+    b.textContent = label;
+    b.addEventListener('click', function () {
+      curCat = val;
+      chipsEl.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('on'); });
+      b.classList.add('on');
+      apply();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    return b;
+  };
+  chipsEl.appendChild(mk('全部', '全部'));
+  SITES.forEach(function (s) { chipsEl.appendChild(mk(s.sec + ' ' + s.items.length, s.sec)); });
+}
+
+function apply() {
+  var q = qEl.value.trim().toLowerCase();
+  var shown = 0, secShown = 0;
+  var visBySec = new Map();
+  all.forEach(function (o) {
+    var okCat = (curCat === '全部') || (o.cat === curCat);
+    var okQ = !q || o.kw.indexOf(q) >= 0;
+    var vis = okCat && okQ;
+    o.el.style.display = vis ? '' : 'none';
+    o.secEl.style.display = 'none';   /* 先全部藏，下面按需显示 */
+    if (vis) { shown++; visBySec.set(o.secEl, true); }
+  });
+  all.forEach(function (o) { if (o.el.style.display !== 'none') o.secEl.style.display = ''; });
+  visBySec.forEach(function (_, secEl) { secShown++; });
+  cntEl.textContent = shown;
+  cnEl.textContent = secShown;
+  if (shown === 0) {
+    if (!document.getElementById('none')) {
+      var e = document.createElement('div');
+      e.id = 'none'; e.className = 'empty';
+      e.textContent = '没有匹配的站点，换个关键词试试';
+      wrap.appendChild(e);
+    }
+  } else {
+    var e = document.getElementById('none');
+    if (e) e.remove();
+  }
+}
+
+qEl.addEventListener('input', apply);
+chipRow();
+apply();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  });
+}
+</script>
+</body>
+</html>

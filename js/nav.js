@@ -84,6 +84,7 @@
       var el;
       if (nav === 'editor') { enterEditor(); return; }
       if (nav === 'sites') { location.href = 'sites.html'; return; }
+      if (nav === 'more') { location.href = 'more.html'; return; }
       if (nav === 'fuhao') { location.href = 'fuhao.html'; return; }
       if (nav === 'changelog') { location.href = 'changelog.html'; return; }
       if (nav === 'about') {
