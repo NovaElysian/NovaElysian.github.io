@@ -1192,7 +1192,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     }, 2000);
                 }
             }
-            if (O) {
+            
+            window.App.openProjectById = H;   /* 供抽屉「T显编辑器」直接进编辑器 */
+if (O) {
                 O.addEventListener("touchstart", e => {
                     if (!B) {
                         return;

@@ -53,6 +53,24 @@
       if (e.key === 'Escape' && sidebar.classList.contains('active')) closeDrawer();
     });
 
+    /* ---------- 进入编辑器：最近的项目；没有则新建 ----------
+       不再经过「创建项目」面板 —— 与参考实现一致（打开即是编辑器）。 */
+    function enterEditor() {
+      if (!(window.App && window.App.storage && window.App.openProjectById)) {
+        var fb = document.getElementById('btn-create');
+        if (fb) fb.click();          /* 兜底：走创建面板 */
+        return;
+      }
+      var list = window.App.storage.getAllProjects() || [];
+      list.sort(function (a, b) { return (b.updatedAt || 0) - (a.updatedAt || 0); });
+      var p = list[0];
+      if (!p) {
+        p = window.App.storage.createNewProject();
+        window.App.storage.saveProject(p);
+      }
+      window.App.openProjectById(p.id);
+    }
+
     /* ---------- 动作分派 ---------- */
     var VIEW_MAP = {
       home: 'view-home',
@@ -64,11 +82,8 @@
 
     function runAction(nav) {
       var el;
-      if (nav === 'editor') {
-        el = document.getElementById('btn-create');
-        if (el) el.click();
-        return;
-      }
+      if (nav === 'editor') { enterEditor(); return; }
+      if (nav === 'sites') { location.href = 'sites.html'; return; }
       if (nav === 'fuhao') { location.href = 'fuhao.html'; return; }
       if (nav === 'changelog') { location.href = 'changelog.html'; return; }
       if (nav === 'about') {
