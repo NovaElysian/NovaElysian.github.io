@@ -83,3 +83,27 @@ body.dark-theme .gs-drop{background:var(--card-bg);}
 .grad-g4::before,.grad-g4 .tool-icon{background:linear-gradient(135deg,#f7b733,#fc8721);}
 .grad-g5::before,.grad-g5 .tool-icon{background:linear-gradient(135deg,#30cfd0,#00b8d9);}
 .grad-g6::before,.grad-g6 .tool-icon{background:linear-gradient(135deg,#667eea,#4fb8ff);}
+
+
+/* ===== v1.7.0：隐藏底部Tab + 功能抽屉导航 ===== */
+.app-tabbar{display:none !important;}
+
+.nav-title{font-size:16px;font-weight:600;color:var(--text-main);}
+.nav-close{width:32px;height:32px;border:0;border-radius:10px;background:transparent;color:var(--text-sub);font-size:20px;line-height:1;cursor:pointer;}
+.nav-close:active{background:var(--bg-color);}
+.nav-group{margin-bottom:14px;}
+.nav-group-label{font-size:12px;color:var(--text-sub);padding:6px 6px 8px;letter-spacing:.06em;}
+.nav-item{display:flex;align-items:center;gap:12px;padding:10px 10px;border-radius:12px;color:var(--text-main);cursor:pointer;-webkit-tap-highlight-color:transparent;opacity:0;transform:translateX(-10px);}
+.nav-item:active,.nav-item:focus-visible{background:var(--bg-color);}
+.nav-ic{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none;box-shadow:0 2px 6px rgba(0,0,0,.10);}
+.nav-ic svg{width:20px;height:20px;}
+.nav-txt{flex:1;font-size:15px;font-weight:500;}
+.nav-arrow{color:var(--text-sub);font-size:18px;line-height:1;}
+.nav-sep{height:4px;}
+.sidebar-content{padding-top:8px;}
+.nav-item[data-g="g1"] .nav-ic{background:linear-gradient(135deg,#fb7299,#ff8fb1);}
+.nav-item[data-g="g2"] .nav-ic{background:linear-gradient(135deg,#4facfe,#00c6fb);}
+.nav-item[data-g="g3"] .nav-ic{background:linear-gradient(135deg,#43e79b,#38f9d7);}
+.nav-item[data-g="g4"] .nav-ic{background:linear-gradient(135deg,#f7b733,#fc8721);}
+.nav-item[data-g="g5"] .nav-ic{background:linear-gradient(135deg,#30cfd0,#00b8d9);}
+.nav-item[data-g="g6"] .nav-ic{background:linear-gradient(135deg,#667eea,#4fb8ff);}
