@@ -16,7 +16,7 @@
  *   跨源 / 非 GET    → 直接放行
  */
 
-const VERSION = 'v1.8.7';
+const VERSION = 'v1.8.8';
 const CACHE_STATIC = 'tnt-static-' + VERSION;
 const CACHE_PAGE = 'tnt-page-' + VERSION;
 const KEEP = [CACHE_STATIC, CACHE_PAGE];

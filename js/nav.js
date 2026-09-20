@@ -53,6 +53,44 @@
       if (e.key === 'Escape' && sidebar.classList.contains('active')) closeDrawer();
     });
 
+    /* ---------- 应用内外观：进入 T显编辑器 及其内页时显示底栏 ---------- */
+    var APP_VIEWS = ['view-editor', 'view-template', 'view-tutorial', 'view-project'];
+    function syncAppChrome() {
+      var inApp = APP_VIEWS.some(function (id) {
+        var v = document.getElementById(id);
+        return !!(v && v.classList.contains('active'));
+      });
+      document.body.classList.toggle('in-app', inApp);
+    }
+    syncAppChrome();
+    if (window.MutationObserver) {
+      var chromeOb = new MutationObserver(syncAppChrome);
+      APP_VIEWS.concat(['view-home']).forEach(function (id) {
+        var v = document.getElementById(id);
+        if (v) chromeOb.observe(v, { attributes: true, attributeFilter: ['class'] });
+      });
+    }
+    /* 编辑器是 z-index:200 的全屏浮层，用 transform/visibility 隐藏，
+       不属于 .view-section —— 标准的视图切换（只清 .view-section）清不掉它。
+       因此切到任何其它视图时都要显式收起，否则会残留并盖住页面。 */
+    function dismissEditorOverlay() {
+      var ed = document.getElementById('view-editor');
+      if (ed) ed.classList.remove('active');
+    }
+
+    /* 兜底：MutationObserver 只覆盖上面这几个节点，且回调触发时机不总是可靠。
+       任何点击后同步更新一次（此时视图切换已在同一事件派发内完成），
+       再异步兜底一次以覆盖延迟切换的场景。 */
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest && e.target.closest('[data-target^="view-"], [data-switch-view]');
+      if (t) {
+        var v = t.getAttribute('data-target') || t.getAttribute('data-switch-view');
+        if (v !== 'view-editor') dismissEditorOverlay();
+      }
+      syncAppChrome();
+      setTimeout(syncAppChrome, 0);
+    });
+
     /* ---------- 进入编辑器：最近的项目；没有则新建 ----------
        不再经过「创建项目」面板 —— 与参考实现一致（打开即是编辑器）。 */
     function enterEditor() {
