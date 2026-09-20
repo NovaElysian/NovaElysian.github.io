@@ -84,6 +84,9 @@
       });
     }
 
+    var heroCreate = document.getElementById('hero-create');
+    if (heroCreate) heroCreate.addEventListener('click', openEditor);
+
     /* ---------------- 站内搜索 ---------------- */
     function getPresets() { try { return window.__pcPresets || []; } catch (e) { return []; } }
     function getTutorials() {

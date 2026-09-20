@@ -107,3 +107,24 @@ body.dark-theme .gs-drop{background:var(--card-bg);}
 .nav-item[data-g="g4"] .nav-ic{background:linear-gradient(135deg,#f7b733,#fc8721);}
 .nav-item[data-g="g5"] .nav-ic{background:linear-gradient(135deg,#30cfd0,#00b8d9);}
 .nav-item[data-g="g6"] .nav-ic{background:linear-gradient(135deg,#667eea,#4fb8ff);}
+
+
+/* ===== v1.8.0：首页Hero + 工具表面统一 ===== */
+.hero-card{border-radius:16px;}
+.hero-badge{display:inline-flex;align-items:center;padding:5px 11px;border-radius:999px;background:color-mix(in srgb,var(--accent-color,#fb7299) 14%,transparent);color:var(--accent-color);font-size:12px;font-weight:600;margin-bottom:12px;}
+.hero-title{font-size:25px;line-height:1.25;font-weight:700;color:var(--text-main);margin:0 0 6px;}
+.hero-title span{color:var(--accent-color);}
+.hero-sub{font-size:13px;color:var(--text-sub);line-height:1.65;margin:0 0 18px;}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap;}
+.hero-btn{flex:1;min-width:120px;background:var(--accent-color);color:#fff;border:0;border-radius:10px;padding:12px 16px;font-size:14px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .1s,opacity .15s;}
+.hero-btn.ghost{background:transparent;color:var(--accent-color);border:1px solid var(--accent-color);}
+.hero-btn:active{transform:scale(.97);opacity:.9;}
+body.dark-theme .hero-badge{background:color-mix(in srgb,var(--accent-color,#fb7299) 22%,transparent);}
+
+/* 工具表面统一（工坊/模板/教程/项目卡片） */
+.ws-panel .card{border-radius:14px;}
+.ws-panel .card-title{font-size:0.95rem;font-weight:600;color:var(--text-main);}
+.ws-panel button,.ws-panel .ws-btn{border-radius:9px;}
+.output-box{border-radius:12px;}
+.section-header h2{font-size:19px;font-weight:700;color:var(--text-main);}
+.view-section{animation:none;}

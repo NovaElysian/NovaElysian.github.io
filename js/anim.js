@@ -79,8 +79,6 @@
         nr.textContent = '未找到匹配结果';
       });
     }
-    bindSearch('tutorial-search', 'tutorial-grid', '.interactive-tutorial-card');
-    bindSearch('template-search', 'templates-grid', '.element-card');
 
     /* --- animejs 入场动效 --- */
     function forceShow() {

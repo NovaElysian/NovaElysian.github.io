@@ -710,7 +710,7 @@
     };
 
     var searchInput = document.getElementById("siteSearch");
-    searchInput.addEventListener("input", function() {
+    if (searchInput) searchInput.addEventListener("input", function() {
         var q = this.value.trim().toLowerCase();
         document.querySelectorAll("#siteList .site-item").forEach(function(it) {
             var kw = (it.getAttribute("data-kw") || "").toLowerCase();
