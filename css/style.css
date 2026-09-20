@@ -65,7 +65,7 @@ body.dark-theme .about-item{background:var(--card-bg);}
 .gs-sub{flex:none;font-size:12px;color:var(--text-sub);}
 .home-section-title{font-size:13px;color:var(--text-sub);margin:0 0 10px;padding-left:2px;letter-spacing:.04em;}
 
-.tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+/* .tool-grid 已废弃：主页工具格于 v1.8.2 迁入抽屉 .nav-grid */
 .tool-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:10px;box-sizing:border-box;padding:14px;border:1px solid var(--border-color);border-radius:14px;background:var(--card-bg);text-align:left;cursor:pointer;overflow:hidden;-webkit-tap-highlight-color:transparent;opacity:0;transition:transform .12s,border-color .2s,box-shadow .2s;}
 .tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:.85;}
 .tool-card:active{transform:scale(.97);}
@@ -95,7 +95,7 @@ body.dark-theme .gs-drop{background:var(--card-bg);}
 .nav-close:active{background:var(--bg-color);}
 .nav-group{margin-bottom:14px;}
 .nav-group-label{font-size:12px;color:var(--text-sub);padding:6px 6px 8px;letter-spacing:.06em;}
-.nav-item{display:flex;align-items:center;gap:12px;padding:10px 10px;border-radius:12px;color:var(--text-main);cursor:pointer;-webkit-tap-highlight-color:transparent;opacity:0;transform:translateX(-10px);}
+.nav-item{display:flex;align-items:center;gap:12px;padding:10px 10px;border-radius:12px;color:var(--text-main);cursor:pointer;-webkit-tap-highlight-color:transparent;}
 .nav-item:active,.nav-item:focus-visible{background:var(--bg-color);}
 .nav-ic{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none;box-shadow:0 2px 6px rgba(0,0,0,.10);}
 .nav-ic svg{width:20px;height:20px;}
@@ -109,6 +109,26 @@ body.dark-theme .gs-drop{background:var(--card-bg);}
 .nav-item[data-g="g4"] .nav-ic{background:linear-gradient(135deg,#f7b733,#fc8721);}
 .nav-item[data-g="g5"] .nav-ic{background:linear-gradient(135deg,#30cfd0,#00b8d9);}
 .nav-item[data-g="g6"] .nav-ic{background:linear-gradient(135deg,#667eea,#4fb8ff);}
+
+/* ===== 抽屉「功能」分格（原主页工具卡迁入）=====
+   注意：这些卡片是导航的唯一入口，默认必须可见 —— 不得依赖 JS 动画才显示。 */
+.nav-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;padding:2px 0 4px;}
+.fn-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:13px 8px;border-radius:14px;background:var(--card-bg);color:var(--text-main);cursor:pointer;-webkit-tap-highlight-color:transparent;border:1px solid var(--border-color);box-shadow:0 1px 3px rgba(0,0,0,.05);transition:transform .12s,box-shadow .12s;}
+.fn-card:active,.fn-card:focus-visible{transform:scale(.96);box-shadow:0 0 0 2px var(--accent-color);}
+.fn-ic{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none;box-shadow:0 2px 6px rgba(0,0,0,.10);}
+.fn-ic svg{width:20px;height:20px;}
+.fn-title{font-size:12.5px;font-weight:600;line-height:1.3;text-align:center;word-break:break-word;}
+.fn-card[data-g="g1"] .fn-ic{background:linear-gradient(135deg,#fb7299,#ff8fb1);}
+.fn-card[data-g="g2"] .fn-ic{background:linear-gradient(135deg,#4facfe,#00c6fb);}
+.fn-card[data-g="g3"] .fn-ic{background:linear-gradient(135deg,#43e79b,#38f9d7);}
+.fn-card[data-g="g4"] .fn-ic{background:linear-gradient(135deg,#f7b733,#fc8721);}
+.fn-card[data-g="g5"] .fn-ic{background:linear-gradient(135deg,#30cfd0,#00b8d9);}
+.fn-card[data-g="g6"] .fn-ic{background:linear-gradient(135deg,#667eea,#4fb8ff);}
+.fn-card[data-g="g7"] .fn-ic{background:linear-gradient(135deg,#a86bff,#e879f9);}
+.fn-card[data-g="g8"] .fn-ic{background:linear-gradient(135deg,#94a3b8,#64748b);}
+/* 抽屉内搜索框自适应窄栏 */
+.sidebar .global-search{width:100%;}
+.sidebar .gs-drop{max-height:52vh;overflow-y:auto;}
 
 
 /* ===== v1.8.0：首页Hero + 工具表面统一 ===== */

@@ -5,29 +5,27 @@
     else { document.addEventListener('DOMContentLoaded', fn); }
   }
   onReady(function () {
-    var util = window.anime || null;
 
-    /* ---------------- 工具卡片数据 ---------------- */
-    var TOOLS = [
-      { key:'editor',   title:'指令编辑器', sub:'多帧 actionbar 排版', icon:'pencil', grad:'g1', act:'editor' },
-      { key:'workshop', title:'指令工坊',   sub:'give / execute 生成', icon:'craft',   grad:'g2', act:'view-workshop' },
-      { key:'template', title:'标题模板',   sub:'竖列 / 跑马灯模板',   icon:'layers',  grad:'g3', act:'view-template' },
-      { key:'preset',   title:'预设指令中心', sub:'撤离 / 菜单 / 商店', icon:'box',    grad:'g4', act:'preset' },
-      { key:'tutorial', title:'交互教程',   sub:'手把手图文引导',      icon:'book',    grad:'g5', act:'view-tutorial' },
-      { key:'project',  title:'我的项目',   sub:'已保存的作品',        icon:'folder',  grad:'g6', act:'view-project' },
-      { key:'fuhao',    title:'字形符号库', sub:'5.4 万字形 · 点击复制', icon:'hash',   grad:'g7', act:'fuhao' },
-      { key:'changelog',title:'更新日志',   sub:'版本变更记录',        icon:'clock',   grad:'g8', act:'changelog' }
-    ];
-    var ICONS = {
-      pencil: 'M12 2l1 4 4 1-3 3 1 4-3-2-3 2 1-4-3-3 4-1 1-4z',
-      craft:  'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0zM8.5 13l2 2 5-5',
-      layers: 'M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5',
-      box:    'M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M12 12v10',
-      book:   'M5 3h13a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM8 3v9l3-2 3 2V3',
-      folder: 'M3 6a2 2 0 0 1 2-2h4l3 3h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z',
-      hash:   'M4 9h16M4 15h16M10 3L8 21M16 3l-2 18',
-      clock:  'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0zM12 7v5l3 2'
+    /* ---------------- 工具数据（单一数据源）----------------
+       抽屉里的功能卡（index.html 中 #sidebar .fn-card，静态 HTML）就是权威列表。
+       原先这里另有一份硬编码 TOOLS + ICONS，与主页工具格、抽屉卡片三处重复，
+       主页工具格已删除，故改为直接从抽屉卡片派生，避免再次走样。 */
+    var NAV2ACT = {
+      home: 'view-home', workshop: 'view-workshop', template: 'view-template',
+      tutorial: 'view-tutorial', project: 'view-project',
+      editor: 'editor', preset: 'preset', fuhao: 'fuhao', changelog: 'changelog'
     };
+    var TOOLS = [];
+    document.querySelectorAll('#sidebar .fn-card').forEach(function (card) {
+      var t = card.querySelector('.fn-title');
+      var nav = card.getAttribute('data-nav') || '';
+      TOOLS.push({
+        key: nav,
+        title: t ? t.textContent.trim() : '',
+        sub: card.getAttribute('title') || '',
+        act: NAV2ACT[nav] || nav
+      });
+    });
     var TEMPLATES = [
       { name:'竖列菜单', kw:'washoku 状态机' },
       { name:'通用菜单', kw:'marquee 跑马灯 菜单' },
@@ -35,9 +33,7 @@
       { name:'关机动画', kw:'18帧 shutdown' },
       { name:'载入动画', kw:'9帧 滑入 load' }
     ];
-    function svgIcon(path) {
-      return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + path + '"/></svg>';
-    }
+    /* svgIcon 已移除：功能卡改为 index.html 里的静态 HTML，图标直接写在卡片内 */
 
     /* ---------------- 视图切换 / 打开 ---------------- */
     function switchView(v) {
@@ -73,25 +69,26 @@
       else switchView(act);
     }
 
-    /* ---------------- 渲染工具卡片 ---------------- */
-    var grid = document.getElementById('tool-grid');
-    if (grid) {
-      var html = '';
-      for (var i = 0; i < TOOLS.length; i++) {
-        var t = TOOLS[i];
-        html += '<button type="button" class="tool-card grad-' + t.grad + '" data-tool="' + t.key + '" data-act="' + t.act + '">' +
-                  '<span class="tool-icon">' + svgIcon(ICONS[t.icon]) + '</span>' +
-                  '<span class="tool-txt"><span class="tool-title">' + t.title + '</span><span class="tool-sub">' + t.sub + '</span></span>' +
-                '</button>';
-      }
-      grid.innerHTML = html;
-      grid.querySelectorAll('.tool-card').forEach(function (c) {
-        c.addEventListener('click', function () { actTool(c.getAttribute('data-act')); });
-      });
-    }
+    /* ---------------- 工具卡片渲染：已迁至抽屉 ----------------
+       原先在此渲染 #tool-grid，现已按需求把「功能分格」搬进左上角抽屉
+       （index.html 中静态 HTML，保证不依赖 JS 也能显示）。
+       这里不再渲染任何工具卡，仅保留下面的搜索与 hero 绑定。 */
 
     var heroCreate = document.getElementById('hero-create');
     if (heroCreate) heroCreate.addEventListener('click', openEditor);
+
+    /* 点击搜索结果后收起抽屉，否则结果在抽屉后面看不见 */
+    function closeDrawerIfOpen() {
+      var sb = document.getElementById('sidebar');
+      if (!sb || !sb.classList.contains('active')) return;
+      sb.classList.remove('active');
+      var ov = document.getElementById('sidebar-overlay');
+      if (ov) ov.classList.remove('active');
+      sb.querySelectorAll('.fn-card, .nav-item').forEach(function (el) {
+        el.style.opacity = '';
+        el.style.transform = '';
+      });
+    }
 
     /* ---------------- 站内搜索 ---------------- */
     function getPresets() { try { return window.__pcPresets || []; } catch (e) { return []; } }
@@ -115,7 +112,8 @@
       d.type = 'button';
       d.className = 'gs-row';
       d.innerHTML = '<span class="gs-tag">' + type + '</span><span class="gs-label">' + label + '</span>' + (sub ? '<span class="gs-sub">' + sub + '</span>' : '');
-      d.addEventListener('click', fn);
+      /* 搜索框现在位于抽屉内：先收起抽屉，再执行动作 */
+      d.addEventListener('click', function () { closeDrawerIfOpen(); fn(); });
       return d;
     }
     function doSearch() {
@@ -175,14 +173,10 @@
     if (clear) clear.addEventListener('click', function () { input.value = ''; clear.style.opacity = '0'; drop.classList.remove('open'); input.focus(); });
     document.addEventListener('click', function (e) { if (!e.target.closest('#global-search')) drop.classList.remove('open'); });
 
-    /* ---------------- 入场动效 ---------------- */
-    if (util) {
-      var cards = document.querySelectorAll('#tool-grid .tool-card');
-      if (cards.length) {
-        util.animate(cards, { opacity: [0, 1], translateY: [16, 0], scale: [0.96, 1], delay: util.stagger(55), duration: 520, ease: 'outCubic' });
-      }
-    } else {
-      document.querySelectorAll('#tool-grid .tool-card').forEach(function (c) { c.style.opacity = '1'; });
-    }
+    /* ---------------- 入场动效 ----------------
+       原先在这里给 #tool-grid 的工具卡做错峰入场；工具卡已迁入抽屉，
+       其入场动效改由 nav.js 负责（且降级为纯增强，CSS 默认可见）。
+       这里不再新增动效：主页内容一律保持 CSS 默认可见，避免再出现
+       「动画没跑 → 内容被留在 opacity:0」这类静默空白。 */
   });
 })();
