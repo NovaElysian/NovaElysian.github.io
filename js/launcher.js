@@ -14,7 +14,9 @@
       { key:'template', title:'标题模板',   sub:'竖列 / 跑马灯模板',   icon:'layers',  grad:'g3', act:'view-template' },
       { key:'preset',   title:'预设指令中心', sub:'撤离 / 菜单 / 商店', icon:'box',    grad:'g4', act:'preset' },
       { key:'tutorial', title:'交互教程',   sub:'手把手图文引导',      icon:'book',    grad:'g5', act:'view-tutorial' },
-      { key:'project',  title:'我的项目',   sub:'已保存的作品',        icon:'folder',  grad:'g6', act:'view-project' }
+      { key:'project',  title:'我的项目',   sub:'已保存的作品',        icon:'folder',  grad:'g6', act:'view-project' },
+      { key:'fuhao',    title:'字形符号库', sub:'5.4 万字形 · 点击复制', icon:'hash',   grad:'g7', act:'fuhao' },
+      { key:'changelog',title:'更新日志',   sub:'版本变更记录',        icon:'clock',   grad:'g8', act:'changelog' }
     ];
     var ICONS = {
       pencil: 'M12 2l1 4 4 1-3 3 1 4-3-2-3 2 1-4-3-3 4-1 1-4z',
@@ -22,7 +24,9 @@
       layers: 'M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5',
       box:    'M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M12 12v10',
       book:   'M5 3h13a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM8 3v9l3-2 3 2V3',
-      folder: 'M3 6a2 2 0 0 1 2-2h4l3 3h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z'
+      folder: 'M3 6a2 2 0 0 1 2-2h4l3 3h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z',
+      hash:   'M4 9h16M4 15h16M10 3L8 21M16 3l-2 18',
+      clock:  'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0zM12 7v5l3 2'
     };
     var TEMPLATES = [
       { name:'竖列菜单', kw:'washoku 状态机' },
@@ -64,6 +68,8 @@
     function actTool(act) {
       if (act === 'editor') openEditor();
       else if (act === 'preset') openPreset('');
+      else if (act === 'fuhao') location.href = 'fuhao.html';
+      else if (act === 'changelog') location.href = 'changelog.html';
       else switchView(act);
     }
 

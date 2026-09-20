@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>更新日志 · 通用T显编辑器</title>
+<meta name="description" content="通用T显编辑器版本变更记录，按时间倒序，含每版的功能改动与性能优化明细。">
+<meta name="theme-color" content="#fb7299">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--accent:#fb7299;--bg:#f5f6f8;--card:#fff;--text:#1a1a1a;--sub:#777;--border:#e0e0e0}
+@media (prefers-color-scheme:dark){:root{--bg:#151724;--card:#1a1c29;--text:#e0e0e0;--sub:#a0a0a0;--border:#2a2d3e}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans SC",sans-serif;padding:0 0 32px;-webkit-tap-highlight-color:transparent}
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding:calc(12px + env(safe-area-inset-top,0px)) 14px 12px}
+.hrow{max-width:680px;margin:0 auto;display:flex;align-items:center;gap:10px}
+h1{font-size:1.05rem;margin:0;font-weight:700;flex:1}
+h1 span{color:var(--accent)}
+a.back{font-size:.82rem;color:var(--sub);text-decoration:none;border:1px solid var(--border);padding:6px 11px;border-radius:9px;white-space:nowrap}
+a.back:hover{color:var(--accent);border-color:var(--accent)}
+main{max-width:680px;margin:0 auto;padding:16px 14px}
+.tl{position:relative;padding-left:20px}
+.tl::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--border);border-radius:2px}
+.rel{position:relative;margin-bottom:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 15px}
+.rel::before{content:'';position:absolute;left:-19px;top:19px;width:10px;height:10px;border-radius:50%;background:var(--border);box-shadow:0 0 0 3px var(--bg)}
+.rel.latest::before{background:var(--accent);box-shadow:0 0 0 3px var(--bg),0 0 0 5px rgba(251,114,153,.25)}
+.relhead{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:8px}
+.ver{font-size:1rem;font-weight:800;letter-spacing:.01em}
+.latest .ver{color:var(--accent)}
+.date{font-size:.74rem;color:var(--sub);font-family:ui-monospace,Menlo,Consolas,monospace}
+.badge{font-size:.66rem;padding:2px 7px;border-radius:6px;background:var(--accent);color:#fff;font-weight:600}
+ul{margin:0;padding-left:18px}
+li{font-size:.86rem;line-height:1.85;color:var(--text)}
+li::marker{color:var(--sub)}
+li b{color:var(--accent)}
+.note{font-size:.76rem;color:var(--sub);line-height:1.8;margin-top:14px;text-align:center}
+footer{max-width:680px;margin:22px auto 0;padding:0 14px;font-size:.74rem;color:var(--sub);text-align:center;line-height:1.8}
+</style>
+</head>
+<body>
+<header>
+  <div class="hrow">
+    <h1>更新 / <span>日志</span></h1>
+    <a class="back" href="index.html">返回编辑器</a>
+  </div>
+</header>
+
+<main>
+  <div class="tl">
+
+    <div class="rel latest">
+      <div class="relhead"><span class="ver">v1.8.1</span><span class="badge">最新</span><span class="date">2026-09-20</span></div>
+      <ul>
+        <li><b>性能</b>：移除启动链中一份<b>全站零引用</b>的字体数据（1.58 MB），首屏传输体积减少约 <b>1.11 MB</b>，实测该资源原本要下载 <b>8.9 秒</b></li>
+        <li><b>性能</b>：字形宽度表由 939 KB 改为紧凑编码，压缩到 <b>50.6 KB</b>（gzip 148 KB → 16.8 KB），逐条校验 54,092 项映射完全一致</li>
+        <li><b>性能</b>：宽度表改为 <code>&lt;link rel="preload"&gt;</code> 提前下载，启动屏消失更快</li>
+        <li><b>离线</b>：新增 Service Worker，回访秒开、断网可用（页面走网络优先，绝不锁死旧版本）</li>
+        <li><b>新增</b>：<a href="fuhao.html">字形符号库</a> —— 54,092 个字形按页浏览、按码点搜索、点击即复制</li>
+        <li><b>新增</b>：更新日志页（本页）、404 页面、manifest.json（可安装为应用）、robots.txt / sitemap.xml</li>
+        <li><b>改进</b>：全站资源统一版本指纹，修正两个漏加版本号的脚本</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <div class="relhead"><span class="ver">v1.8.0</span><span class="date">2026-09-20</span></div>
+      <ul>
+        <li>功能页布局精简统一，消除重复入口</li>
+        <li>首页改为 Hero 版式，去除重复的逐页搜索框</li>
+        <li>统一工具卡片圆角</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <div class="relhead"><span class="ver">v1.7.0</span><span class="date">2026-09-20</span></div>
+      <ul>
+        <li>移除底部 Tab 栏，整合为左上角功能抽屉导航（主页 / 编辑器 / 工坊 / 模板 / 预设 / 教程 / 项目 / 关于）</li>
+        <li>整体转为简洁风，anime.js 错峰入场动效</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <div class="relhead"><span class="ver">v1.6.0</span><span class="date">2026-09-20</span></div>
+      <ul>
+        <li>首页工具启动器（6 卡片 + anime.js 动效）</li>
+        <li>站内全局搜索：工具 / 模板 / 预设 / 教程</li>
+        <li>新增预设中心入口</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <div class="relhead"><span class="ver">v1.5.0</span><span class="date">2026-09-20</span></div>
+      <ul>
+        <li>anime.js 动效、首页搜索、网站公告条</li>
+        <li>新增开发者联系方式与首页关于卡片</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <div class="relhead"><span class="ver">v1.4.1</span><span class="date">2026-09-20</span></div>
+      <ul>
+        <li>新 favicon（T+ 粉色）</li>
+        <li>预设中心新增分类与搜索，扩充 6 个预设</li>
+        <li>清理旧品牌字样</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <div class="relhead"><span class="ver">v1.4.0</span><span class="date">2026-09-20</span></div>
+      <ul>
+        <li>修复模板页插值被拆坏导致显示代码的问题</li>
+        <li>预设中心统一主题，同步预设 / 字体 / favicon 资产</li>
+        <li>视觉体验优化</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <div class="relhead"><span class="ver">v1.3.2 / v1.3.3</span><span class="date">2026-09-19</span></div>
+      <ul>
+        <li>进入时全屏加载动画 + 资源就绪检测，修复编辑器文字晕染</li>
+        <li>移除 intent 跳转，新增工具站收录（MC Toolbox / CraftCMD / MineBuildr / MCWorldTools）</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <div class="relhead"><span class="ver">v1.3.0 / v1.3.1</span><span class="date">2026-09-19</span></div>
+      <ul>
+        <li>集成指令工坊（give / execute / 历史 / 推荐网站）</li>
+        <li>整合系列站点为单一入口</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <div class="relhead"><span class="ver">v1.2.0</span><span class="date">2026-09-19</span></div>
+      <ul>
+        <li>字体数据改为异步加载，核心交互即时可用</li>
+        <li>修复移动端点击无效问题</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <div class="relhead"><span class="ver">v1.0.0</span><span class="date">2026-09-19</span></div>
+      <ul>
+        <li>通用T显编辑器首次发布（GitHub Pages）</li>
+        <li>修复移动端 view-editor / sidebar / bottom-sheet 未激活拦截点击</li>
+      </ul>
+    </div>
+
+  </div>
+  <p class="note">版本号与改动依据仓库提交记录整理，按时间倒序。</p>
+</main>
+
+<footer>通用T显编辑器 · 网易基岩版 titleraw 排版工具</footer>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}</script>
+</body>
+</html>

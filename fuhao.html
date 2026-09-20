@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>符号库 · 通用T显编辑器</title>
+<meta name="description" content="基岩版 titleraw 可用字形速查表：54,092 个字形，按页浏览、按码点搜索、点击即复制。与通用T显编辑器同源数据，完全本地离线。">
+<meta name="keywords" content="基岩版,字形表,特殊符号,titleraw,Unicode,符号库,MC工具">
+<meta name="theme-color" content="#fb7299">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--accent:#fb7299;--bg:#f5f6f8;--card:#fff;--text:#1a1a1a;--sub:#777;--border:#e0e0e0;--tile:#1a1c29;--tile-hover:rgba(251,114,153,.28)}
+@media (prefers-color-scheme:dark){:root{--bg:#151724;--card:#1a1c29;--text:#e0e0e0;--sub:#a0a0a0;--border:#2a2d3e;--tile:#0f111a}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans SC",sans-serif;padding:0 0 32px;-webkit-tap-highlight-color:transparent}
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding:12px 14px calc(12px + env(safe-area-inset-top,0px));padding-top:calc(12px + env(safe-area-inset-top,0px))}
+.hrow{max-width:680px;margin:0 auto;display:flex;align-items:center;gap:10px}
+h1{font-size:1.05rem;margin:0;font-weight:700;flex:1}
+h1 span{color:var(--accent)}
+a.back{font-size:.82rem;color:var(--sub);text-decoration:none;border:1px solid var(--border);padding:6px 11px;border-radius:9px;white-space:nowrap}
+a.back:hover{color:var(--accent);border-color:var(--accent)}
+main{max-width:680px;margin:0 auto;padding:14px}
+.bar{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+input[type=search],select{font:inherit;font-size:.86rem;padding:9px 11px;border-radius:10px;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none}
+input[type=search]{flex:1;min-width:150px}
+input[type=search]:focus,select:focus{border-color:var(--accent)}
+.meta{font-size:.76rem;color:var(--sub);margin:0 0 10px;line-height:1.6}
+.meta b{color:var(--accent);font-weight:600}
+.gridwrap{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px;overflow-x:auto}
+.grid{display:grid;grid-template-columns:repeat(16,1fr);gap:4px;min-width:320px}
+.tile{position:relative;aspect-ratio:1;border-radius:6px;background-color:var(--tile);background-repeat:no-repeat;cursor:pointer;image-rendering:pixelated;transition:transform .1s,box-shadow .1s;border:1px solid transparent}
+.tile:hover{transform:scale(1.14);box-shadow:0 0 0 2px var(--accent);z-index:5}
+.tile:active{transform:scale(.94)}
+.tile.empty{opacity:.13;cursor:default}
+.tile.empty:hover{transform:none;box-shadow:none}
+.tile .cp{position:absolute;inset:auto 0 0 0;font-size:8px;text-align:center;color:#8891b0;font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1.3;pointer-events:none}
+.hit{box-shadow:0 0 0 3px var(--accent)!important;z-index:6}
+.legend{font-size:.74rem;color:var(--sub);margin-top:10px;line-height:1.7}
+#toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:#1a2232;color:#fff;padding:11px 18px;border-radius:11px;font-size:.86rem;opacity:0;pointer-events:none;transition:.22s;z-index:99;max-width:88vw;text-align:center;word-break:break-all}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+footer{max-width:680px;margin:22px auto 0;padding:0 14px;font-size:.74rem;color:var(--sub);line-height:1.8;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <div class="hrow">
+    <h1>字形 / <span>符号库</span></h1>
+    <a class="back" href="index.html">返回编辑器</a>
+  </div>
+</header>
+
+<main>
+  <div class="bar">
+    <select id="page" aria-label="选择页"></select>
+    <input type="search" id="q" placeholder="搜码点或字符：4E2D / \u4E2D / 中" autocomplete="off" spellcheck="false" enterkeyhint="search">
+    <button id="rand" class="back" type="button" style="cursor:pointer">随机</button>
+  </div>
+  <p class="meta" id="meta">加载中…</p>
+  <div class="gridwrap"><div class="grid" id="grid"></div></div>
+  <p class="legend">
+    点击方格即可复制该字符 · 左上角小字是码点（十六进制低两位）<br>
+    数据源与编辑器完全一致：225 页字形图集 + 54,092 条宽度表，全部本地加载，不联网。
+  </p>
+</main>
+
+<footer>通用T显编辑器 · 符号库</footer>
+<div id="toast"></div>
+
+<script src="data/bedrock_widths.js?v=1.8.1"></script>
+<script>
+(function () {
+  var table = (typeof bedrockWidths !== 'undefined') ? bedrockWidths : null;
+  if (!table) { document.getElementById('meta').textContent = '字形数据加载失败，请刷新重试。'; return; }
+
+  // 1) 按高字节分页，只保留真实存在的页
+  var pages = {};            // pageHex -> 该页已有的低字节集合
+  var allCount = 0;
+  for (var k in table) {
+    if (!Object.prototype.hasOwnProperty.call(table, k)) continue;
+    var cp = k.charCodeAt(0);
+    var hi = (cp >> 8) & 0xFF, lo = cp & 0xFF;
+    (pages[hi] || (pages[hi] = []))[lo] = 1;
+    allCount++;
+  }
+  var pageKeys = Object.keys(pages).map(Number).sort(function (a, b) { return a - b; });
+  var PAGE_URL = function (hi) { return 'data/fonts/' + hi.toString(16).toUpperCase().padStart(2, '0') + '.png'; };
+
+  var elPage = document.getElementById('page');
+  var elGrid = document.getElementById('grid');
+  var elMeta = document.getElementById('meta');
+  var elQ = document.getElementById('q');
+  var elToast = document.getElementById('toast');
+
+  pageKeys.forEach(function (hi) {
+    var o = document.createElement('option');
+    o.value = hi;
+    o.textContent = 'U+' + hi.toString(16).toUpperCase().padStart(2, '0') + '00 – ' + hi.toString(16).toUpperCase().padStart(2, '0') + 'FF';
+    elPage.appendChild(o);
+  });
+
+  function toast(msg) {
+    elToast.textContent = msg;
+    elToast.classList.add('on');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { elToast.classList.remove('on'); }, 1500);
+  }
+
+  function copy(text) {
+    var done = function () { toast('已复制：' + text + '  (U+' + text.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0') + ')'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function () { fallback(text, done); });
+    } else { fallback(text, done); }
+  }
+  function fallback(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) { toast('复制失败，请长按选择'); }
+    document.body.removeChild(ta);
+  }
+
+  var current = null;
+  function render(hi) {
+    current = hi;
+    var url = PAGE_URL(hi);
+    var have = pages[hi];
+    var frag = document.createDocumentFragment();
+    for (var lo = 0; lo < 256; lo++) {
+      var d = document.createElement('div');
+      d.className = 'tile' + (have[lo] ? '' : ' empty');
+      if (have[lo]) {
+        var cp = (hi << 8) | lo;
+        var ch = String.fromCharCode(cp);
+        var col = lo % 16, row = (lo / 16) | 0;
+        d.style.backgroundImage = 'url("' + url + '")';
+        d.style.backgroundSize = '1600% 1600%';                       // 16x16 网格 => 图是容器的 16 倍
+        /* background-position 的百分比基准是「容器尺寸 - 图尺寸」= -15x容器，
+           因此第 col 列应取 col/15*100%，而不是 col*100% */
+        d.style.backgroundPosition = (-col / 15 * 100) + '% ' + (-row / 15 * 100) + '%';
+        d.title = ch + '  U+' + cp.toString(16).toUpperCase().padStart(4, '0') + '  宽 ' + table[ch][1];
+        d.dataset.cp = cp;
+        var s = document.createElement('span');
+        s.className = 'cp';
+        s.textContent = lo.toString(16).toUpperCase().padStart(2, '0');
+        d.appendChild(s);
+      }
+      frag.appendChild(d);
+    }
+    elGrid.textContent = '';
+    elGrid.appendChild(frag);
+
+    var cnt = have.filter(Boolean).length;
+    elMeta.innerHTML = '本页 <b>' + cnt + '</b> 个字形 · 全站共 <b>' + allCount.toLocaleString() +
+      '</b> 个 · <b>' + pageKeys.length + '</b> 页 · 当前 U+' + hi.toString(16).toUpperCase().padStart(2, '0') + '00 起';
+  }
+
+  elGrid.addEventListener('click', function (e) {
+    var t = e.target.closest('.tile');
+    if (!t || t.classList.contains('empty') || !t.dataset.cp) return;
+    copy(String.fromCharCode(+t.dataset.cp));
+  });
+
+  elPage.addEventListener('change', function () { render(+elPage.value); });
+
+  // 2) 搜索：支持 4E2D / \u4E2D / u4e2d / 单个字符
+  function jump(cp) {
+    var hi = (cp >> 8) & 0xFF;
+    if (!pages[hi]) return false;
+    if (+elPage.value !== hi) { elPage.value = hi; render(hi); }
+    var lo = cp & 0xFF;
+    var tiles = elGrid.children;
+    var t = tiles[lo];
+    if (t) {
+      elGrid.querySelectorAll('.hit').forEach(function (n) { n.classList.remove('hit'); });
+      t.classList.add('hit');
+      t.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    }
+    return true;
+  }
+
+  elQ.addEventListener('input', function () {
+    var v = elQ.value.trim();
+    if (!v) return;
+    var cp = null, m;
+    if (v.length === 1) cp = v.charCodeAt(0);
+    else if ((m = v.match(/^(?:\\?u|U\+?|0x)?([0-9a-fA-F]{2,6})$/))) {
+      cp = parseInt(m[1], 16);
+      if (cp > 0xFFFF && v.length <= 2) cp = null;   // 纯两位当十六进制
+    }
+    if (cp == null || isNaN(cp)) { elMeta.innerHTML = '无法识别「' + v.replace(/[<>&]/g, '') + '」，试试 4E2D / \u4E2D / 中'; return; }
+    if (jump(cp)) toast('跳转到 U+' + cp.toString(16).toUpperCase().padStart(4, '0'));
+    else elMeta.innerHTML = 'U+' + cp.toString(16).toUpperCase().padStart(4, '0') + ' 没有字形数据';
+  });
+
+  document.getElementById('rand').addEventListener('click', function () {
+    for (var i = 0; i < 60; i++) {
+      var hi = pageKeys[(Math.random() * pageKeys.length) | 0];
+      var lo = (Math.random() * 256) | 0;
+      if (pages[hi][lo]) { elPage.value = hi; render(hi); jump((hi << 8) | lo); return; }
+    }
+  });
+
+  // 3) 初始页：优先 ASCII 页（00），其次最小页
+  var start = pages[0] ? 0 : pageKeys[0];
+  elPage.value = start;
+  render(start);
+
+  // 4) 注册 SW（离线可用）
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
+})();
+</script>
+</body>
+</html>
