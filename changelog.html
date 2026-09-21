@@ -52,162 +52,20 @@ footer{max-width:680px;margin:22px auto 0;padding:0 14px;font-size:.74rem;color:
   <div class="tl">
 
     <div class="rel latest">
-      <div class="relhead"><span class="ver">v1.8.9</span><span class="badge">最新</span><span class="date">2026-09-20</span></div>
+      <div class="relhead"><span class="ver">v2.0</span><span class="badge">最新</span><span class="date">2026-09-21</span></div>
       <ul>
-        <li><b>修复</b>：编辑器是 z-index:200 的全屏浮层，不属于 <code>.view-section</code> —— 用底栏从编辑器切到其它页面时它的 <code>active</code> 不会被清除，会<b>残留并盖住页面</b>；现已显式收起</li>
-        <li><b>修正</b>：「T显编辑器」= <b>完整应用</b>：点进去即进入编辑器，其内页 <b>标题模板 / 交互教程 / 我的项目</b> 通过<b>应用内底栏</b>切换（与「编辑器逆向」原版的 主页/教程/项目/模板/工坊 一致），<b>不再占用抽屉条目</b></li>
-        <li><b>抽屉</b>：T显编辑器 / 指令工坊 / 预设指令中心 / 字形符号库 / 更新日志 / 网站导航 / 更多网站 + 搜索 + 设置</li>
-        <li><b>应用底栏</b>：主页 / 教程 / 项目 / 模板 —— 不含工坊（工坊是抽屉里的工具入口）</li>
-        <li><b>说明</b>：本站与「通用T显编辑器」核心 285 个文件逐字节一致，不存在功能缺失，此前问题是内部导航入口的呈现方式</li>
-      </ul>
-    </div>
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.8.7</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li><b>修复</b>：「更多网站」在抽屉中出现<b>两次</b>（功能卡 + 「综合」分组行）—— 移除后者，仅保留功能卡入口</li>
-        <li>并入 v1.8.6：补回「T显编辑器」分组（标题模板 / 交互教程 / 我的项目），修复三页面不可达</li>
-      </ul>
-    </div>
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.8.6</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li><b>修复</b>：补回抽屉「T显编辑器」分组 —— <b>标题模板 / 交互教程 / 我的项目</b> 三个页面此前在功能精简时被移除且未归组，处于不可达状态（v1.8.3 说明与实际实现不符）</li>
-        <li><b>对齐</b>：与参考实现一致 —— T显编辑器内含 标题模板 / 交互教程 / 我的项目，现以独立分组呈现于抽屉</li>
-      </ul>
-    </div>
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.8.5</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li><b>新增</b>：<a href="more.html">更多网站</a> —— 融合综合导航，<b>337 个站点 / 53 个分类</b>，覆盖 工具 / 开发 / 设计 / 教育 / 娱乐 / 生活 等，支持搜索与分类筛选</li>
-        <li><b>入口</b>：抽屉功能卡「更多网站」+ 网站导航页顶部横幅</li>
-        <li><b>剔除</b>：原站 13 条自推广/私人接口条目（均挂在同一域名下）</li>
-        <li><b>主题</b>：全站改为<b>简洁白</b>（近黑强调 + 浅灰描边，弃用银灰与粉色）</li>
-      </ul>
-    </div>
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.8.4</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li><b>修复</b>：点「T显编辑器」<b>直接进入编辑</b>（最近的项目；没有则新建），不再先弹「创建项目」面板 —— 与参考实现一致</li>
-        <li><b>新增</b>：<a href="sites.html">网站导航</a> —— 指令工坊「网站」标签独立成页并扩充至 <b>25 个站点 / 8 个分类</b>（新增 文档与百科、命令与皮肤），支持搜索与分类浏览</li>
-        <li><b>调整</b>：指令工坊移除「网站」标签（内容已迁至独立页）</li>
-        <li><b>改进</b>：暴露 <code>openProjectById</code>，抽屉与编辑器解耦</li>
-      </ul>
-    </div>
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.8.3</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li><b>改版</b>：主页配色由粉色改为<b>简洁现代白</b>，强调色换为<b>银灰 / 石墨</b>（横幅、徽章、按钮、图标同步调整）</li>
-        <li><b>改版</b>：抽屉「功能」精简为 5 项 —— <b>T显编辑器</b>（原「指令编辑器」）、指令工坊、预设指令中心、字形符号库、更新日志</li>
-        <li><b>调整</b>：标题模板 / 交互教程 / 我的项目 归入 T显编辑器，不再作为独立功能入口；移除抽屉里的「主页 / 关于」分组，改为点顶部标题回主页</li>
-        <li><b>改版</b>：主页只保留介绍（含版本号）与开发者 / 交流群信息</li>
+        <li><b>爆改</b>：编辑器界面全面翻新为「工程台」设计语言 —— 全新配色令牌、画布工程点阵网格、胶囊化工具栏、主题渐变播放按钮、卡片化面板</li>
+        <li><b>动效</b>：进入编辑器错峰浮现、按钮点按弹性、播放状态呼吸光晕（anime.js）</li>
+        <li><b>引导</b>：首次进入三步上手引导（添加图层 / 画布拖放 / 导出指令）</li>
+        <li><b>体验</b>：整体精简入口、优化使用方式与视觉层次</li>
       </ul>
     </div>
 
     <div class="rel">
-      <div class="relhead"><span class="ver">v1.8.2</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li><b>修复</b>：左上角功能导航<b>全空白</b>且<b>点 X 无法关闭</b> —— 同一个根因：脚本按 <code>id</code> 取抽屉内容容器，而页面里只有 <code>class</code>，取不到便提前退出，导致关闭按钮的事件与条目点击全部没绑定，同时条目被 CSS 的 <code>opacity:0</code> 隐藏后无人恢复</li>
-        <li><b>修复</b>：导航条目改为<b>默认可见</b>，入场动效降级为纯增强 —— 动画失败或被打断都不会再把内容留在隐藏状态</li>
-        <li><b>改进</b>：主页的<b>功能分格</b>整体迁入左上角抽屉；主页只保留介绍与开发者信息</li>
-        <li><b>改进</b>：站内搜索移入抽屉，点击搜索结果后自动收起抽屉</li>
-        <li><b>改进</b>：抽屉支持点遮罩关闭、Esc 关闭、卡片键盘操作（Enter / 空格）</li>
-      </ul>
-    </div>
-
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.8.1</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li><b>性能</b>：移除启动链中一份<b>全站零引用</b>的字体数据（1.58 MB），首屏传输体积减少约 <b>1.11 MB</b>，实测该资源原本要下载 <b>8.9 秒</b></li>
-        <li><b>性能</b>：字形宽度表由 939 KB 改为紧凑编码，压缩到 <b>50.6 KB</b>（gzip 148 KB → 16.8 KB），逐条校验 54,092 项映射完全一致</li>
-        <li><b>性能</b>：宽度表改为 <code>&lt;link rel="preload"&gt;</code> 提前下载，启动屏消失更快</li>
-        <li><b>离线</b>：新增 Service Worker，回访秒开、断网可用（页面走网络优先，绝不锁死旧版本）</li>
-        <li><b>新增</b>：<a href="fuhao.html">字形符号库</a> —— 54,092 个字形按页浏览、按码点搜索、点击即复制</li>
-        <li><b>新增</b>：更新日志页（本页）、404 页面、manifest.json（可安装为应用）、robots.txt / sitemap.xml</li>
-        <li><b>改进</b>：全站资源统一版本指纹，修正两个漏加版本号的脚本</li>
-      </ul>
-    </div>
-
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.8.0</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li>功能页布局精简统一，消除重复入口</li>
-        <li>首页改为 Hero 版式，去除重复的逐页搜索框</li>
-        <li>统一工具卡片圆角</li>
-      </ul>
-    </div>
-
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.7.0</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li>移除底部 Tab 栏，整合为左上角功能抽屉导航（主页 / 编辑器 / 工坊 / 模板 / 预设 / 教程 / 项目 / 关于）</li>
-        <li>整体转为简洁风，anime.js 错峰入场动效</li>
-      </ul>
-    </div>
-
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.6.0</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li>首页工具启动器（6 卡片 + anime.js 动效）</li>
-        <li>站内全局搜索：工具 / 模板 / 预设 / 教程</li>
-        <li>新增预设中心入口</li>
-      </ul>
-    </div>
-
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.5.0</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li>anime.js 动效、首页搜索、网站公告条</li>
-        <li>新增开发者联系方式与首页关于卡片</li>
-      </ul>
-    </div>
-
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.4.1</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li>新 favicon（T+ 粉色）</li>
-        <li>预设中心新增分类与搜索，扩充 6 个预设</li>
-        <li>清理旧品牌字样</li>
-      </ul>
-    </div>
-
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.4.0</span><span class="date">2026-09-20</span></div>
-      <ul>
-        <li>修复模板页插值被拆坏导致显示代码的问题</li>
-        <li>预设中心统一主题，同步预设 / 字体 / favicon 资产</li>
-        <li>视觉体验优化</li>
-      </ul>
-    </div>
-
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.3.2 / v1.3.3</span><span class="date">2026-09-19</span></div>
-      <ul>
-        <li>进入时全屏加载动画 + 资源就绪检测，修复编辑器文字晕染</li>
-        <li>移除 intent 跳转，新增工具站收录（MC Toolbox / CraftCMD / MineBuildr / MCWorldTools）</li>
-      </ul>
-    </div>
-
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.3.0 / v1.3.1</span><span class="date">2026-09-19</span></div>
-      <ul>
-        <li>集成指令工坊（give / execute / 历史 / 推荐网站）</li>
-        <li>整合系列站点为单一入口</li>
-      </ul>
-    </div>
-
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.2.0</span><span class="date">2026-09-19</span></div>
-      <ul>
-        <li>字体数据改为异步加载，核心交互即时可用</li>
-        <li>修复移动端点击无效问题</li>
-      </ul>
-    </div>
-
-    <div class="rel">
-      <div class="relhead"><span class="ver">v1.0.0</span><span class="date">2026-09-19</span></div>
+      <div class="relhead"><span class="ver">v1.0</span><span class="date">2026-09-19</span></div>
       <ul>
         <li>通用T显编辑器首次发布（GitHub Pages）</li>
-        <li>修复移动端 view-editor / sidebar / bottom-sheet 未激活拦截点击</li>
+        <li>网易基岩版 titleraw 行动栏动画排版编辑，完全本地离线运行</li>
       </ul>
     </div>
 
