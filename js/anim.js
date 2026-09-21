@@ -40,17 +40,17 @@
     }
 
     /* --- 开发者 QQ 与群聊：点按复制 --- */
-    var devQQ = document.getElementById('dev-qq');
+    var devQQ = document.getElementById('yayue-qqgroup');
     if (devQQ) {
       devQQ.addEventListener('click', function () {
-        copyText('1913816411', function () { toast('已复制开发者QQ：1913816411'); });
+        copyText('1094943340', function () { toast('已复制官方交流群：1094943340'); });
       });
     }
-    var gl = document.getElementById('group-link');
+    var gl = document.getElementById('yayue-audit');
     if (gl) {
       gl.addEventListener('click', function (e) {
         e.preventDefault();
-        copyText('137759778', function () { toast('已复制群号：137759778，请在QQ搜索加入'); });
+        copyText('1057715645', function () { toast('已复制审核群：1057715645'); });
       });
     }
 
