@@ -93,7 +93,7 @@
 
     /* ---------- 进入编辑器：最近的项目；没有则新建 ----------
        不再经过「创建项目」面板 —— 与参考实现一致（打开即是编辑器）。 */
-    function enterEditor() {
+    function enterEditor(withDemo) {
       if (!(window.App && window.App.storage && window.App.openProjectById)) {
         var fb = document.getElementById('btn-create');
         if (fb) fb.click();          /* 兜底：走创建面板 */
@@ -104,6 +104,10 @@
       var p = list[0];
       if (!p) {
         p = window.App.storage.createNewProject();
+        if (withDemo) {
+          p.name = '新项目';
+          p.frames[0].lines = [{type:"text", text:"§e网易基岩版 titleraw \u3000从这里开始编辑", x:0, trackIndex:0, startTick:0, durationTicks:20}];
+        }
         window.App.storage.saveProject(p);
       }
       window.App.openProjectById(p.id);
@@ -136,8 +140,8 @@
 
     function runAction(nav) {
       if (nav === 'editor') {
-        /* 点「T显编辑器」→ 展示完整的通用编辑器页面（主页：Hero+搜索+工具启动器+关于） */
-        directSwitch('view-home');
+        /* 点「T显编辑器」→ 进入完整的编辑器工作区；无最近项目时自动带一个示例图层，避免空白 */
+        enterEditor(true);
         return;
       }
       if (nav === 'sites') { location.href = 'sites.html'; return; }
