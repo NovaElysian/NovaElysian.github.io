@@ -63,3 +63,45 @@ body:not(.dark-theme) .view-editor{
 .ed-tip button{margin-left:auto;background:none;border:0;color:var(--ed-sub);font-size:16px;line-height:1;cursor:pointer;}
 .ed-tip-bullet{font-weight:700;color:var(--ed-accent2);}
 @media (prefers-reduced-motion: reduce){.view-editor.is-entering *{animation:none !important;}}
+
+
+/* ============================================================
+ * v2.4 深度升级 · 实时预览面板 ---------------------------------
+ * 仅增量追加；保留全部绑定，可整块删除回退
+ * ============================================================ */
+.view-editor .edx-btn-preview{color:var(--ed-accent2);}
+.view-editor .edx-btn-preview.edx-on{background:color-mix(in srgb,var(--ed-accent2) 18%, transparent);color:var(--ed-text);}
+.edx-preview-panel{
+  position:fixed;top:72px;right:14px;bottom:14px;width:min(430px,92vw);z-index:980;
+  background:var(--ed-panel);border:1px solid var(--ed-line);border-radius:16px;
+  box-shadow:0 18px 50px rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden;
+  transform:translateX(calc(100% + 24px));opacity:0;pointer-events:none;
+  transition:transform .26s cubic-bezier(.2,.8,.2,1),opacity .22s;
+}
+.edx-preview-panel.edx-open{transform:none;opacity:1;pointer-events:auto;}
+.edx-pp-head{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--ed-line);flex-wrap:wrap;}
+.edx-pp-title{font-size:14px;font-weight:700;color:var(--ed-text);}
+.edx-pp-vers{display:flex;gap:4px;margin-left:auto;}
+.edx-pp-ver{font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid var(--ed-line);background:var(--ed-panel2);color:var(--ed-sub);cursor:pointer;}
+.edx-pp-ver.edx-on{background:color-mix(in srgb,var(--ed-accent2) 18%,transparent);color:var(--ed-text);border-color:transparent;}
+.edx-pp-actions{display:flex;gap:6px;}
+.edx-pp-actions button{font-size:12px;padding:5px 10px;border-radius:8px;border:1px solid var(--ed-line);background:var(--ed-panel2);color:var(--ed-text);cursor:pointer;}
+.edx-pp-actions button:active{transform:scale(.94);}
+#edx-pp-close{color:var(--ed-sub);}
+.edx-pp-tabs{display:flex;gap:4px;padding:8px 12px;border-bottom:1px solid var(--ed-line);}
+.edx-pp-tab{font-size:12px;padding:6px 12px;border-radius:9px;border:0;background:transparent;color:var(--ed-sub);cursor:pointer;}
+.edx-pp-tab.edx-on{background:var(--ed-panel2);color:var(--ed-text);font-weight:600;}
+.edx-pp-body{flex:1;overflow:hidden;position:relative;}
+.edx-pp-cmd,.edx-pp-mock,.edx-pp-raw{position:absolute;inset:0;display:none;overflow:auto;margin:0;padding:14px;font-size:12px;line-height:1.55;}
+.edx-pp-cmd{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--ed-text);white-space:pre-wrap;word-break:break-all;background:var(--ed-bg);}
+.edx-pp-body.edx-pp-mock-active .edx-pp-mock{display:block;}
+.edx-pp-body.edx-pp-raw-active .edx-pp-raw{display:block;}
+.edx-pp-body.edx-pp-cmd-active .edx-pp-cmd{display:block;}
+.edx-pp-mock{background:radial-gradient(1.5px 1.5px at 1px 1px,color-mix(in srgb,var(--ed-text) 20%,transparent) 50%,transparent 50%) 0 0/18px 18px,var(--ed-bg);}
+.edx-pp-line{font-family:"Minecraft",system-ui,sans-serif;font-size:20px;font-weight:700;line-height:1.5;color:var(--ed-text);text-shadow:0 3px 0 rgba(0,0,0,.4);padding:3px 0;white-space:pre-wrap;word-break:break-all;}
+.edx-pp-empty{color:var(--ed-sub);font-size:13px;padding:20px;}
+@media (max-width:720px){
+  .edx-preview-panel{width:100%;right:0;bottom:0;top:auto;height:66vh;border-radius:16px 16px 0 0;transform:translateY(100%);}
+  .edx-preview-panel.edx-open{transform:none;}
+  .edx-pp-line{font-size:17px;}
+}
