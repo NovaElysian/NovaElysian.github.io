@@ -124,3 +124,24 @@ body:not(.dark-theme) .view-editor{
 .edx-find-count{color:var(--ed-sub);font-size:12px;min-width:22px;text-align:center;}
 .edx-find-btn{background:color-mix(in srgb,var(--ed-accent2) 20%,transparent);color:var(--ed-text);border:0;border-radius:8px;padding:7px 12px;font-size:12px;cursor:pointer;white-space:nowrap;}
 .edx-find-btn:active{transform:scale(.94);}
+
+/* ============================================================
+ * v2.6 深度升级 · 界面布局重构（工程台·三栏化）-----------------
+ * 仅重排 #preview-container / #layer-prop-panel，时间轴不动；
+ * 带「经典/工程台」切换，可整块删除回退
+ * ============================================================ */
+.view-editor .edx-btn-layout{color:var(--ed-sub);}
+.view-editor .edx-btn-layout.edx-on{color:var(--ed-accent);}
+.view-editor.edx-3col{display:flex;flex-direction:column;overflow:hidden;}
+.view-editor.edx-3col .edx-stage{flex:1 1 auto;min-height:260px;display:flex;flex-direction:column;}
+.view-editor.edx-3col .edx-main{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:1fr minmax(300px,360px);}
+.view-editor.edx-3col .edx-preview-cell{min-width:0;min-height:0;overflow:hidden;position:relative;background:var(--ed-bg);}
+.view-editor.edx-3col .edx-preview-cell .editor-preview{height:100%;box-shadow:none;border-radius:0;}
+.view-editor.edx-3col .edx-preview-cell canvas{max-width:100%;}
+.view-editor.edx-3col .edx-prop-cell{min-width:0;border-left:1px solid var(--ed-line);background:var(--ed-panel);overflow:hidden;display:flex;flex-direction:column;}
+.view-editor.edx-3col .edx-prop-cell .layer-prop-panel{position:relative;flex:1;min-height:0;overflow-y:auto;border:0;border-radius:0;box-shadow:none;}
+.view-editor.edx-3col .editor-controls{border-top:1px solid var(--ed-line);}
+@media (max-width:760px){
+  .view-editor.edx-3col .edx-main{grid-template-columns:1fr;grid-template-rows:minmax(220px,52vh) 42vh;overflow:auto;}
+  .view-editor.edx-3col .edx-prop-cell{border-left:0;border-top:1px solid var(--ed-line);}
+}
