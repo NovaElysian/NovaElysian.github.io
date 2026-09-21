@@ -104,6 +104,7 @@
       var p = list[0];
       if (!p) {
         p = window.App.storage.createNewProject();
+        p.name = '新项目';
         if (withDemo) {
           p.name = '新项目';
           p.frames[0].lines = [{type:"text", text:"§e网易基岩版 titleraw \u3000从这里开始编辑", x:0, trackIndex:0, startTick:0, durationTicks:20}];
@@ -140,8 +141,8 @@
 
     function runAction(nav) {
       if (nav === 'editor') {
-        /* 点「T显编辑器」→ 进入通用编辑器页面（不自动新建项目，交由用户操作） */
-        directSwitch('view-teditor');
+        /* 点「T显编辑器」→ 直接进入编辑器工作区（v2.0 工程台爆改界面） */
+        enterEditor();
         return;
       }
       if (nav === 'sites') { location.href = 'sites.html'; return; }
