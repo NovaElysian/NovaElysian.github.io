@@ -146,3 +146,9 @@ body.dark-theme .hero-badge{background:color-mix(in srgb,var(--accent-color,#1f2
 .set-colors .color-dot{width:26px;height:26px;}
 /* 底栏不再有工坊：tab 自动均分 */
 .app-tabbar .tab-item{flex:1;}
+
+
+/* v1.13.0 通用编辑器页面 */
+.te-hero{margin-bottom:4px;}
+.te-ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none;box-shadow:0 2px 6px rgba(0,0,0,.10);}
+.te-ic svg{width:22px;height:22px;}

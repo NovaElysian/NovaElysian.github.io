@@ -140,8 +140,8 @@
 
     function runAction(nav) {
       if (nav === 'editor') {
-        /* 点「T显编辑器」→ 进入完整的编辑器工作区；无最近项目时自动带一个示例图层，避免空白 */
-        enterEditor(true);
+        /* 点「T显编辑器」→ 进入通用编辑器页面（不自动新建项目，交由用户操作） */
+        directSwitch('view-teditor');
         return;
       }
       if (nav === 'sites') { location.href = 'sites.html'; return; }
@@ -205,6 +205,30 @@
         if (sidebar.classList.contains('active')) animateItems();
         else resetItems();
       }).observe(sidebar, { attributes: true, attributeFilter: ['class'] });
+    }
+
+
+    /* ---------- 通用编辑器页面(#teditor-grid)入口绑定 ---------- */
+    var tGrid = document.getElementById('teditor-grid');
+    if (tGrid) {
+      tGrid.addEventListener('click', function (e) {
+        var c = e.target.closest('.tool-card');
+        if (!c) return;
+        if (c.hasAttribute('data-open-url')) { return; }   /* 预设中心走 app.js 委托 */
+        var act = c.getAttribute('data-act');
+        if (act === 'new') { enterEditor(); return; }      /* 用户主动新建 -> 直接进入编辑器 */
+        if (act === 'preset') { return; }
+        if (act === 'about') {
+          directSwitch('view-home');
+          setTimeout(function () {
+            var a = document.getElementById('about-card');
+            if (a && a.scrollIntoView) a.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 90);
+          return;
+        }
+        var t = { project: 'view-project', template: 'view-template', tutorial: 'view-tutorial' }[act];
+        if (t) directSwitch(t);
+      });
     }
 
     /* 兜底：即便上面全部失效，条目也必须是可见的 */
