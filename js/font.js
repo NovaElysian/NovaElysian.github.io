@@ -73,12 +73,12 @@
             return `#${e.toString(16).padStart(2, "0")}${o.toString(16).padStart(2, "0")}${n.toString(16).padStart(2, "0")}`;
         },
         loadWidths: async function() {
-            if (typeof bedrockWidths != "undefined") {
-                t = bedrockWidths;
-            } else {
-                console.error("未能加载 bedrock_widths.js");
-            }
-            // 已彻底摆脱 font_base64.js 的同步阻塞，实现纯外链异步加载
+            // 宽度表由 data/bedrock_widths.js 异步加载，全局实为 window.bedrockWidths（驼峰）。
+            // 本函数可能在宽度表就绪前被提前调用，此时静默等待，由 __fontsLoaded 后的正式调用补齐 t，
+            // 不再打印“未能加载”的误导性报错。
+            const W = (typeof window != "undefined" && window.bedrockWidths) ||
+                      (typeof bedrockWidths != "undefined" ? bedrockWidths : null);
+            if (W) { t = W; }
         },
         getCharWidth: n,
         getCharOffset: function(e) {
