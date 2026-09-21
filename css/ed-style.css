@@ -105,3 +105,22 @@ body:not(.dark-theme) .view-editor{
   .edx-preview-panel.edx-open{transform:none;}
   .edx-pp-line{font-size:17px;}
 }
+
+/* ============================================================
+ * v2.5 深度升级 · 编辑功能增强（色板 / 查找替换 / 快捷键）--------
+ * 仅增量追加；保留全部绑定，可整块删除回退
+ * ============================================================ */
+.view-editor .edx-colorbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:6px 8px;border:1px solid var(--ed-line);border-radius:10px;background:var(--ed-panel2);margin:4px 8px;}
+.view-editor .edx-colorbar-title{font-size:11px;color:var(--ed-sub);white-space:nowrap;}
+.view-editor .edx-colorbar-swatches{display:flex;flex-wrap:wrap;gap:5px;}
+.view-editor .edx-swatch{width:22px;height:22px;border-radius:6px;border:1px solid rgba(127,127,127,.55);cursor:pointer;padding:0;transition:transform .12s;outline:none;}
+.view-editor .edx-swatch:active{transform:scale(.82);}
+.view-editor .edx-swatch-reset{width:auto;padding:0 7px;font-size:10px;color:var(--ed-text);background:var(--ed-panel) !important;display:flex;align-items:center;line-height:1;}
+.edx-find{position:fixed;top:78px;left:50%;transform:translateX(-50%) translateY(-8px);z-index:981;width:min(360px,90vw);background:var(--ed-panel);border:1px solid var(--ed-line);border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,.32);padding:10px;display:flex;flex-direction:column;gap:8px;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;}
+.edx-find.edx-open{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
+.edx-find-row{display:flex;gap:6px;align-items:center;}
+.edx-find-input{flex:1;background:var(--ed-panel2);border:1px solid var(--ed-line);border-radius:8px;color:var(--ed-text);padding:7px 9px;font-size:13px;}
+.edx-find-input::placeholder{color:var(--ed-sub);}
+.edx-find-count{color:var(--ed-sub);font-size:12px;min-width:22px;text-align:center;}
+.edx-find-btn{background:color-mix(in srgb,var(--ed-accent2) 20%,transparent);color:var(--ed-text);border:0;border-radius:8px;padding:7px 12px;font-size:12px;cursor:pointer;white-space:nowrap;}
+.edx-find-btn:active{transform:scale(.94);}
