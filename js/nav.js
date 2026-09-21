@@ -135,7 +135,11 @@
     }
 
     function runAction(nav) {
-      if (nav === 'editor') { enterEditor(); return; }
+      if (nav === 'editor') {
+        /* 点「T显编辑器」→ 展示完整的通用编辑器页面（主页：Hero+搜索+工具启动器+关于） */
+        directSwitch('view-home');
+        return;
+      }
       if (nav === 'sites') { location.href = 'sites.html'; return; }
       if (nav === 'more') { location.href = 'more.html'; return; }
       if (nav === 'fuhao') { location.href = 'fuhao.html'; return; }
