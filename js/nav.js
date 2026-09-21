@@ -54,7 +54,7 @@
     });
 
     /* ---------- 应用内外观：进入 T显编辑器 及其内页时显示底栏 ---------- */
-    var APP_VIEWS = ['view-editor', 'view-template', 'view-tutorial', 'view-project'];
+    var APP_VIEWS = ['view-teditor', 'view-editor', 'view-template', 'view-tutorial', 'view-project'];
     function syncAppChrome() {
       var inApp = APP_VIEWS.some(function (id) {
         var v = document.getElementById(id);
